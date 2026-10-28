@@ -30,6 +30,7 @@ function Index() {
       <RootCause />
       <Host />
       <Areas />
+      <MonthFormat />
     </>
   );
 }
