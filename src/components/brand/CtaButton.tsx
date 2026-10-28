@@ -12,7 +12,7 @@ const ctaVariants = cva(
       },
       size: {
         md: "",
-        sm: "min-h-10 px-5 py-2 text-sm",
+        sm: "min-h-10 px-4 py-2 text-sm whitespace-nowrap sm:px-5",
       },
       block: { true: "w-full sm:w-auto", false: "" },
     },
