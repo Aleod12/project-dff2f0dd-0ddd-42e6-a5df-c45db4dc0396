@@ -29,7 +29,7 @@ export function Hero() {
         {/* Text */}
         <div className="relative flex flex-col items-center gap-2 text-center md:order-1 md:items-start md:gap-5 md:text-left">
           <p className="text-eyebrow">{hero.eyebrow}</p>
-          <h1 id="hero-title" className="flex flex-col gap-2 md:gap-3">
+          <h1 id="hero-title" className="flex flex-col gap-1 md:gap-3">
             <span className="text-[1.95rem] leading-[1.05] sm:text-h1">
               {hero.titleLead} <em className="italic">{hero.titleAccent}</em>
             </span>
@@ -38,7 +38,7 @@ export function Hero() {
           <p className="-mt-1 font-display text-xl italic text-primary">{hero.signature}</p>
           <p className="max-w-xl text-base font-medium md:text-xl">{hero.lead}</p>
           {isPresent(hero.sub) && <p className="max-w-xl text-muted-foreground">{hero.sub}</p>}
-          <ul className="flex flex-col items-center gap-2 text-base font-medium md:items-start">
+          <ul className="flex flex-col items-center gap-1.5 text-base font-medium md:items-start">
             {hero.facts.map((f) => (
               <li key={f} className="flex items-center gap-2">
                 <span aria-hidden="true" className="size-1.5 rotate-45 bg-gold" />
@@ -46,7 +46,7 @@ export function Hero() {
               </li>
             ))}
           </ul>
-          <div className="mt-1 flex w-full flex-col gap-2 md:gap-3 md:w-auto md:flex-row md:items-stretch">
+          <div className="flex w-full md:mt-1 flex-col gap-2 md:gap-3 md:w-auto md:flex-row md:items-stretch">
             <CtaButton href={hero.primary.href} track={hero.primary.track} className="w-full md:w-auto">{hero.primary.label}</CtaButton>
             <CtaButton href={hero.secondary.href} track={hero.secondary.track} variant="outline" className="w-full md:w-auto">{hero.secondary.label}</CtaButton>
           </div>
