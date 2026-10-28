@@ -137,10 +137,12 @@ export function Host() {
 
       <div className="mt-8 grid gap-10 md:mt-12 lg:grid-cols-[minmax(0,440px)_1fr] lg:gap-16">
         {/* Desktop: portrait with the round video over its lower-right corner. */}
-        <div className="relative hidden self-start pb-20 lg:sticky lg:top-24 lg:block">
-          <Portrait />
-          <RoundVideo className="absolute -right-12 bottom-0" />
-          <Transcript text={host.video.transcript} className="mt-6" />
+        <div className="hidden self-start lg:sticky lg:top-24 lg:block">
+          <div className="relative pb-20">
+            <Portrait />
+            <RoundVideo className="absolute -right-12 bottom-0" />
+          </div>
+          <Transcript text={host.video.transcript} className="mt-4" />
         </div>
 
         <div className="flex min-w-0 flex-col gap-10">
