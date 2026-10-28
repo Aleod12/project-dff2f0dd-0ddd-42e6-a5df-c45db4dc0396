@@ -8,7 +8,7 @@ const title = "Политика обработки персональных да
 const description = "Политика ИП Табачникова С. Б. в отношении обработки персональных данных на сайте Клуба «Трансформация»: цели, сроки, права субъекта.";
 
 export const Route = createFileRoute("/privacy")({
-  validateSearch: (search: Record<string, unknown>): { from?: ReturnType<typeof parseFrom> } => ({ from: parseFrom(search.from) }),
+  validateSearch: (search: Record<string, unknown>): { from?: ReturnType<typeof parseFrom> | undefined } => ({ from: parseFrom(search["from"]) }),
   head: () => {
     const seo = pageSeo("/privacy");
     return {

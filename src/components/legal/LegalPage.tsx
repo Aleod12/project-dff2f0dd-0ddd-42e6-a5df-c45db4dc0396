@@ -12,7 +12,7 @@ import { LegalBackLink } from "./LegalBackLink";
 const TOKEN_RE = /(\[ЗАПОЛНИТЬ:[^\]]*\]|\{(?:policyLink|policyLinkWith|offerLink|consentLink)\})/g;
 
 /** Inline text: placeholders → <mark>, {xxxLink} → internal document link keeping ?from. */
-export function LegalText({ text, from }: { text: string; from?: LegalFrom }) {
+export function LegalText({ text, from }: { text: string; from?: LegalFrom | undefined }) {
   const parts = text.split(TOKEN_RE);
   return (
     <>
@@ -32,7 +32,7 @@ export function LegalText({ text, from }: { text: string; from?: LegalFrom }) {
   );
 }
 
-function Block({ block, from }: { block: LegalBlock; from?: LegalFrom }) {
+function Block({ block, from }: { block: LegalBlock; from?: LegalFrom | undefined }) {
   if (block.type === "p") return <p><LegalText text={block.text} from={from} /></p>;
   if (block.type === "list")
     return (
@@ -80,7 +80,7 @@ function Block({ block, from }: { block: LegalBlock; from?: LegalFrom }) {
   );
 }
 
-export function LegalPage({ doc, from }: { doc: LegalDoc; from?: LegalFrom }) {
+export function LegalPage({ doc, from }: { doc: LegalDoc; from?: LegalFrom | undefined }) {
   const placeholders = listPlaceholders(doc).length;
   const others = (Object.keys(legalDocs) as (keyof typeof legalDocs)[]).filter((k) => k !== doc.key);
 

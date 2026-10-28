@@ -8,7 +8,7 @@ const title = "Публичная оферта — Клуб «Трансформ
 const description = "Договор об участии в онлайн-клубе «Трансформация»: что входит, стоимость, порядок оплаты, отказ от договора и реквизиты.";
 
 export const Route = createFileRoute("/offer")({
-  validateSearch: (search: Record<string, unknown>): { from?: ReturnType<typeof parseFrom> } => ({ from: parseFrom(search.from) }),
+  validateSearch: (search: Record<string, unknown>): { from?: ReturnType<typeof parseFrom> | undefined } => ({ from: parseFrom(search["from"]) }),
   head: () => {
     const seo = pageSeo("/offer");
     return {
