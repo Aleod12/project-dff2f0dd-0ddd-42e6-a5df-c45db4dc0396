@@ -80,7 +80,12 @@ describe("content rules", () => {
   });
   it("Sergey's note under the cards is signed and keeps the 27 years", () => {
     expect(pains.hostNote.sign).toBe("— Сергей Табачников");
-    expect(pains.hostNote.text).toContain("27 лет в бизнесе");
+    expect(pains.hostNote.text).toBe("Я знаю это изнутри: однажды драйв просто закончился, хотя внешне всё было. Тогда я начал искать не советы, а первопричины.");
+  });
+
+  it("hero facts and header order follow the polish brief", () => {
+    expect(hero.facts).toEqual(["4 живые онлайн-встречи со мной", "Записи всех встреч", "Разовая оплата, без автосписаний"]);
+    expect(site.nav.map((n) => n.label)).toEqual(["Клуб", "Ведущий", "Отзывы", "Стоимость", "Вопросы"]);
   });
   it("section 3 has three links of the loop, in the agreed order", () => {
     expect(rootCause.nodes.map((n) => n.title)).toEqual([

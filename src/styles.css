@@ -199,8 +199,3 @@
   font-size: clamp(2rem, 3.6vw + 0.75rem, 3.25rem);
 }
 
-/* Soft fade for decorative olive shadow layers */
-@utility olive-fade {
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 30%, transparent 75%);
-  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 30%, transparent 75%);
-}
