@@ -104,7 +104,6 @@ function RoundVideo({ className }: { className?: string }) {
         )}
       </div>
       <figcaption className="text-center text-sm font-semibold text-muted-foreground">{v.caption}</figcaption>
-      <Transcript text={v.transcript} className="max-w-[440px]" />
     </figure>
   );
 }
@@ -141,6 +140,7 @@ export function Host() {
         <div className="relative hidden self-start pb-20 lg:sticky lg:top-24 lg:block">
           <Portrait />
           <RoundVideo className="absolute -right-12 bottom-0" />
+          <Transcript text={host.video.transcript} className="mt-6" />
         </div>
 
         <div className="flex min-w-0 flex-col gap-10">
@@ -149,6 +149,7 @@ export function Host() {
           {/* Phones/tablets: video, then portrait. */}
           <div className="flex flex-col items-center gap-8 lg:hidden">
             <RoundVideo />
+            <Transcript text={host.video.transcript} className="-mt-4 max-w-[440px]" />
             <div className="hidden w-full max-w-[440px] md:block">
               <Portrait />
             </div>
