@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Hero } from "@/components/sections/Hero";
 import { ForYou } from "@/components/sections/ForYou";
+import { RootCause } from "@/components/sections/RootCause";
 
 const title = "Клуб «Трансформация» Сергея Табачникова — месяц системной работы";
 const description =
@@ -23,6 +24,7 @@ function Index() {
     <>
       <Hero />
       <ForYou />
+      <RootCause />
     </>
   );
 }

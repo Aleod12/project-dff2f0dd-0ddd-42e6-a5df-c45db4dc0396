@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { pricing } from "@/content/pricing";
 import { links } from "@/content/links";
 import { pains } from "@/content/pains";
+import { rootCause } from "@/content/rootCause";
 import { isPresent } from "@/lib/present";
 
 describe("content rules", () => {
@@ -50,5 +51,23 @@ describe("content rules", () => {
   it("Sergey's note under the cards is signed and keeps the 27 years", () => {
     expect(pains.hostNote.sign).toBe("— Сергей Табачников");
     expect(pains.hostNote.text).toContain("27 лет в бизнесе");
+  });
+  it("section 3 has three links of the loop, in the agreed order", () => {
+    expect(rootCause.nodes.map((n) => n.title)).toEqual([
+      "Внутреннее напряжение",
+      "Скрытая программа",
+      "Повторяющийся результат",
+    ]);
+    for (const node of rootCause.nodes) expect(isPresent(node.text)).toBe(true);
+  });
+  it("section 3 emphasizes the paragraph about the hidden root", () => {
+    expect(rootCause.thesis[rootCause.emphasizedIndex]).toContain("Дело не в силе воли");
+    expect(rootCause.thesis).toHaveLength(3);
+  });
+  it("section 3 closes the loop without inventing new promises", () => {
+    expect(rootCause.loopLabel).toBe("и круг замыкается");
+    expect(rootCause.conclusion).toBe(
+      "Круг замыкается. В клубе мы работаем с первым звеном — через тело и состояние.",
+    );
   });
 });
