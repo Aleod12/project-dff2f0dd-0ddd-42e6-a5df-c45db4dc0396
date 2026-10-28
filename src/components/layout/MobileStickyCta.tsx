@@ -14,7 +14,7 @@ export function MobileStickyCta() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     const footer = document.getElementById("site-footer");
-    const io = footer ? new IntersectionObserver(([e]) => setFooterVisible(e.isIntersecting)) : null;
+    const io = footer ? new IntersectionObserver(([e]) => setFooterVisible(!!e?.isIntersecting)) : null;
     if (footer && io) io.observe(footer);
     return () => {
       window.removeEventListener("scroll", onScroll);
