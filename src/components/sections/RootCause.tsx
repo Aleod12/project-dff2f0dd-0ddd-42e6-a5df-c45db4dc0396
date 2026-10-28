@@ -82,7 +82,7 @@ export function RootCause() {
               <path d="M 116 266 C 40 190, 60 80, 244 36" markerEnd="url(#rc-arrow)" />
             </svg>
 
-            <ol className="relative flex flex-col gap-6 lg:h-full lg:gap-0">
+            <ol className="relative flex flex-col gap-6 pb-6 lg:h-full lg:gap-0 lg:pb-0">
               {rootCause.nodes.map((node, i) => (
                 <li
                   key={node.title}
