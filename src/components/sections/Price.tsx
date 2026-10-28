@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { pricing } from "@/content/pricing";
 import { payments } from "@/content/payments";
 import { Island } from "@/components/layout/Island";
@@ -50,9 +51,9 @@ export function Price() {
 
         <p className="text-sm text-muted-foreground">
           {pricing.offerNote.before}
-          <a href={pricing.offerNote.href} className="text-primary underline underline-offset-4 hover:no-underline">
+          <Link to={pricing.offerNote.to} search={{ from: pricing.offerNote.from }} className="text-primary underline underline-offset-4 hover:no-underline">
             {pricing.offerNote.linkLabel}
-          </a>
+          </Link>
         </p>
         {isPresent(payments.vatNote) && <p className="text-sm text-muted-foreground">{payments.vatNote}</p>}
       </div>

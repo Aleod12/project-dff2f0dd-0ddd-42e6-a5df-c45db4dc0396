@@ -113,8 +113,18 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+/** The mobile «Вступить в Клуб» bar exists only on the home page. */
+export const showStickyCta = (pathname: string) => pathname === "/";
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const location = useRouterState({ select: (s) => s.location });
+  const firstLoad = useRef(true);
+  // Flag for «back» on document pages: false after a fresh load, true after any in-site navigation in this tab.
+  useEffect(() => {
+    setCameFromSite(!firstLoad.current);
+    firstLoad.current = false;
+  }, [location.href]);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -125,7 +135,7 @@ function RootComponent() {
         </main>
         <SiteFooter />
       </div>
-      <MobileStickyCta />
+      {showStickyCta(location.pathname) && <MobileStickyCta />}
     </QueryClientProvider>
   );
 }

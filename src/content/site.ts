@@ -39,8 +39,8 @@ export const site = {
     { label: "YouTube", href: links.youtube, track: "footer-youtube" },
   ],
   legalPages: [
-    { label: "Политика конфиденциальности", to: "/privacy" },
-    { label: "Согласие на обработку данных", to: "/consent" },
+    { label: "Политика в отношении обработки персональных данных", to: "/privacy" },
     { label: "Публичная оферта", to: "/offer" },
+    { label: "Согласие на обработку персональных данных", to: "/consent" },
   ],
 } as const;
