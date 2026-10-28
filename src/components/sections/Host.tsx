@@ -42,7 +42,7 @@ function RoundVideo({ className }: { className?: string }) {
 
   return (
     <figure className={cn("flex flex-col items-center gap-3", className)}>
-      <div className="relative size-60 rounded-full bg-sage shadow-island ring-4 ring-background lg:size-[280px]">
+      <div className="relative size-60 rounded-full bg-sage shadow-island ring-4 ring-background lg:size-60">
         {state === "idle" ? (
           <button
             type="button"
@@ -138,7 +138,7 @@ export function Host() {
       <div className="mt-8 grid gap-10 md:mt-12 lg:grid-cols-[minmax(0,440px)_1fr] lg:gap-16">
         {/* Desktop: portrait with the round video over its lower-right corner. */}
         <div className="hidden self-start lg:sticky lg:top-24 lg:block">
-          <div className="relative pb-20">
+          <div className="relative pb-[200px]">
             <Portrait />
             <RoundVideo className="absolute -right-12 bottom-0" />
           </div>

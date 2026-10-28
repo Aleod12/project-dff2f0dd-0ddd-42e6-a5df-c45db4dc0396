@@ -41,7 +41,7 @@ export function FinalCta() {
               <CtaButton
                 href={c.join.href}
                 track={c.join.track}
-                className={`w-full bg-primary-foreground text-base font-semibold text-primary shadow-none hover:bg-sage sm:w-auto ${focusLight}`}
+                className={`w-full bg-primary-foreground text-base font-semibold text-primary shadow-cta-light hover:bg-sage sm:w-auto ${focusLight}`}
               >
                 {c.join.label}
               </CtaButton>

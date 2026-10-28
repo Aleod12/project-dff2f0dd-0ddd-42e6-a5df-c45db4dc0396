@@ -28,7 +28,7 @@ export const pricing = {
     accent: "участия",
     summaryLabel: "Ваш заказ",
     noRenewal: "Разовый платёж, без автосписаний",
-    disabledText: "Онлайн-оплата подключается. Пока Вы можете вступить в клуб написав мне в Telegram.",
+    disabledText: "Онлайн-оплата подключается. Пока Вы можете вступить в клуб, написав мне в Telegram.",
     redirecting: "Переходим на страницу оплаты…",
     errorText: "Не удалось открыть страницу оплаты. Напишите мне — помогу с оплатой.",
     write: { label: "Написать в Telegram", href: links.club, track: "checkout-write" },

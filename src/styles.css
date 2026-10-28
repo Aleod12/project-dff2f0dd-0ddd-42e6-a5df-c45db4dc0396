@@ -97,6 +97,7 @@
   --shadow-island: var(--island-shadow);
   --shadow-photo: var(--photo-shadow);
   --shadow-cta: var(--cta-shadow);
+  --shadow-cta-light: var(--cta-light-shadow);
 }
 
 :root {
@@ -131,6 +132,7 @@
   --island-shadow: 0 1px 2px oklch(0.26 0.016 165 / 4%), 0 24px 60px -32px oklch(0.4 0.03 75 / 22%);
   --photo-shadow: 0 30px 60px -30px oklch(0.3 0.03 75 / 35%);
   --cta-shadow: 0 10px 24px -12px oklch(0.47 0.05 170 / 55%);
+  --cta-light-shadow: 0 12px 28px -10px oklch(0.15 0.02 170 / 55%), 0 0 0 1px oklch(0.98 0.01 80 / 25%);
 }
 
 @media (min-width: 768px) {

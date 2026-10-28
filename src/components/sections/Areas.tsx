@@ -25,7 +25,7 @@ export function Areas() {
   const items = areas.items.filter((item) => isPresent(item.title));
 
   return (
-    <Island id="club" tone="surface" aria-labelledby={areas.titleId}>
+    <Island id="club" tone="sage" aria-labelledby={areas.titleId}>
       <SectionTitle id={areas.titleId} title={areas.title} accent={areas.accent} />
 
       {isPresent(areas.intro) && (

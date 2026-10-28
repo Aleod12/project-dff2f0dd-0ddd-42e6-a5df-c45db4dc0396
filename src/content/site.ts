@@ -18,6 +18,7 @@ export const site = {
   nav: [
     { label: "Клуб", hash: "club" },
     { label: "Ведущий", hash: "host" },
+    { label: "Отзывы", hash: "reviews" },
     { label: "Стоимость", hash: "price" },
     { label: "Вопросы", hash: "faq" },
   ],
