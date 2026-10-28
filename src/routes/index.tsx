@@ -8,6 +8,7 @@ import { MonthFormat } from "@/components/sections/MonthFormat";
 import { Reviews } from "@/components/sections/Reviews";
 import { Price } from "@/components/sections/Price";
 import { FreeLadder } from "@/components/sections/FreeLadder";
+import { FinalCta } from "@/components/sections/FinalCta";
 import { Faq } from "@/components/sections/Faq";
 import { faqJsonLd } from "@/content/faq";
 
@@ -41,6 +42,7 @@ function Index() {
       <Price />
       <FreeLadder />
       <Faq />
+      <FinalCta />
     </>
   );
 }

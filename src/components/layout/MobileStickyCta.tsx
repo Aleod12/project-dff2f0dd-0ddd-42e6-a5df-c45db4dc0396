@@ -16,7 +16,7 @@ export function MobileStickyCta() {
     window.addEventListener("scroll", onScroll, { passive: true });
     const footer = document.getElementById("site-footer");
     // Hide while the footer or the price block (where the button leads) is on screen.
-    const targets = [footer, document.getElementById("price")].filter((el): el is HTMLElement => !!el);
+    const targets = [footer, document.getElementById("price"), document.getElementById("start")].filter((el): el is HTMLElement => !!el);
     const visible = new Set<Element>();
     const io = new IntersectionObserver((entries) => {
       for (const e of entries) (e.isIntersecting ? visible.add(e.target) : visible.delete(e.target));
