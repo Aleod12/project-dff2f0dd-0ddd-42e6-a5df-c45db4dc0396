@@ -13,7 +13,7 @@ export function TranscriptButton({ open, onToggle, controls, className }: Button
       onClick={onToggle}
       aria-expanded={open}
       aria-controls={controls}
-      className={cn("text-sm font-semibold text-primary underline underline-offset-4 hover:no-underline", className)}
+      className={cn("inline-flex min-h-11 items-center text-sm font-semibold text-primary underline underline-offset-4 hover:no-underline", className)}
     >
       {open ? transcriptLabels.close : transcriptLabels.open}
     </button>
