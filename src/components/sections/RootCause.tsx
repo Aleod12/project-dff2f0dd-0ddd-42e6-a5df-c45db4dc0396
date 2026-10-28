@@ -43,7 +43,15 @@ export function RootCause() {
 
         {/* Closed loop */}
         <div className="flex w-full flex-col items-center lg:flex-1">
-          <div className="relative w-full max-w-[520px] lg:aspect-[520/420]">
+          <div className="relative w-full max-w-[520px] pl-7 lg:aspect-[520/420] lg:pl-0">
+            {/* Phones only: the path that returns from the last link of the loop to the first. */}
+            <span
+              aria-hidden="true"
+              className="absolute bottom-4 left-[4px] top-4 w-px bg-primary/25 lg:hidden"
+            />
+            <svg aria-hidden="true" viewBox="0 0 10 10" className="absolute left-0 top-1 size-2.5 lg:hidden">
+              <path d="M 5 0 L 10 10 L 0 10 z" fill="var(--color-primary)" fillOpacity="0.6" />
+            </svg>
             <svg
               aria-hidden="true"
               viewBox="0 0 520 420"
@@ -68,7 +76,7 @@ export function RootCause() {
                 </marker>
               </defs>
               <path d="M 272 34 C 430 60, 440 180, 402 266" markerEnd="url(#rc-arrow)" />
-              <path d="M 386 282 C 330 296, 190 296, 138 282" markerEnd="url(#rc-arrow)" />
+              <path d="M 388 286 C 320 324, 200 324, 132 286" markerEnd="url(#rc-arrow)" />
               <path d="M 116 266 C 40 190, 60 80, 244 36" markerEnd="url(#rc-arrow)" />
             </svg>
 
@@ -102,35 +110,8 @@ export function RootCause() {
           </div>
 
           <div className="mt-8 flex w-full flex-col items-center gap-4">
-            {/* Phones only: a small arrow back to the first link of the loop. */}
-            <div className="flex w-full items-center gap-3 lg:hidden">
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 30 48"
-                className="h-12 w-[30px] shrink-0"
-                fill="none"
-                stroke="var(--color-primary)"
-                strokeOpacity="0.65"
-                strokeWidth="1.75"
-                strokeLinecap="round"
-              >
-                <defs>
-                  <marker
-                    id="rc-arrow-loop"
-                    viewBox="0 0 10 10"
-                    refX="9"
-                    refY="5"
-                    markerWidth="6"
-                    markerHeight="6"
-                    orient="auto"
-                  >
-                    <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--color-primary)" fillOpacity="0.65" stroke="none" />
-                  </marker>
-                </defs>
-                <path d="M 22 44 C 6 36, 6 14, 20 6" markerEnd="url(#rc-arrow-loop)" />
-              </svg>
-              <p className="text-sm text-muted-foreground">{rootCause.loopLabel}</p>
-            </div>
+            {/* Phones only: the caption for the return path drawn along the list. */}
+            <p className="w-full pl-7 text-sm text-muted-foreground lg:hidden">{rootCause.loopLabel}</p>
 
             <p className="text-balance text-center font-display text-xl italic">{rootCause.conclusion}</p>
           </div>
