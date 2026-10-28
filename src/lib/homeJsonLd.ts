@@ -3,7 +3,7 @@ import { absoluteUrl } from "@/lib/siteUrl";
 import { links } from "@/content/links";
 import { hero } from "@/content/hero";
 import { payments } from "@/content/payments";
-import photo860 from "@/assets/hero/sergey-hero-860.webp.asset.json";
+import photo860 from "@/assets/hero/sergey-hero-v3-860.webp.asset.json";
 
 const url = absoluteUrl;
 
