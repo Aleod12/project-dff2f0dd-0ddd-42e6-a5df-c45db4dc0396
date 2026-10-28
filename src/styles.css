@@ -59,6 +59,9 @@
  */
 
 @theme inline {
+  /* No UI text below 15px: text-sm is 15px on this site. */
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.5;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);

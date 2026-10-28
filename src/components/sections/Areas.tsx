@@ -15,7 +15,7 @@ const icons: Record<AreaIcon, typeof Leaf> = {
 };
 
 /** Small uppercase label in front of every row. */
-const rowLabel = "text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground";
+const rowLabel = "text-sm font-semibold uppercase tracking-[0.12em] text-muted-foreground";
 
 /**
  * Two cards per row on desktop: a narrower measure reads better than four narrow columns.

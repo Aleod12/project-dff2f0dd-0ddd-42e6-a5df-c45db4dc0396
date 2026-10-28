@@ -47,7 +47,7 @@ export function SiteFooter() {
 
           <DiamondDivider className="my-8 justify-center" />
           <p className="mx-auto max-w-3xl text-center text-sm text-muted-foreground">{site.disclaimer}</p>
-          <p className="mt-4 text-center text-xs text-muted-foreground">© {new Date().getFullYear()} {site.hostName}</p>
+          <p className="mt-4 text-center text-sm text-muted-foreground">© {new Date().getFullYear()} {site.hostName}</p>
         </div>
       </Container>
     </footer>

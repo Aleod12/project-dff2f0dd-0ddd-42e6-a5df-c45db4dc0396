@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageSeo } from "@/lib/siteUrl";
+import heroPhoto from "@/assets/hero/sergey-hero-860.webp.asset.json";
 import { Hero } from "@/components/sections/Hero";
 import { ForYou } from "@/components/sections/ForYou";
 import { RootCause } from "@/components/sections/RootCause";
@@ -18,19 +20,24 @@ const description =
   "Онлайн-клуб с Сергеем Табачниковым: 4 живые встречи, 4 сферы жизни — здоровье, финансы, отношения, предназначение. Разовая оплата, без автосписаний.";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
+  head: () => {
+    const seo = pageSeo("/", heroPhoto.url);
+    return {
+    links: seo.links,
     meta: [
       { title },
       { name: "description", content: description },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
+      ...seo.meta,
     ],
     scripts: [
       { type: "application/ld+json", children: JSON.stringify(personJsonLd()) },
       { type: "application/ld+json", children: JSON.stringify(serviceJsonLd()) },
       { type: "application/ld+json", children: JSON.stringify(faqJsonLd()) },
     ],
-  }),
+  };
+  },
   component: Index,
 });
 
