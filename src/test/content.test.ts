@@ -3,6 +3,7 @@ import { pricing } from "@/content/pricing";
 import { links } from "@/content/links";
 import { pains } from "@/content/pains";
 import { rootCause } from "@/content/rootCause";
+import { host } from "@/content/host";
 import { isPresent } from "@/lib/present";
 
 describe("content rules", () => {
@@ -68,5 +69,13 @@ describe("content rules", () => {
     expect(rootCause.conclusion).toBe(
       "Круг замыкается. В клубе мы работаем с первым звеном — через тело и состояние.",
     );
+  });
+  it("section 4 scan CTA goes to the bot scanning link", () => {
+    expect(host.cta.href).toBe(links.scanning);
+    expect(host.cta.track).toBe("host-scan");
+  });
+  it("section 4 practice numbers match the agreed draft", () => {
+    expect(host.numbers.map((n) => n.value)).toEqual(["27 лет", "150+", "120+", "10"]);
+    expect(host.numbersCaption).toBe("по моей практике");
   });
 });
