@@ -19,10 +19,12 @@ import { Island } from "@/components/layout/Island";
 import { DiamondDivider } from "@/components/brand/DiamondDivider";
 
 function NotFoundComponent() {
+  useEffect(() => {
+    document.title = "Страница не найдена — Клуб «Трансформация»";
+  }, []);
   return (
     <Island tone="surface" className="flex flex-col items-center gap-6 text-center">
       <meta name="robots" content="noindex, nofollow" />
-      <title>Страница не найдена — Клуб «Трансформация»</title>
       <p className="font-display text-7xl text-secondary">404</p>
       <h1 className="text-h2">
         Страница <em className="italic">не найдена</em>
