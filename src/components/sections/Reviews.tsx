@@ -155,7 +155,7 @@ export function Reviews() {
             aria-current={dot === i ? "true" : undefined}
             className="flex size-6 items-center justify-center"
           >
-            <span aria-hidden="true" className={cn("size-2 rounded-full transition-colors", dot === i ? "bg-primary" : "bg-secondary")} />
+            <span aria-hidden="true" className={cn("h-2 w-2 rounded-full transition-all", dot === i ? "w-5 bg-primary" : "bg-primary/75")} />
           </button>
         ))}
       </div>

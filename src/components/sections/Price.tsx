@@ -64,7 +64,7 @@ export function Price() {
             {pricing.questions.linkLabel}
           </a>
         </p>
-        <TelegramFallback />
+        <TelegramFallback cta="vk-fallback-price" />
       </div>
     </Island>
   );

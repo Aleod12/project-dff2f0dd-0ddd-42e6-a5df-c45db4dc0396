@@ -64,7 +64,7 @@ export function Hero() {
             <CtaButton href={hero.primary.href} track={hero.primary.track} className="w-full md:w-auto">{hero.primary.label}</CtaButton>
             <CtaButton href={hero.secondary.href} track={hero.secondary.track} variant="outline" className="w-full md:w-auto">{hero.secondary.label}</CtaButton>
           </div>
-          <TelegramFallback />
+          <TelegramFallback cta="vk-fallback-hero" />
         </div>
       </Container>
     </section>

@@ -42,7 +42,7 @@ export function FreeLadder() {
       </ol>
 
       <div className="mt-10 flex justify-center text-center">
-        <TelegramFallback />
+        <TelegramFallback cta="vk-fallback-free" />
       </div>
     </Island>
   );
