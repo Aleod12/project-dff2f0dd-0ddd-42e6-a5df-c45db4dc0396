@@ -34,7 +34,7 @@ export function Faq() {
             {faq.more.linkLabel}
           </a>
         </p>
-        <TelegramFallback />
+        <TelegramFallback cta="vk-fallback-faq" />
       </div>
     </Island>
   );

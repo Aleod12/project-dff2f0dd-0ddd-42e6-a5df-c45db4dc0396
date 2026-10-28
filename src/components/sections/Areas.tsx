@@ -77,7 +77,7 @@ export function Areas() {
         <CtaButton href={areas.cta.href} track={areas.cta.track} block>
           {areas.cta.label}
         </CtaButton>
-        <TelegramFallback />
+        <TelegramFallback cta="vk-fallback-areas" />
       </div>
     </Island>
   );

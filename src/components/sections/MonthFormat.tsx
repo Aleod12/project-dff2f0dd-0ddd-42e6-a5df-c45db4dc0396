@@ -96,7 +96,7 @@ export function MonthFormat() {
         <CtaButton href={monthFormat.cta.href} track={monthFormat.cta.track} block>
           {monthFormat.cta.label}
         </CtaButton>
-        <TelegramFallback />
+        <TelegramFallback cta="vk-fallback-format" />
       </div>
     </Island>
   );
