@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Pause, Play, X } from "lucide-react";
-import { reviews, reviewTitle, type VideoReview } from "@/content/reviews";
+import { reviews, reviewTitle, transcriptHeading, type VideoReview } from "@/content/reviews";
 import { CtaButton } from "@/components/brand/CtaButton";
 import { SectionTitle } from "@/components/brand/SectionTitle";
 import { Island } from "@/components/layout/Island";
@@ -124,21 +124,21 @@ export function Reviews() {
           const open = openText === r.id;
           return (
             <div key={r.id} role="listitem" data-review-video className="flex w-[260px] shrink-0 snap-center flex-col items-center gap-3 md:contents">
-              <div className="flex flex-col items-center gap-3 text-center">
-                <div className={circle}>
+              <div className="flex flex-col items-center gap-3 text-center md:h-full">
+                <div className={cn(circle, open && "ring-[3px] ring-gold")}>
                   <LocalVideo r={r} active={active === r.id} onActivate={() => setActive(r.id)} onStop={() => setActive(null)} />
                 </div>
-                <div className="flex flex-col items-center gap-1">
+                <div className="flex flex-1 flex-col items-center gap-1">
                   <p className="font-display text-lg font-semibold text-primary">{reviewTitle(r)}</p>
                   {isPresent(r.summary ?? "") && <p className="font-display text-lg italic leading-snug">«{r.summary}»</p>}
                   <p className="text-sm text-muted-foreground">{r.duration}</p>
                   {isPresent(r.transcript ?? "") && (
-                    <TranscriptButton open={open} onToggle={() => setOpenText(open ? null : r.id)} controls={panelId} className="mt-1" />
+                    <TranscriptButton open={open} onToggle={() => setOpenText(open ? null : r.id)} controls={panelId} className="mt-auto pt-1" />
                   )}
                 </div>
               </div>
               {isPresent(r.transcript ?? "") && (
-                <TranscriptPanel id={panelId} open={open} text={r.transcript!} className="w-full md:order-1 md:col-span-4 md:mx-auto md:max-w-[760px]" />
+                <TranscriptPanel id={panelId} open={open} text={r.transcript!} label={transcriptHeading(reviewTitle(r), r.duration)} className="w-full md:order-1 md:col-span-4 md:mx-auto md:max-w-[760px]" />
               )}
             </div>
           );

@@ -7,7 +7,7 @@ import { Island } from "@/components/layout/Island";
 import { isPresent } from "@/lib/present";
 import { cn } from "@/lib/utils";
 import { pauseOtherVideos } from "@/lib/exclusivePlay";
-import { Transcript } from "@/components/brand/TranscriptToggle";
+import { Transcript, TranscriptButton, TranscriptPanel } from "@/components/brand/TranscriptToggle";
 import portrait480 from "@/assets/host/sergey-host-480.webp.asset.json";
 import portrait864 from "@/assets/host/sergey-host-864.webp.asset.json";
 import poster from "@/assets/host/welcome-poster.webp.asset.json";
@@ -129,20 +129,27 @@ function Portrait() {
 }
 
 export function Host() {
+  const [textOpen, setTextOpen] = useState(false);
   const numbers = host.numbers.filter((n) => isPresent(n.value));
 
   return (
     <Island id="host" tone="card" aria-labelledby={host.titleId}>
       <SectionTitle id={host.titleId} title={host.title} accent={host.accent} />
 
-      <div className="mt-8 grid gap-10 md:mt-12 lg:grid-cols-[minmax(0,440px)_1fr] lg:gap-16">
+      <div className="mt-8 grid gap-10 md:mt-12 lg:grid-cols-[minmax(0,400px)_1fr] lg:gap-x-[136px]">
         {/* Desktop: portrait with the round video over its lower-right corner. */}
         <div className="hidden self-start lg:sticky lg:top-24 lg:block">
-          <div className="relative pb-[200px]">
-            <Portrait />
-            <RoundVideo className="absolute -right-12 bottom-0" />
+          {/* The circle's center sits on the portrait's bottom-right corner: only a quarter covers the photo. */}
+          <div className="relative pb-[190px]">
+            <div className="relative">
+              <Portrait />
+              <div className="absolute -right-[120px] top-[calc(100%-120px)] flex w-60 flex-col items-center gap-2">
+                <RoundVideo />
+                <TranscriptButton open={textOpen} onToggle={() => setTextOpen((o) => !o)} controls="host-video-text" />
+              </div>
+            </div>
           </div>
-          <Transcript text={host.video.transcript} className="mt-4" />
+          <TranscriptPanel id="host-video-text" open={textOpen} text={host.video.transcript} />
         </div>
 
         <div className="flex min-w-0 flex-col gap-10">

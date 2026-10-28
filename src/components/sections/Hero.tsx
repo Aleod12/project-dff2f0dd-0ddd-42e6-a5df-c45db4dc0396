@@ -19,11 +19,11 @@ export function Hero() {
               srcSet={`${photo430.url} 430w, ${photo640.url} 640w, ${photo860.url} 860w`}
               sizes="(min-width: 768px) 460px, 300px"
               width={860}
-              height={940}
+              height={957}
               alt={hero.photoAlt}
               fetchPriority="high"
               decoding="async"
-              className="absolute inset-x-0 top-[6%] h-auto w-full md:top-auto md:bottom-0"
+              className="absolute bottom-0 left-1/2 h-[86%] w-auto max-w-[94%] -translate-x-1/2 object-contain object-bottom"
             />
           </div>
         </div>
@@ -37,7 +37,7 @@ export function Hero() {
             </span>
             <span className="text-name text-base text-foreground sm:text-xl">{hero.titleName}</span>
           </h1>
-          <p className="font-display text-xl italic text-primary">{hero.signature}</p>
+          <p className="-mt-1 font-display text-xl italic text-primary">{hero.signature}</p>
           <p className="max-w-xl text-base font-medium md:text-xl">{hero.lead}</p>
           {isPresent(hero.sub) && <p className="max-w-xl text-muted-foreground">{hero.sub}</p>}
           <ul className="flex flex-col items-center gap-2 text-base font-medium md:items-start">

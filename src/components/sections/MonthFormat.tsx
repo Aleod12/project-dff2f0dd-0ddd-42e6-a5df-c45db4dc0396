@@ -20,7 +20,7 @@ export function MonthFormat() {
   const lastStep = steps.length - 1;
 
   return (
-    <Island id="format" tone="sage" aria-labelledby={monthFormat.titleId}>
+    <Island id="format" tone="light" aria-labelledby={monthFormat.titleId}>
       <SectionTitle
         id={monthFormat.titleId}
         title={monthFormat.title}
@@ -33,7 +33,7 @@ export function MonthFormat() {
           {cards.map((card) => (
             <li
               key={card.title}
-              className="flex flex-col gap-3 rounded-card bg-background p-5 md:p-6"
+              className="flex flex-col gap-3 rounded-card bg-surface p-5 md:p-6"
             >
               {isPresent(card.badge) && <FrequencyBadge>{card.badge}</FrequencyBadge>}
               <h3 className="font-display text-2xl font-semibold leading-snug text-primary">
@@ -72,7 +72,7 @@ export function MonthFormat() {
                   {/* Desktop diamond, sitting on the connector line. */}
                   <span
                     aria-hidden="true"
-                    className="hidden h-3 items-center justify-center bg-sage px-3 md:flex"
+                    className="hidden h-3 items-center justify-center bg-background px-3 md:flex"
                   >
                     <span className="size-2 rotate-45 bg-gold" />
                   </span>
