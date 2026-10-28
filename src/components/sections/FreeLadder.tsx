@@ -17,10 +17,10 @@ export function FreeLadder() {
         <p className="mx-auto mt-4 max-w-xl text-balance text-center text-muted-foreground">{freeLadder.lead}</p>
       )}
 
-      <ol className="relative mt-10 grid gap-8 md:mt-14 md:grid-cols-4 md:gap-6">
+      <ol className="relative mt-10 grid gap-8 md:mt-14 md:grid-cols-4 md:gap-x-6 md:gap-y-4">
         <span aria-hidden="true" className="absolute left-[12.5%] right-[12.5%] top-[5px] hidden h-px bg-gold md:block" />
         {steps.map((step, i) => (
-          <li key={step.title} className="flex gap-4 md:flex-col md:items-center md:gap-4 md:text-center">
+          <li key={step.title} className="flex gap-4 md:row-span-4 md:grid md:grid-rows-subgrid md:justify-items-center md:gap-y-4 md:text-center">
             <span aria-hidden="true" className="flex flex-col items-center pt-1 md:hidden">
               <span className="size-2 rotate-45 bg-gold" />
               {i !== last && <span className="-mb-8 mt-1 w-px flex-1 bg-gold/60" />}
@@ -29,11 +29,13 @@ export function FreeLadder() {
               <span className="size-2 rotate-45 bg-gold" />
             </span>
 
-            <div className="flex flex-1 flex-col items-start gap-3 md:items-center">
-              {isPresent(step.badge) && <FrequencyBadge className="md:self-center">{step.badge}</FrequencyBadge>}
-              <h3 className="font-display text-xl font-semibold leading-snug text-primary md:text-[22px]">{step.title}</h3>
-              <p className="text-muted-foreground md:flex-1">{step.text}</p>
-              <CtaButton href={step.button.href} track={step.button.track} variant="outline" size="sm" className="mt-1">
+            <div className="flex flex-1 flex-col items-start gap-3 md:contents">
+              <div className="flex flex-col items-start gap-3 md:items-center md:self-end">
+                {isPresent(step.badge) && <FrequencyBadge className="md:self-center">{step.badge}</FrequencyBadge>}
+                <h3 className="font-display text-xl font-semibold leading-snug text-primary md:text-[22px]">{step.title}</h3>
+              </div>
+              <p className="text-base text-muted-foreground md:self-start">{step.text}</p>
+              <CtaButton href={step.button.href} track={step.button.track} variant="outline" size="sm" className="mt-1 md:self-end">
                 {step.button.label}
               </CtaButton>
             </div>

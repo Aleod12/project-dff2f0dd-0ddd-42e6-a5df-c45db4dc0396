@@ -10,9 +10,9 @@ import { cn } from "@/lib/utils";
  * the arrows run 1 → 2 → 3 → 1. All labels sit outside the loop.
  */
 const nodePos = [
-  "lg:left-[50%] lg:top-[26%] lg:w-[30%]",
-  "lg:left-[77%] lg:top-[66%] lg:w-[36%]",
-  "lg:left-[23%] lg:top-[66%] lg:w-[36%]",
+  "lg:left-[50%] lg:top-[calc(21.43%-5px)] lg:w-[30%]",
+  "lg:left-[73.3%] lg:top-[calc(71.43%-5px)] lg:w-[36%]",
+  "lg:left-[26.7%] lg:top-[calc(71.43%-5px)] lg:w-[36%]",
 ];
 
 export function RootCause() {
@@ -27,9 +27,9 @@ export function RootCause() {
         suffix={rootCause.titleSuffix}
       />
 
-      <div className="mt-10 flex flex-col gap-10 md:mt-14 md:gap-14 lg:flex-row lg:items-center lg:gap-12">
+      <div className="mt-10 flex flex-col gap-10 md:mt-14 md:gap-14 lg:flex-row lg:items-start lg:gap-12">
         {/* Thesis */}
-        <div className="flex flex-col gap-5 lg:max-w-[440px]">
+        <div className="flex flex-col gap-5 lg:max-w-[480px]">
           {rootCause.thesis.map((line, i) => (
             <p
               key={line}
@@ -78,9 +78,10 @@ export function RootCause() {
                   <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--color-primary)" fillOpacity="0.6" stroke="none" />
                 </marker>
               </defs>
-              <path d="M 274 112 C 435 125, 448 205, 402 266" markerEnd="url(#rc-arrow)" />
-              <path d="M 388 286 C 320 324, 200 324, 132 286" markerEnd="url(#rc-arrow)" />
-              <path d="M 116 266 C 40 190, 60 130, 242 116" markerEnd="url(#rc-arrow)" />
+              {/* One circle (center 260,230, r 140) split into three equal arcs; nodes sit at 0°, 120°, 240°. */}
+              <path d="M 293.9 94.2 A 140 140 0 0 1 394.6 268.6" markerEnd="url(#rc-arrow)" />
+              <path d="M 360.7 327.3 A 140 140 0 0 1 159.3 327.3" markerEnd="url(#rc-arrow)" />
+              <path d="M 125.4 268.6 A 140 140 0 0 1 226.1 94.2" markerEnd="url(#rc-arrow)" />
             </svg>
 
             <ol className="relative flex flex-col gap-6 pb-6 lg:h-full lg:gap-0 lg:pb-0">
@@ -101,7 +102,11 @@ export function RootCause() {
                   )}
                   <span
                     aria-hidden="true"
-                    className="mt-[6px] size-[11px] shrink-0 rotate-45 bg-gold lg:mt-0 lg:mb-8"
+                    className={cn(
+                      "mt-[6px] size-[11px] shrink-0 rotate-45 bg-gold lg:mt-0",
+                      // Bottom labels start below the lowest point of the circle.
+                      i === 0 ? "lg:mb-8" : "lg:mb-20",
+                    )}
                   />
                   <div
                     className={cn(
@@ -118,7 +123,7 @@ export function RootCause() {
             </ol>
           </div>
 
-          <div className="mt-8 flex w-full justify-center lg:mt-[72px]">
+          <div className="mt-8 flex w-full justify-center lg:mt-[136px]">
             <p className="max-w-[520px] text-balance text-center font-display text-xl italic">{rootCause.conclusion}</p>
           </div>
         </div>

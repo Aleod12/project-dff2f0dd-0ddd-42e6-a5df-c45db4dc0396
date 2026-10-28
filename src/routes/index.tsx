@@ -13,7 +13,7 @@ import { Faq } from "@/components/sections/Faq";
 import { faqJsonLd } from "@/content/faq";
 import { personJsonLd, serviceJsonLd } from "@/lib/homeJsonLd";
 
-const title = "Клуб «Трансформация» Сергея Табачникова — месяц системной работы";
+const title = "Клуб «Трансформация» Сергея Табачникова";
 const description =
   "Онлайн-клуб с Сергеем Табачниковым: 4 живые встречи, 4 сферы жизни — здоровье, финансы, отношения, предназначение. Разовая оплата, без автосписаний.";
 

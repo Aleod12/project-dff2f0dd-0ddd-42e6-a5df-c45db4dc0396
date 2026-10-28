@@ -40,7 +40,7 @@ export function MonthFormat() {
                 {card.title}
               </h3>
               {isPresent(card.text) && (
-                <p className="text-balance text-muted-foreground">{card.text}</p>
+                <p className="text-muted-foreground">{card.text}</p>
               )}
             </li>
           ))}
