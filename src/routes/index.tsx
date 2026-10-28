@@ -4,6 +4,7 @@ import { ForYou } from "@/components/sections/ForYou";
 import { RootCause } from "@/components/sections/RootCause";
 import { Host } from "@/components/sections/Host";
 import { Areas } from "@/components/sections/Areas";
+import { MonthFormat } from "@/components/sections/MonthFormat";
 
 const title = "Клуб «Трансформация» Сергея Табачникова — месяц системной работы";
 const description =
@@ -29,6 +30,7 @@ function Index() {
       <RootCause />
       <Host />
       <Areas />
+      <MonthFormat />
     </>
   );
 }

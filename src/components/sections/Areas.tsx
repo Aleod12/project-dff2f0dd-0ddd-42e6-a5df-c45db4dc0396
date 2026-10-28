@@ -1,4 +1,4 @@
-import { Coins, Compass, Heart, Leaf } from "lucide-react";
+import { Compass, Heart, Leaf, Wallet } from "lucide-react";
 import { areas, type AreaIcon } from "@/content/areas";
 import { CtaButton } from "@/components/brand/CtaButton";
 import { SectionTitle } from "@/components/brand/SectionTitle";
@@ -9,7 +9,7 @@ import { isPresent } from "@/lib/present";
 /** Icon keys used in the content file, resolved to components here. */
 const icons: Record<AreaIcon, typeof Leaf> = {
   leaf: Leaf,
-  coins: Coins,
+  wallet: Wallet,
   heart: Heart,
   compass: Compass,
 };
@@ -41,16 +41,17 @@ export function Areas() {
                 key={item.title}
                 className="flex flex-col gap-4 rounded-card bg-background p-5 shadow-island md:p-7"
               >
-                <span
-                  aria-hidden="true"
-                  className="flex size-11 items-center justify-center rounded-full bg-sage text-primary"
-                >
-                  <Icon size={20} strokeWidth={1.5} aria-hidden="true" />
-                </span>
-
-                <h3 className="font-display text-2xl font-semibold leading-snug text-primary md:text-[26px]">
-                  {item.title}
-                </h3>
+                <div className="flex items-center gap-3 md:flex-col md:items-start md:gap-4">
+                  <span
+                    aria-hidden="true"
+                    className="flex size-11 shrink-0 items-center justify-center rounded-full bg-sage text-primary"
+                  >
+                    <Icon size={20} strokeWidth={1.5} aria-hidden="true" />
+                  </span>
+                  <h3 className="font-display text-2xl font-semibold leading-snug text-primary md:text-[26px]">
+                    {item.title}
+                  </h3>
+                </div>
 
                 <dl className="flex flex-col gap-3">
                   {isPresent(item.work) && (

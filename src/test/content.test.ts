@@ -5,6 +5,7 @@ import { pains } from "@/content/pains";
 import { rootCause } from "@/content/rootCause";
 import { host } from "@/content/host";
 import { areas } from "@/content/areas";
+import { monthFormat } from "@/content/format";
 import { isPresent } from "@/lib/present";
 
 describe("content rules", () => {
@@ -103,5 +104,33 @@ describe("content rules", () => {
     expect(areas.cta.href).toBe(links.join);
     expect(areas.cta.track).toBe("club-areas");
     expect(areas.cta.label).toBe("Вступить в Клуб");
+  });
+  it("section 6 has the four format cards in the agreed order, each with a frequency badge", () => {
+    expect(monthFormat.cards.map((c) => c.title)).toEqual([
+      "Живая встреча с Сергеем",
+      "Закрытый канал потока",
+      "Медитации и практики",
+      "Архив +2 недели",
+    ]);
+    expect(monthFormat.cards.map((c) => c.badge)).toEqual([
+      "Раз в неделю",
+      "Весь месяц",
+      "Бонус",
+      "После потока",
+    ]);
+    for (const card of monthFormat.cards) expect(isPresent(card.text)).toBe(true);
+  });
+  it("section 6 joining is three steps in the agreed order", () => {
+    expect(monthFormat.join.subtitle).toBe("Как присоединиться");
+    expect(monthFormat.join.steps.map((s) => s.title)).toEqual([
+      "Нажмите «Вступить в Клуб»",
+      "Оплатите участие",
+      "Получите доступ",
+    ]);
+    expect(monthFormat.join.steps[1].text).toContain("без автосписаний");
+  });
+  it("section 6 button is the club link with its own tracking tag", () => {
+    expect(monthFormat.cta.href).toBe(links.join);
+    expect(monthFormat.cta.track).toBe("format-join");
   });
 });
