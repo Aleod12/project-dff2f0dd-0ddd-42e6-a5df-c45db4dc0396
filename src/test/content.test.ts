@@ -46,7 +46,7 @@ describe("content rules", () => {
   it("every link is an https URL", () => {
     for (const v of Object.values(links)) expect(v).toMatch(/^https:\/\//);
   });
-  it("«Написать Сергею» goes to Sergey's Telegram", () => {
+  it("«Написать в Telegram» goes to Sergey's Telegram", () => {
     expect(links.club).toBe("https://t.me/STabachnikov");
   });
   it("empty values are hidden", () => {
@@ -134,7 +134,7 @@ describe("content rules", () => {
   });
   it("section 6 has the four format cards in the agreed order, each with a frequency badge", () => {
     expect(monthFormat.cards.map((c) => c.title)).toEqual([
-      "Живая встреча с Сергеем",
+      "Живая встреча",
       "Закрытый канал потока",
       "Медитации и практики",
       "Архив +2 недели",
@@ -194,10 +194,10 @@ describe("section 10 faq", () => {
     expect(answerText(faq.items[4]!.a)).toBe("Нет. Вы оплачиваете ровно один месяц участия разовым платежом, без автосписаний. Продление — только по Вашему решению.");
   });
   it("«no Telegram» answer links «ВКонтакте» to VK messages", () => {
-    expect(answerText(faq.items[6]!.a)).toBe("Напишите нам во ВКонтакте — подскажем.");
+    expect(answerText(faq.items[6]!.a)).toBe("Напишите мне во ВКонтакте — подскажу.");
     expect(faq.items[6]!.a.find((p) => p.href)).toEqual({ text: "ВКонтакте", href: links.vkMessages });
   });
   it("stream answer has no date line while the date is empty", () => {
-    expect(faq.items[8]!.a[0]!.text).toBe("Дату старта Сергей сообщает в Telegram-канале и при вступлении в клуб.");
+    expect(faq.items[8]!.a[0]!.text).toBe("Дату старта я сообщаю в Telegram-канале и при вступлении в клуб.");
   });
 });
