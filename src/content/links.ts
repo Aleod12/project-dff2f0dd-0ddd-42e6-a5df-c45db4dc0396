@@ -1,6 +1,6 @@
 /** All external links of the site. Change a link here only. */
 export const links = {
-  /** Sergey's Telegram DM — used only for «Написать Сергею». */
+  /** Sergey's Telegram DM — used for «Написать в Telegram». */
   club: "https://t.me/STabachnikov",
   diagnostic: "https://t.me/st_soulpower_bot?start=test_site",
   audioPractice: "https://t.me/st_soulpower_bot?start=trans_site",
