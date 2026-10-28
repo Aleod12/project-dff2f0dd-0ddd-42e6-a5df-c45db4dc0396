@@ -6,6 +6,8 @@ import { SectionTitle } from "@/components/brand/SectionTitle";
 import { Island } from "@/components/layout/Island";
 import { isPresent } from "@/lib/present";
 import { cn } from "@/lib/utils";
+import { pauseOtherVideos } from "@/lib/exclusivePlay";
+import { Transcript } from "@/components/brand/TranscriptToggle";
 import portrait480 from "@/assets/host/sergey-host-480.webp.asset.json";
 import portrait864 from "@/assets/host/sergey-host-864.webp.asset.json";
 import poster from "@/assets/host/welcome-poster.webp.asset.json";
@@ -70,7 +72,10 @@ function RoundVideo({ className }: { className?: string }) {
               preload="none"
               playsInline
               onClick={toggle}
-              onPlay={() => setState("playing")}
+              onPlay={() => {
+                pauseOtherVideos(ref.current);
+                setState("playing");
+              }}
               onPause={() => setState((s) => (s === "idle" ? s : "paused"))}
               onEnded={close}
               className="size-full cursor-pointer rounded-full object-cover"
@@ -98,7 +103,7 @@ function RoundVideo({ className }: { className?: string }) {
           </>
         )}
       </div>
-      <figcaption className="text-sm font-semibold text-muted-foreground">{v.caption}</figcaption>
+      <figcaption className="text-center text-sm font-semibold text-muted-foreground">{v.caption}</figcaption>
     </figure>
   );
 }
@@ -132,9 +137,12 @@ export function Host() {
 
       <div className="mt-8 grid gap-10 md:mt-12 lg:grid-cols-[minmax(0,440px)_1fr] lg:gap-16">
         {/* Desktop: portrait with the round video over its lower-right corner. */}
-        <div className="relative hidden self-start pb-20 lg:sticky lg:top-24 lg:block">
-          <Portrait />
-          <RoundVideo className="absolute -right-12 bottom-0" />
+        <div className="hidden self-start lg:sticky lg:top-24 lg:block">
+          <div className="relative pb-20">
+            <Portrait />
+            <RoundVideo className="absolute -right-12 bottom-0" />
+          </div>
+          <Transcript text={host.video.transcript} className="mt-4" />
         </div>
 
         <div className="flex min-w-0 flex-col gap-10">
@@ -143,6 +151,7 @@ export function Host() {
           {/* Phones/tablets: video, then portrait. */}
           <div className="flex flex-col items-center gap-8 lg:hidden">
             <RoundVideo />
+            <Transcript text={host.video.transcript} className="-mt-4 max-w-[440px]" />
             <div className="hidden w-full max-w-[440px] md:block">
               <Portrait />
             </div>
