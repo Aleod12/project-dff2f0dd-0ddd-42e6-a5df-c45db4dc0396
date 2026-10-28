@@ -145,7 +145,7 @@ export function Host() {
           </div>
           <RoundVideo className="mt-6" circleClassName="size-[200px]" captionClassName="max-w-[260px]" />
           <TranscriptButton open={textOpen} onToggle={() => setTextOpen((o) => !o)} controls="host-video-text" className="mt-1" />
-          <TranscriptPanel id="host-video-text" open={textOpen} text={host.video.transcript} className="w-full" />
+          <TranscriptPanel id="host-video-text" open={textOpen} text={host.video.transcript} className="mt-3 w-full" />
         </div>
 
         <div className="flex min-w-0 flex-col gap-10">
