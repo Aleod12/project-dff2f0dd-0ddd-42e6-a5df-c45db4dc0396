@@ -9,9 +9,9 @@ import { cn } from "@/lib/utils";
  * Node 1 top center, node 2 bottom right, node 3 bottom left — the arrows run 1 → 2 → 3 → 1.
  */
 const nodePos = [
-  "lg:left-[50%] lg:top-[6.7%] lg:w-[42%]",
-  "lg:left-[77%] lg:top-[70%] lg:w-[38%]",
-  "lg:left-[23%] lg:top-[70%] lg:w-[38%]",
+  "lg:left-[50%] lg:top-[6.7%] lg:w-[30%]",
+  "lg:left-[77%] lg:top-[66%] lg:w-[36%]",
+  "lg:left-[23%] lg:top-[66%] lg:w-[36%]",
 ];
 
 export function RootCause() {
@@ -67,9 +67,9 @@ export function RootCause() {
                   <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--color-primary)" fillOpacity="0.6" stroke="none" />
                 </marker>
               </defs>
-              <path d="M 274 46 C 392 112, 412 194, 400 284" markerEnd="url(#rc-arrow)" />
-              <path d="M 386 299 L 138 299" markerEnd="url(#rc-arrow)" />
-              <path d="M 116 284 C 106 194, 128 112, 240 38" markerEnd="url(#rc-arrow)" />
+              <path d="M 272 34 C 430 60, 440 180, 402 266" markerEnd="url(#rc-arrow)" />
+              <path d="M 386 282 L 138 282" markerEnd="url(#rc-arrow)" />
+              <path d="M 116 266 C 40 190, 60 80, 244 36" markerEnd="url(#rc-arrow)" />
             </svg>
 
             <ol className="relative flex flex-col gap-6 lg:h-full lg:gap-0">
@@ -90,7 +90,7 @@ export function RootCause() {
                   )}
                   <span
                     aria-hidden="true"
-                    className="mt-[6px] size-[11px] shrink-0 rotate-45 bg-gold lg:mt-0 lg:mb-3"
+                    className="mt-[6px] size-[11px] shrink-0 rotate-45 bg-gold lg:mt-0 lg:mb-8"
                   />
                   <div className="flex flex-col gap-1.5">
                     <h3 className="text-lg font-semibold">{node.title}</h3>
