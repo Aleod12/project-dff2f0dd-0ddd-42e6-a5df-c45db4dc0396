@@ -6,30 +6,49 @@ import { cn } from "@/lib/utils";
 import portrait160 from "@/assets/portrait/sergey-portrait-160.webp.asset.json";
 import portrait240 from "@/assets/portrait/sergey-portrait-240.webp.asset.json";
 
-/** One card per row on phones, two on tablets, three on desktop. The last row stays centered. */
-const cardWidth = "w-full sm:w-[calc(50%-0.65rem)] lg:w-[calc(33.333%-0.9rem)]";
+/**
+ * One card per row on phones, two on tablets, three on desktop.
+ * Widths account for the row gap that applies at each breakpoint (12px below md, 20px from md).
+ */
+const cardWidth = "w-full sm:w-[calc(50%-0.4rem)] md:w-[calc(50%-0.65rem)] lg:w-[calc(33.333%-0.9rem)]";
+
+/** Sergey's note reads as one block, kept to a comfortable reading measure. */
+const noteWidth = "mx-auto max-w-[640px]";
 
 export function ForYou() {
   return (
     <Island id="for-you" tone="surface" aria-labelledby={pains.titleId}>
       <SectionTitle id={pains.titleId} title={pains.title} accent={pains.accent} suffix={pains.titleSuffix} />
 
-      <ul className="mt-8 flex flex-wrap justify-center gap-5 md:mt-12">
+      <ul className="mt-8 flex flex-wrap justify-center gap-3 md:mt-12 md:gap-5">
         {pains.items.map((item, i) => (
           <li
             key={item.title}
-            className={cn("flex flex-col gap-3 rounded-card bg-background p-6 shadow-island", cardWidth)}
+            className={cn(
+              "flex flex-col gap-2 rounded-card bg-background p-5 shadow-island md:gap-3 md:p-6",
+              cardWidth,
+            )}
           >
-            <span aria-hidden="true" className="font-display text-4xl leading-none text-primary/40 sm:text-5xl">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <h3 className="text-xl font-semibold sm:text-2xl">{item.title}</h3>
+            <div className="flex items-baseline gap-3 md:flex-col md:gap-3">
+              <span
+                aria-hidden="true"
+                className="lining-nums font-display text-[28px] leading-none text-primary/40 md:text-5xl"
+              >
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="text-lg font-semibold leading-snug md:text-2xl">{item.title}</h3>
+            </div>
             <p className="text-muted-foreground">{item.text}</p>
           </li>
         ))}
       </ul>
 
-      <div className="mt-10 flex flex-col items-center gap-4 text-center sm:flex-row sm:gap-5 sm:text-left md:mt-12">
+      <div
+        className={cn(
+          "mt-10 flex flex-col items-center gap-4 text-center sm:flex-row sm:gap-5 sm:text-left md:mt-12",
+          noteWidth,
+        )}
+      >
         <img
           src={portrait240.url}
           srcSet={`${portrait160.url} 160w, ${portrait240.url} 240w`}
@@ -42,7 +61,7 @@ export function ForYou() {
           className="size-16 shrink-0 rounded-full object-cover shadow-island sm:size-20"
         />
         <div className="flex flex-col gap-2">
-          <p className="font-display text-lg italic sm:text-xl">{pains.hostNote.text}</p>
+          <p className="font-display text-[19px] italic leading-relaxed sm:text-xl">{pains.hostNote.text}</p>
           <p className="text-sm font-semibold text-muted-foreground">{pains.hostNote.sign}</p>
         </div>
       </div>
