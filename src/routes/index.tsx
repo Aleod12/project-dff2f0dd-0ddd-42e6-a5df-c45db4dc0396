@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Hero } from "@/components/sections/Hero";
+import { ForYou } from "@/components/sections/ForYou";
 
 const title = "Клуб «Трансформация» Сергея Табачникова — месяц системной работы";
 const description =
