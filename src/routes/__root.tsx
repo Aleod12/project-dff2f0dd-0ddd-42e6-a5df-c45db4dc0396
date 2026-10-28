@@ -11,6 +11,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, useRef, type ReactNode } from "react";
 import { setCameFromSite } from "@/lib/legalFrom";
+import { showStickyCta } from "@/lib/stickyCta";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -114,9 +115,6 @@ function RootShell({ children }: { children: ReactNode }) {
     </html>
   );
 }
-
-/** The mobile «Вступить в Клуб» bar exists only on the home page. */
-export const showStickyCta = (pathname: string) => pathname === "/";
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();

@@ -3,7 +3,7 @@ import { fireEvent, screen, waitFor } from "@testing-library/react";
 import { offer } from "@/content/legal/offer";
 import { LegalPage } from "@/components/legal/LegalPage";
 import { parseFrom } from "@/lib/legalFrom";
-import { showStickyCta } from "@/routes/__root";
+import { showStickyCta } from "@/lib/stickyCta";
 import { renderAt } from "./legal-render";
 
 beforeEach(() => window.sessionStorage.clear());
