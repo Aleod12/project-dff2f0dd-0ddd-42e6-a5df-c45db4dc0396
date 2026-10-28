@@ -5,6 +5,7 @@ import { RootCause } from "@/components/sections/RootCause";
 import { Host } from "@/components/sections/Host";
 import { Areas } from "@/components/sections/Areas";
 import { MonthFormat } from "@/components/sections/MonthFormat";
+import { Price } from "@/components/sections/Price";
 
 const title = "Клуб «Трансформация» Сергея Табачникова — месяц системной работы";
 const description =
@@ -31,6 +32,7 @@ function Index() {
       <Host />
       <Areas />
       <MonthFormat />
+      <Price />
     </>
   );
 }
