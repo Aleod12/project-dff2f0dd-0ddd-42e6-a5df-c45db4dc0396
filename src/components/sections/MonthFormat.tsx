@@ -72,7 +72,7 @@ export function MonthFormat() {
                   {/* Desktop diamond, sitting on the connector line. */}
                   <span
                     aria-hidden="true"
-                    className="hidden h-3 items-center justify-center bg-sage px-3 md:flex"
+                    className="hidden h-3 items-center justify-center bg-background px-3 md:flex"
                   >
                     <span className="size-2 rotate-45 bg-gold" />
                   </span>
