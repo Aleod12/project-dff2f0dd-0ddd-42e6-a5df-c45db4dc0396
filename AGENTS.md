@@ -15,3 +15,5 @@
 - All colors/fonts/shadows are tokens in `src/styles.css`; components use semantic classes only. No dark theme.
 - Header, footer and mobile sticky CTA are mounted once in `src/routes/__root.tsx`; home sections go in `src/components/sections/`, one file each.
 - No forms or personal data on the site. «Вступить в Клуб» CTAs scroll to #price; prices and the on/off switch live only in `src/content/payments.ts`; online payment goes through `createPayment` (server, stub until a provider is connected) and is confirmed only by a signed provider notification — so turning payment on never touches the design.
+- Fonts are self-hosted woff2 in public/fonts (@font-face in src/styles.css); never load Google Fonts — no visitor IP transfer to Google.
+- robots.txt and sitemap.xml are generated server routes from site.siteUrl (src/lib/seoFiles.ts); while siteUrl is empty there is no Sitemap line and sitemap.xml returns 404.
