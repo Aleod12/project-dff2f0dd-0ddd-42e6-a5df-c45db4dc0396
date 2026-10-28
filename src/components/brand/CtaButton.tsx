@@ -28,10 +28,34 @@ type Props = VariantProps<typeof ctaVariants> & {
   className?: string;
 };
 
-/** External CTA link (Telegram / VK). Opens in a new tab. */
+const isInternal = (href: string) => href.startsWith("/") || href.startsWith("#");
+
+/** Smooth-scroll to an anchor on the current page instead of reloading. */
+function scrollToAnchor(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
+  const hashAt = href.indexOf("#");
+  if (hashAt < 0) return;
+  const path = href.slice(0, hashAt) || window.location.pathname;
+  if (path !== window.location.pathname) return;
+  const target = document.getElementById(href.slice(hashAt + 1));
+  if (!target) return;
+  e.preventDefault();
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  window.history.replaceState(null, "", href.slice(hashAt));
+}
+
+/** CTA link. External links (Telegram / VK) open in a new tab; internal ones stay on the site. */
 export function CtaButton({ href, children, track, variant, size, block, className }: Props) {
+  const cls = cn(ctaVariants({ variant, size, block }), className);
+  if (isInternal(href)) {
+    return (
+      <a href={href} data-cta={track} className={cls} onClick={(e) => scrollToAnchor(e, href)}>
+        {children}
+      </a>
+    );
+  }
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" data-cta={track} className={cn(ctaVariants({ variant, size, block }), className)}>
+    <a href={href} target="_blank" rel="noopener noreferrer" data-cta={track} className={cls}>
       {children}
     </a>
   );
