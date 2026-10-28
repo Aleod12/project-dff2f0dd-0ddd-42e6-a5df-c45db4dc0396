@@ -4,6 +4,7 @@ import { links } from "@/content/links";
 import { pains } from "@/content/pains";
 import { rootCause } from "@/content/rootCause";
 import { host } from "@/content/host";
+import { areas } from "@/content/areas";
 import { isPresent } from "@/lib/present";
 
 describe("content rules", () => {
@@ -77,5 +78,30 @@ describe("content rules", () => {
   it("section 4 practice numbers match the agreed draft", () => {
     expect(host.numbers.map((n) => n.value)).toEqual(["27 лет", "150+", "120+", "10"]);
     expect(host.numbersCaption).toBe("по моей практике");
+  });
+  it("section 5 has the four areas in the agreed order, both rows filled", () => {
+    expect(areas.items.map((i) => i.title)).toEqual([
+      "Здоровье и энергия",
+      "Финансы",
+      "Отношения",
+      "Предназначение",
+    ]);
+    for (const item of areas.items) {
+      expect(isPresent(item.work)).toBe(true);
+      expect(isPresent(item.goal)).toBe(true);
+    }
+  });
+  it("section 5 names the direction without promising a result", () => {
+    expect(areas.items.map((i) => i.goal)).toEqual([
+      "больше сил и спокойный ресурс в теле",
+      "внутреннее разрешение расти без отката",
+      "отношения без вины и роли спасателя",
+      "внутренняя опора и свой вектор",
+    ]);
+  });
+  it("section 5 button is the club link with its own tracking tag", () => {
+    expect(areas.cta.href).toBe(links.join);
+    expect(areas.cta.track).toBe("club-areas");
+    expect(areas.cta.label).toBe("Вступить в Клуб");
   });
 });
