@@ -23,6 +23,10 @@ describe("content rules", () => {
   it("price list says no auto-renewal", () => {
     expect(pricing.included).toContain("Разовый платёж, без автосписаний");
   });
+  it("price list promises recordings plus two weeks of archive", () => {
+    expect(pricing.included).toContain("Записи всех встреч + 2 недели доступа к архиву");
+    expect(pricing.included.some((s) => s.startsWith("Ещё 2 недели"))).toBe(false);
+  });
   it("unknown checkout currency falls back to rubles", () => {
     expect(parseCurrency("usd")).toBe("rub");
     expect(parseCurrency("eur")).toBe("eur");
@@ -143,6 +147,9 @@ describe("content rules", () => {
     ]);
     for (const card of monthFormat.cards) expect(isPresent(card.text)).toBe(true);
   });
+  it("archive card says all recordings stay available two weeks longer", () => {
+    expect(monthFormat.cards[3]!.text).toBe("Записи всех встреч и материалы остаются доступны ещё две недели после окончания месяца.");
+  });
   it("section 6 joining is three steps in the agreed order", () => {
     expect(monthFormat.join.subtitle).toBe("Как присоединиться");
     expect(monthFormat.join.steps.map((s) => s.title)).toEqual([
@@ -170,14 +177,25 @@ describe("section 9 free ladder", () => {
   });
 });
 
-import { faq, faqJsonLd } from "@/content/faq";
+import { faq, faqJsonLd, answerText } from "@/content/faq";
 describe("section 10 faq", () => {
-  it("has 11 questions and matching FAQPage data", () => {
-    expect(faq.items).toHaveLength(11);
-    expect(faqJsonLd().mainEntity).toHaveLength(11);
+  it("has 10 questions and matching FAQPage data", () => {
+    expect(faq.items).toHaveLength(10);
+    expect(faqJsonLd().mainEntity).toHaveLength(10);
   });
-  it("refund answer links «оферте» to /offer", () => {
-    expect(faq.items[10]!.a.find((p) => p.href)).toEqual({ text: "оферте", href: "/offer" });
+  it("no answer mentions the MAX platform", () => {
+    const all = faq.items.map((i) => `${i.q} ${answerText(i.a)}`).join(" ");
+    expect(all).not.toMatch(/МАКС|MAX/i);
+  });
+  it("missed-meeting answer names recordings and the archive window", () => {
+    expect(answerText(faq.items[3]!.a)).toBe("Все встречи записываются — записи остаются в закрытом канале потока. Доступ: 1 месяц + 2 недели архива, чтобы спокойно пересмотреть материалы.");
+  });
+  it("auto-renewal answer repeats one-time payment", () => {
+    expect(answerText(faq.items[4]!.a)).toBe("Нет. Вы оплачиваете ровно один месяц участия разовым платежом, без автосписаний. Продление — только по Вашему решению.");
+  });
+  it("«no Telegram» answer links «ВКонтакте» to VK messages", () => {
+    expect(answerText(faq.items[6]!.a)).toBe("Напишите нам во ВКонтакте — подскажем.");
+    expect(faq.items[6]!.a.find((p) => p.href)).toEqual({ text: "ВКонтакте", href: links.vkMessages });
   });
   it("stream answer has no date line while the date is empty", () => {
     expect(faq.items[8]!.a[0]!.text).toBe("Дату старта Сергей сообщает в Telegram-канале и при вступлении в клуб.");
