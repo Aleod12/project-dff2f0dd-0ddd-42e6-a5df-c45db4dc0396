@@ -13,6 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ConsentRouteImport } from './routes/consent'
 import { Route as OfferRouteImport } from './routes/offer'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PaymentCheckoutRouteImport } from './routes/payment.checkout'
 import { Route as PaymentFailRouteImport } from './routes/payment.fail'
 import { Route as PaymentSuccessRouteImport } from './routes/payment.success'
@@ -37,6 +39,16 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PaymentCheckoutRoute = PaymentCheckoutRouteImport.update({
   id: '/payment/checkout',
   path: '/payment/checkout',
@@ -58,6 +70,8 @@ export interface FileRoutesByFullPath {
   '/consent': typeof ConsentRoute
   '/offer': typeof OfferRoute
   '/privacy': typeof PrivacyRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/payment/checkout': typeof PaymentCheckoutRoute
   '/payment/fail': typeof PaymentFailRoute
   '/payment/success': typeof PaymentSuccessRoute
@@ -67,6 +81,8 @@ export interface FileRoutesByTo {
   '/consent': typeof ConsentRoute
   '/offer': typeof OfferRoute
   '/privacy': typeof PrivacyRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/payment/checkout': typeof PaymentCheckoutRoute
   '/payment/fail': typeof PaymentFailRoute
   '/payment/success': typeof PaymentSuccessRoute
@@ -77,6 +93,8 @@ export interface FileRoutesById {
   '/consent': typeof ConsentRoute
   '/offer': typeof OfferRoute
   '/privacy': typeof PrivacyRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/payment/checkout': typeof PaymentCheckoutRoute
   '/payment/fail': typeof PaymentFailRoute
   '/payment/success': typeof PaymentSuccessRoute
@@ -88,6 +106,8 @@ export interface FileRouteTypes {
     | '/consent'
     | '/offer'
     | '/privacy'
+    | '/robots.txt'
+    | '/sitemap.xml'
     | '/payment/checkout'
     | '/payment/fail'
     | '/payment/success'
@@ -97,6 +117,8 @@ export interface FileRouteTypes {
     | '/consent'
     | '/offer'
     | '/privacy'
+    | '/robots.txt'
+    | '/sitemap.xml'
     | '/payment/checkout'
     | '/payment/fail'
     | '/payment/success'
@@ -106,6 +128,8 @@ export interface FileRouteTypes {
     | '/consent'
     | '/offer'
     | '/privacy'
+    | '/robots.txt'
+    | '/sitemap.xml'
     | '/payment/checkout'
     | '/payment/fail'
     | '/payment/success'
@@ -116,6 +140,8 @@ export interface RootRouteChildren {
   ConsentRoute: typeof ConsentRoute
   OfferRoute: typeof OfferRoute
   PrivacyRoute: typeof PrivacyRoute
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   PaymentCheckoutRoute: typeof PaymentCheckoutRoute
   PaymentFailRoute: typeof PaymentFailRoute
   PaymentSuccessRoute: typeof PaymentSuccessRoute
@@ -151,6 +177,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/payment/checkout': {
       id: '/payment/checkout'
       path: '/payment/checkout'
@@ -180,6 +220,8 @@ const rootRouteChildren: RootRouteChildren = {
   ConsentRoute: ConsentRoute,
   OfferRoute: OfferRoute,
   PrivacyRoute: PrivacyRoute,
+  RobotsDottxtRoute: RobotsDottxtRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   PaymentCheckoutRoute: PaymentCheckoutRoute,
   PaymentFailRoute: PaymentFailRoute,
   PaymentSuccessRoute: PaymentSuccessRoute,
