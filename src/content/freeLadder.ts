@@ -1,7 +1,7 @@
 import { links } from "./links";
 
 /** Section 9 «Начните бесплатно» (#free). Empty badge = hidden. */
-const practiceDuration = "";
+const practiceDuration = "около часа";
 
 export const freeLadder = {
   titleId: "free-title",
@@ -21,7 +21,7 @@ export const freeLadder = {
     {
       badge: practiceDuration,
       title: "Аудиопрактика «Трансформация»",
-      text: "Авторская практика центрирования и снятия фонового напряжения. Понадобятся наушники и спокойное время.",
+      text: "Авторская практика центрирования и снятия фонового напряжения. Сдвиг заметен уже в первые 15–20 минут. Понадобятся наушники и спокойное время.",
       button: { label: "Послушать практику", href: links.audioPractice, track: "free-practice" },
     },
     {
@@ -31,9 +31,9 @@ export const freeLadder = {
       button: { label: "Записаться", href: links.scanning, track: "free-scan" },
     },
     {
-      badge: "Раз в месяц",
+      badge: "≈ раз в месяц",
       title: "Открытые встречи",
-      text: "Бесплатная онлайн-встреча для всех. Ссылка публикуется в Telegram-канале Сергея.",
+      text: "Бесплатная онлайн-встреча для всех, регулярно, примерно раз в месяц. Ссылка — в Telegram-канале Сергея.",
       button: { label: "Перейти в канал", href: links.telegramChannel, track: "free-channel" },
     },
   ],

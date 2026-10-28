@@ -7,6 +7,8 @@ import { Areas } from "@/components/sections/Areas";
 import { MonthFormat } from "@/components/sections/MonthFormat";
 import { Price } from "@/components/sections/Price";
 import { FreeLadder } from "@/components/sections/FreeLadder";
+import { Faq } from "@/components/sections/Faq";
+import { faqJsonLd } from "@/content/faq";
 
 const title = "Клуб «Трансформация» Сергея Табачникова — месяц системной работы";
 const description =
@@ -20,6 +22,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: title },
       { property: "og:description", content: description },
     ],
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(faqJsonLd()) }],
   }),
   component: Index,
 });
@@ -35,6 +38,7 @@ function Index() {
       <MonthFormat />
       <Price />
       <FreeLadder />
+      <Faq />
     </>
   );
 }

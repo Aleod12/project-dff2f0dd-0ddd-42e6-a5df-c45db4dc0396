@@ -165,8 +165,7 @@ describe("section 9 free ladder", () => {
     expect(freeLadder.steps[0]!.button.href).toBe(links.diagnostic);
     expect(freeLadder.steps[3]!.button.href).toBe(links.telegramChannel);
   });
-  it("practice badge stays hidden while the duration is empty", () => {
-    expect(freeLadder.practiceDuration).toBe("");
-    expect(isPresent(freeLadder.steps[1]!.badge)).toBe(false);
+  it("practice badge shows «около часа»", () => {
+    expect(freeLadder.steps[1]!.badge).toBe("около часа");
   });
 });
