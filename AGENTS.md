@@ -17,3 +17,6 @@
 - No forms or personal data on the site. «Вступить в Клуб» CTAs scroll to #price; prices and the on/off switch live only in `src/content/payments.ts`; online payment goes through `createPayment` (server, stub until a provider is connected) and is confirmed only by a signed provider notification — so turning payment on never touches the design.
 - Fonts are self-hosted woff2 in public/fonts (@font-face in src/styles.css); never load Google Fonts — no visitor IP transfer to Google.
 - robots.txt and sitemap.xml are generated server routes from site.siteUrl (src/lib/seoFiles.ts); while siteUrl is empty there is no Sitemap line and sitemap.xml returns 404.
+- Uploaded photos/videos are self-hosted in public/media and their .asset.json `url` points to /media/<file> — the production Node server cannot serve Lovable's asset CDN paths.
+- Production build for own Node hosting: `NITRO_PRESET=node-server npm run build`, run `node .output/server/index.mjs` (PORT env); the Lovable editor build keeps its own preset.
+- Canonical, og:url and og:image come only from `pageSeo()` in src/lib/siteUrl.ts (reads site.siteUrl; emits nothing while empty) — so one domain value drives every absolute URL.

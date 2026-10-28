@@ -36,7 +36,7 @@ export function SiteFooter() {
               <ul className="flex flex-wrap gap-3" aria-label="Соцсети">
                 {site.socials.map((s) => (
                   <li key={s.label}>
-                    <a href={s.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center rounded-full border border-primary px-4 font-medium text-primary hover:bg-sage">
+                    <a href={s.href} target="_blank" rel="noopener noreferrer" data-cta={s.track} className="inline-flex min-h-10 items-center rounded-full border border-primary px-4 font-medium text-primary hover:bg-sage">
                       {s.label}
                     </a>
                   </li>
@@ -47,7 +47,7 @@ export function SiteFooter() {
 
           <DiamondDivider className="my-8 justify-center" />
           <p className="mx-auto max-w-3xl text-center text-sm text-muted-foreground">{site.disclaimer}</p>
-          <p className="mt-4 text-center text-xs text-muted-foreground">© {new Date().getFullYear()} {site.hostName}</p>
+          <p className="mt-4 text-center text-sm text-muted-foreground">© {new Date().getFullYear()} {site.hostName}</p>
         </div>
       </Container>
     </footer>

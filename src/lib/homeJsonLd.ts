@@ -1,15 +1,11 @@
 import { site } from "@/content/site";
+import { absoluteUrl } from "@/lib/siteUrl";
 import { links } from "@/content/links";
 import { hero } from "@/content/hero";
 import { payments } from "@/content/payments";
 import photo860 from "@/assets/hero/sergey-hero-860.webp.asset.json";
 
-/** Absolute URL when siteUrl is set, otherwise the path as is. */
-function url(path: string) {
-  if (/^https?:\/\//.test(path)) return path;
-  const base = site.siteUrl.trim().replace(/\/+$/, "");
-  return base ? `${base}${path.startsWith("/") ? path : `/${path}`}` : path;
-}
+const url = absoluteUrl;
 
 export function personJsonLd() {
   return {
