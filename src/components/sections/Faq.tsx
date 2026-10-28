@@ -18,7 +18,7 @@ export function Faq() {
             <AccordionContent className="pb-5 text-base leading-relaxed">
               {item.a.map((p, j) =>
                 p.href ? (
-                  <a key={j} href={p.href} className="text-primary underline underline-offset-4 hover:no-underline">{p.text}</a>
+                  <a key={j} href={p.href} {...(p.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="text-primary underline underline-offset-4 hover:no-underline">{p.text}</a>
                 ) : (
                   <span key={j}>{p.text}</span>
                 ),
