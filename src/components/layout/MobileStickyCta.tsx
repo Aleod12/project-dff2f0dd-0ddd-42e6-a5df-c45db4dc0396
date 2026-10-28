@@ -10,7 +10,9 @@ export function MobileStickyCta() {
   const [footerVisible, setFooterVisible] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setPastHero(window.scrollY > window.innerHeight * 0.9);
+    const hero = document.getElementById("hero");
+    const onScroll = () =>
+      setPastHero(hero ? hero.getBoundingClientRect().bottom <= 0 : window.scrollY > window.innerHeight * 0.9);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     const footer = document.getElementById("site-footer");
