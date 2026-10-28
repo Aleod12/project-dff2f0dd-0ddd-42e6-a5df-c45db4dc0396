@@ -29,7 +29,7 @@ export function MonthFormat() {
       />
 
       {cards.length > 0 && (
-        <ul className="mt-10 grid gap-4 md:mt-14 md:grid-cols-2 md:gap-5 xl:grid-cols-4">
+        <ul className="mt-10 grid gap-4 md:mt-14 md:grid-cols-2 md:gap-5">
           {cards.map((card) => (
             <li
               key={card.title}
@@ -66,7 +66,7 @@ export function MonthFormat() {
                   {/* Phone rail: diamond, then the line down to the next one. */}
                   <span aria-hidden="true" className="flex flex-col items-center pt-1 md:hidden">
                     <span className="size-2 rotate-45 bg-gold" />
-                    {i !== lastStep && <span className="mt-1 w-px flex-1 bg-gold/60" />}
+                    {i !== lastStep && <span className="-mb-6 mt-1 w-px flex-1 bg-gold/60" />}
                   </span>
 
                   {/* Desktop diamond, sitting on the connector line. */}
