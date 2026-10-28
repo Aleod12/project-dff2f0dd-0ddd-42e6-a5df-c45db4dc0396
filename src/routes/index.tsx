@@ -5,6 +5,7 @@ import { RootCause } from "@/components/sections/RootCause";
 import { Host } from "@/components/sections/Host";
 import { Areas } from "@/components/sections/Areas";
 import { MonthFormat } from "@/components/sections/MonthFormat";
+import { Reviews } from "@/components/sections/Reviews";
 import { Price } from "@/components/sections/Price";
 import { FreeLadder } from "@/components/sections/FreeLadder";
 import { Faq } from "@/components/sections/Faq";
@@ -36,6 +37,7 @@ function Index() {
       <Host />
       <Areas />
       <MonthFormat />
+      <Reviews />
       <Price />
       <FreeLadder />
       <Faq />
