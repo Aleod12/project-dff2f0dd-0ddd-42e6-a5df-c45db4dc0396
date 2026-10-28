@@ -4,7 +4,8 @@ import { reviews, reviewTitle, type VideoReview } from "@/content/reviews";
 import { CtaButton } from "@/components/brand/CtaButton";
 import { SectionTitle } from "@/components/brand/SectionTitle";
 import { Island } from "@/components/layout/Island";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { TranscriptButton, TranscriptPanel } from "@/components/brand/TranscriptToggle";
+import { pauseOtherVideos } from "@/lib/exclusivePlay";
 import { isPresent } from "@/lib/present";
 import { cn } from "@/lib/utils";
 
@@ -18,26 +19,15 @@ function PlayBadge() {
   );
 }
 
-function Poster({ r, onClick, btnRef }: { r: VideoReview; onClick: () => void; btnRef?: React.Ref<HTMLButtonElement> }) {
+function Poster({ r, onClick }: { r: VideoReview; onClick: () => void }) {
   return (
     <button
-      ref={btnRef}
       type="button"
       onClick={onClick}
-      aria-label={`${reviews.playLabel}: ${reviewTitle(r)}`}
+      aria-label={`${reviews.playLabel}: ${reviewTitle(r)}, ${r.duration}`}
       className="group relative block size-full overflow-hidden rounded-full focus-visible:outline-2"
     >
-      {isPresent(r.poster) && (
-        <img
-          src={r.poster}
-          width={r.posterSize ?? 400}
-          height={r.posterSize ?? 400}
-          alt=""
-          loading="lazy"
-          decoding="async"
-          className="size-full object-cover"
-        />
-      )}
+      <img src={r.poster} width={r.size} height={r.size} alt="" loading="lazy" decoding="async" className="size-full object-cover" />
       <PlayBadge />
     </button>
   );
@@ -66,13 +56,16 @@ function LocalVideo({ r, active, onActivate, onStop }: { r: VideoReview; active:
       <video
         ref={ref}
         src={r.video}
-        poster={r.poster || undefined}
+        poster={r.poster}
         preload="none"
         playsInline
-        width={400}
-        height={400}
+        width={r.size}
+        height={r.size}
         onClick={toggle}
-        onPlay={() => setPlaying(true)}
+        onPlay={() => {
+          pauseOtherVideos(ref.current);
+          setPlaying(true);
+        }}
         onPause={() => setPlaying(false)}
         onEnded={onStop}
         className="size-full cursor-pointer rounded-full object-cover"
@@ -97,49 +90,11 @@ function LocalVideo({ r, active, onActivate, onStop }: { r: VideoReview; active:
   );
 }
 
-/** VK-hosted review: nothing from VK loads until click; closing unmounts the iframe. */
-function VkVideo({ r, onOpen }: { r: VideoReview; onOpen: () => void }) {
-  const [open, setOpen] = useState(false);
-  const btn = useRef<HTMLButtonElement>(null);
-  return (
-    <>
-      <Poster
-        r={r}
-        btnRef={btn}
-        onClick={() => {
-          onOpen();
-          setOpen(true);
-        }}
-      />
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent
-          className="w-auto max-w-[95vw] gap-0 border-0 bg-foreground p-0 sm:rounded-card"
-          onCloseAutoFocus={(e) => {
-            e.preventDefault();
-            btn.current?.focus();
-          }}
-          aria-describedby={undefined}
-        >
-          <DialogTitle className="sr-only">{r.fallbackLabel}</DialogTitle>
-          {open && (
-            <iframe
-              src={r.embedUrl}
-              title={r.fallbackLabel}
-              allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-              allowFullScreen
-              className="aspect-[9/16] h-[80vh] max-h-[80vh] max-w-[95vw] rounded-card border-0"
-            />
-          )}
-        </DialogContent>
-      </Dialog>
-    </>
-  );
-}
-
 export function Reviews() {
   const [active, setActive] = useState<string | null>(null);
   const [dot, setDot] = useState(0);
-  const track = useRef<HTMLUListElement>(null);
+  const [openText, setOpenText] = useState<string | null>(null);
+  const track = useRef<HTMLDivElement>(null);
 
   const onScroll = () => {
     const el = track.current;
@@ -158,28 +113,37 @@ export function Reviews() {
     <Island id="reviews" tone="surface" aria-labelledby={reviews.titleId}>
       <SectionTitle id={reviews.titleId} title={reviews.title} accent={reviews.accent} />
 
-      <ul
+      <div
         ref={track}
+        role="list"
         onScroll={onScroll}
-        className="-mx-5 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none] md:mx-0 md:mt-12 md:grid md:grid-cols-4 md:gap-6 md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden"
+        className="-mx-5 mt-8 flex snap-x snap-mandatory items-start gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none] md:mx-0 md:mt-12 md:grid md:grid-cols-4 md:gap-x-6 md:gap-y-8 md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden"
       >
-        {reviews.videos.map((r) => (
-          <li key={r.id} data-review-video className="flex w-[220px] shrink-0 snap-center flex-col items-center gap-3 text-center md:w-auto">
-            <div className={circle}>
-              {r.embedUrl ? (
-                <VkVideo r={r} onOpen={() => setActive(null)} />
-              ) : (
-                <LocalVideo r={r} active={active === r.id} onActivate={() => setActive(r.id)} onStop={() => setActive(null)} />
+        {reviews.videos.map((r) => {
+          const panelId = `review-text-${r.id}`;
+          const open = openText === r.id;
+          return (
+            <div key={r.id} role="listitem" data-review-video className="flex w-[260px] shrink-0 snap-center flex-col items-center gap-3 md:contents">
+              <div className="flex flex-col items-center gap-3 text-center">
+                <div className={circle}>
+                  <LocalVideo r={r} active={active === r.id} onActivate={() => setActive(r.id)} onStop={() => setActive(null)} />
+                </div>
+                <div className="flex flex-col items-center gap-1">
+                  <p className="font-display text-lg font-semibold text-primary">{reviewTitle(r)}</p>
+                  {isPresent(r.summary ?? "") && <p className="font-display text-lg italic leading-snug">«{r.summary}»</p>}
+                  <p className="text-sm text-muted-foreground">{r.duration}</p>
+                  {isPresent(r.transcript ?? "") && (
+                    <TranscriptButton open={open} onToggle={() => setOpenText(open ? null : r.id)} controls={panelId} className="mt-1" />
+                  )}
+                </div>
+              </div>
+              {isPresent(r.transcript ?? "") && (
+                <TranscriptPanel id={panelId} open={open} text={r.transcript!} className="w-full md:order-1 md:col-span-4 md:mx-auto md:max-w-[760px]" />
               )}
             </div>
-            <div className="flex flex-col gap-0.5">
-              <p className="font-display text-lg font-semibold text-primary">{reviewTitle(r)}</p>
-              {isPresent(r.summary ?? "") && <p className="text-sm">{r.summary}</p>}
-              <p className="text-sm text-muted-foreground">{r.duration}</p>
-            </div>
-          </li>
-        ))}
-      </ul>
+          );
+        })}
+      </div>
 
       <div className="mt-4 flex justify-center gap-1 md:hidden" role="group" aria-label={reviews.dotsLabel}>
         {reviews.videos.map((r, i) => (
