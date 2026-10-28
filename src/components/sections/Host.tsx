@@ -149,7 +149,7 @@ export function Host() {
           </div>
 
           <ol className="relative flex flex-col gap-7 md:rounded-card md:bg-surface md:p-8">
-            <span aria-hidden="true" className="absolute bottom-10 left-[4px] top-10 w-px bg-gold md:left-[37px]" />
+            <span aria-hidden="true" className="absolute bottom-10 left-[4px] top-3 md:top-10 w-px bg-gold md:left-[37px]" />
             {host.timeline.map((step) => (
               <li key={step.title} className="relative pl-8">
                 <span aria-hidden="true" className="absolute left-0 top-2 size-2.5 rotate-45 bg-gold" />
