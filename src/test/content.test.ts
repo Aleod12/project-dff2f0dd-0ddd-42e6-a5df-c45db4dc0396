@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { pricing } from "@/content/pricing";
 import { links } from "@/content/links";
+import { pains } from "@/content/pains";
 import { isPresent } from "@/lib/present";
 
 describe("content rules", () => {

@@ -52,6 +52,7 @@
 :root {
   --radius: 0.75rem;
   --island-radius: 1.5rem;
+  --card-radius: 1.5rem; /* pain cards: 24px on every screen */
 
   --background: oklch(0.976 0.009 75); /* #FBF7F1 */
   --surface: oklch(0.943 0.015 75); /* #F3ECE2 */
