@@ -9,21 +9,36 @@ export function MobileStickyCta() {
   const [footerVisible, setFooterVisible] = useState(false);
 
   useEffect(() => {
-    const hero = document.getElementById("hero");
-    const onScroll = () =>
+    const onScroll = () => {
+      const hero = document.getElementById("hero");
       setPastHero(hero ? hero.getBoundingClientRect().bottom <= 0 : window.scrollY > window.innerHeight * 0.9);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    const footer = document.getElementById("site-footer");
-    // Hide while the footer or the price block (where the button leads) is on screen.
-    const targets = [footer, document.getElementById("price"), document.getElementById("start")].filter((el): el is HTMLElement => !!el);
     const visible = new Set<Element>();
     const io = new IntersectionObserver((entries) => {
       for (const e of entries) (e.isIntersecting ? visible.add(e.target) : visible.delete(e.target));
       setFooterVisible(visible.size > 0);
     });
-    targets.forEach((el) => io.observe(el));
+    // Hide while the footer, the price block (where the button leads) or the final section is on screen.
+    // The home sections may render a few frames after this bar (client navigation back to "/"), so wait for them.
+    let frame = 0;
+    let tries = 0;
+    const observe = () => {
+      const price = document.getElementById("price");
+      if (!price && tries++ < 120) {
+        frame = requestAnimationFrame(observe);
+        return;
+      }
+      ["site-footer", "price", "start"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) io.observe(el);
+      });
+      onScroll();
+    };
+    observe();
     return () => {
+      cancelAnimationFrame(frame);
       window.removeEventListener("scroll", onScroll);
       io.disconnect();
     };
