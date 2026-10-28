@@ -169,3 +169,17 @@ describe("section 9 free ladder", () => {
     expect(freeLadder.steps[1]!.badge).toBe("около часа");
   });
 });
+
+import { faq, faqJsonLd } from "@/content/faq";
+describe("section 10 faq", () => {
+  it("has 11 questions and matching FAQPage data", () => {
+    expect(faq.items).toHaveLength(11);
+    expect(faqJsonLd().mainEntity).toHaveLength(11);
+  });
+  it("refund answer links «оферте» to /offer", () => {
+    expect(faq.items[10]!.a.find((p) => p.href)).toEqual({ text: "оферте", href: "/offer" });
+  });
+  it("stream answer has no date line while the date is empty", () => {
+    expect(faq.items[8]!.a[0]!.text).toBe("Дату старта Сергей сообщает в Telegram-канале и при вступлении в клуб.");
+  });
+});
