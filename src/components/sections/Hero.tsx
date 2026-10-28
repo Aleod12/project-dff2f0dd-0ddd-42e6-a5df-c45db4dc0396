@@ -22,7 +22,7 @@ export function Hero() {
             alt={hero.photoAlt}
             fetchPriority="high"
             decoding="async"
-            className="block aspect-[760/750] h-auto w-[min(78vw,300px)] object-contain md:w-full md:max-w-[520px]"
+            className="block aspect-[760/750] h-auto w-[min(64vw,240px)] object-contain md:w-full md:max-w-[520px]"
           />
         </div>
 
