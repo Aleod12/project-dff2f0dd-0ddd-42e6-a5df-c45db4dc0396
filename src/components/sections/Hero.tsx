@@ -17,10 +17,10 @@ export function Hero() {
         {/* Photo in arch */}
         <div className="relative mx-auto w-full max-w-[460px] md:order-2">
           <img src={oliveLeft.url} alt="" aria-hidden="true" loading="lazy" width={560} height={1440}
-            className="pointer-events-none absolute -left-16 top-0 h-full w-auto opacity-60 mix-blend-multiply md:-left-28" />
+            className="pointer-events-none absolute -left-16 top-0 h-full w-auto olive-fade opacity-70 mix-blend-multiply md:-left-28" />
           <img src={oliveRight.url} alt="" aria-hidden="true" loading="lazy" width={540} height={1440}
-            className="pointer-events-none absolute -right-16 top-0 h-full w-auto opacity-60 mix-blend-multiply md:-right-28" />
-          <div className="relative mx-auto h-[40svh] max-h-[296px] w-[min(100%,300px)] overflow-hidden rounded-t-full bg-sage shadow-photo md:h-auto md:max-h-none md:w-full md:aspect-[43/52]">
+            className="pointer-events-none absolute -right-16 top-0 h-full w-auto olive-fade opacity-70 mix-blend-multiply md:-right-28" />
+          <div className="relative mx-auto h-[32svh] max-h-[296px] w-[min(78%,260px)] overflow-hidden rounded-t-full bg-sage shadow-photo md:h-auto md:max-h-none md:w-full md:aspect-[43/52]">
             <img
               src={photo860.url}
               srcSet={`${photo430.url} 430w, ${photo640.url} 640w, ${photo860.url} 860w`}
@@ -36,10 +36,10 @@ export function Hero() {
         </div>
 
         {/* Text */}
-        <div className="relative flex flex-col items-center gap-4 text-center md:order-1 md:items-start md:gap-5 md:text-left">
+        <div className="relative flex flex-col items-center gap-3 text-center md:order-1 md:items-start md:gap-5 md:text-left">
           <p className="text-eyebrow">{hero.eyebrow}</p>
           <h1 id="hero-title" className="flex flex-col gap-2 md:gap-3">
-            <span className="text-[2.375rem] leading-[1.05] sm:text-h1">
+            <span className="text-[1.95rem] leading-[1.05] sm:text-h1">
               {hero.titleLead} <em className="italic">{hero.titleAccent}</em>
             </span>
             <span className="text-name text-base text-foreground sm:text-xl">{hero.titleName}</span>
@@ -48,9 +48,9 @@ export function Hero() {
             <DiamondDivider />
             <p className="font-display text-xl italic text-primary">{hero.signature}</p>
           </div>
-          <p className="max-w-xl text-lg font-medium md:text-xl">{hero.lead}</p>
-          {isPresent(hero.sub) && <p className="max-w-xl text-muted-foreground">{hero.sub}</p>}
-          <ul className="flex flex-col items-center gap-2 text-sm font-medium md:flex-row md:flex-wrap md:gap-x-6">
+          <p className="max-w-xl text-base font-medium md:text-xl">{hero.lead}</p>
+          {isPresent(hero.sub) && <p className="hidden max-w-xl text-muted-foreground md:block">{hero.sub}</p>}
+          <ul className="flex flex-col items-center gap-1.5 text-sm font-medium md:flex-row md:flex-wrap md:gap-x-6">
             {hero.facts.map((f) => (
               <li key={f} className="flex items-center gap-2">
                 <span aria-hidden="true" className="size-1.5 rotate-45 bg-gold" />
