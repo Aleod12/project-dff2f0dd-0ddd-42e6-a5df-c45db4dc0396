@@ -47,12 +47,12 @@ export function RootCause() {
             {/* Phones only: the path that returns from the last link of the loop to the first. */}
             <span
               aria-hidden="true"
-              className="absolute bottom-3 left-[4px] top-4 w-[150px] rounded-bl-[20px] border-b border-l border-primary/30 lg:hidden"
+              className="absolute bottom-3 left-[4px] top-[11px] w-[130px] rounded-bl-[20px] border-b border-l border-primary/30 lg:hidden"
             />
-            {/* Short stroke linking the return path to the first node. */}
-            <span aria-hidden="true" className="absolute left-[4px] top-[11px] h-px w-[30px] bg-primary/30 lg:hidden" />
-            <svg aria-hidden="true" viewBox="0 0 10 10" className="absolute left-[-1px] top-0 size-3 lg:hidden">
-              <path d="M 5 0 L 10 10 L 0 10 z" fill="var(--color-primary)" fillOpacity="0.7" />
+            {/* Short stroke with an arrow that points into the first node. */}
+            <span aria-hidden="true" className="absolute left-[4px] top-[11px] h-px w-[22px] bg-primary/30 lg:hidden" />
+            <svg aria-hidden="true" viewBox="0 0 10 10" className="absolute left-[24px] top-[5px] size-3 lg:hidden">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--color-primary)" fillOpacity="0.7" />
             </svg>
             <svg
               aria-hidden="true"
