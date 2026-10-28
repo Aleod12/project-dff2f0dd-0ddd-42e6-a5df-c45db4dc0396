@@ -47,7 +47,7 @@ export function RootCause() {
             {/* Phones only: the path that returns from the last link of the loop to the first. */}
             <span
               aria-hidden="true"
-              className="absolute bottom-4 left-[4px] top-4 w-px bg-primary/30 lg:hidden"
+              className="absolute bottom-3 left-[4px] top-4 w-[150px] rounded-bl-[20px] border-b border-l border-primary/30 lg:hidden"
             />
             {/* Short stroke linking the return path to the first node. */}
             <span aria-hidden="true" className="absolute left-[4px] top-[11px] h-px w-[30px] bg-primary/30 lg:hidden" />
