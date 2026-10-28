@@ -8,6 +8,7 @@ const islandVariants = cva("rounded-island px-5 py-12 sm:px-10 md:py-20", {
       surface: "bg-surface",
       sage: "bg-sage",
       card: "bg-card shadow-island",
+      light: "bg-background shadow-island",
       plain: "bg-transparent",
     },
   },

@@ -102,6 +102,9 @@ export const reviews = {
   },
 };
 
+/** Small label at the top of an open transcript. */
+export const transcriptHeading = (label: string, duration: string) => `Текст видеоотзыва — ${label}, ${duration}`;
+
 /** Name (with age if set), or the fallback label when the name is empty. */
 export const reviewTitle = (r: VideoReview) => {
   if (!r.name.trim()) return r.fallbackLabel;

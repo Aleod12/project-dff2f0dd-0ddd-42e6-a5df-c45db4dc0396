@@ -32,7 +32,7 @@ export function ForYou() {
             <div className="flex items-baseline gap-3 md:flex-col md:gap-3">
               <span
                 aria-hidden="true"
-                className="lining-nums font-display text-[28px] leading-none text-primary/30 md:text-5xl"
+                className="lining-nums font-display text-[28px] leading-none text-primary/40 md:text-5xl"
               >
                 {String(i + 1).padStart(2, "0")}
               </span>

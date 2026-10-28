@@ -21,9 +21,10 @@ export function TranscriptButton({ open, onToggle, controls, className }: Button
 }
 
 /** Transcript text: always in the HTML, collapsed visually when closed. */
-export function TranscriptPanel({ id, open, text, className }: { id: string; open: boolean; text: string; className?: string }) {
+export function TranscriptPanel({ id, open, text, label, className }: { id: string; open: boolean; text: string; label?: string; className?: string }) {
   return (
     <div id={id} className={cn(open ? "block" : "hidden", "rounded-card bg-background p-5 text-left text-[17px] leading-relaxed shadow-island md:p-7", className)}>
+      {label && <p className="mb-3 text-sm font-semibold uppercase tracking-[0.08em] text-muted-foreground">{label}</p>}
       <p>{text}</p>
     </div>
   );
