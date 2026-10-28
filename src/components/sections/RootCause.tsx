@@ -102,7 +102,11 @@ export function RootCause() {
                   )}
                   <span
                     aria-hidden="true"
-                    className="mt-[6px] size-[11px] shrink-0 rotate-45 bg-gold lg:mt-0 lg:mb-8"
+                    className={cn(
+                      "mt-[6px] size-[11px] shrink-0 rotate-45 bg-gold lg:mt-0",
+                      // Bottom labels start below the lowest point of the circle.
+                      i === 0 ? "lg:mb-8" : "lg:mb-20",
+                    )}
                   />
                   <div
                     className={cn(
@@ -119,7 +123,7 @@ export function RootCause() {
             </ol>
           </div>
 
-          <div className="mt-8 flex w-full justify-center lg:mt-[72px]">
+          <div className="mt-8 flex w-full justify-center lg:mt-[136px]">
             <p className="max-w-[520px] text-balance text-center font-display text-xl italic">{rootCause.conclusion}</p>
           </div>
         </div>
