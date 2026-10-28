@@ -150,7 +150,7 @@ describe("content rules", () => {
       "Оплатите участие",
       "Получите доступ",
     ]);
-    expect(monthFormat.join.steps[1].text).toContain("без автосписаний");
+    expect(monthFormat.join.steps[1].text).toContain("Чек придёт на e-mail");
   });
   it("section 6 button is the club link with its own tracking tag", () => {
     expect(monthFormat.cta.href).toBe(site.joinHref);
