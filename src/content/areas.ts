@@ -1,4 +1,4 @@
-import { links } from "./links";
+import { site } from "./site";
 
 /** Section 5 «Что даст Вам клуб» — four areas of work: what we take on and the direction, no promises. */
 export const areas = {
@@ -46,7 +46,7 @@ export const areas = {
 
   cta: {
     label: "Вступить в Клуб",
-    href: links.join,
+    href: site.joinHref,
     track: "club-areas",
   },
 } as const;

@@ -7,6 +7,8 @@ export const site = {
   roles: "Проводник • Энергопрактик",
   signature: "Путь к Силе Души",
   joinLabel: "Вступить в Клуб",
+  /** Every «Вступить в Клуб» leads to the price block. */
+  joinHref: "/#price",
   fallbackLabel: "Нет Telegram?",
   fallbackLinkLabel: "Напишите во ВКонтакте",
   disclaimer:

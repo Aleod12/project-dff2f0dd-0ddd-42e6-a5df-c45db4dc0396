@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { site } from "@/content/site";
-import { links } from "@/content/links";
 import { CtaButton } from "@/components/brand/CtaButton";
 import { cn } from "@/lib/utils";
 
@@ -33,7 +32,7 @@ export function MobileStickyCta() {
         show ? "translate-y-0" : "pointer-events-none translate-y-full",
       )}
     >
-      <CtaButton href={links.join} track="sticky-join" className="w-full">
+      <CtaButton href={site.joinHref} track="sticky-join" className="w-full">
         {site.joinLabel}
       </CtaButton>
     </div>
