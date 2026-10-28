@@ -34,9 +34,9 @@ export const site = {
     bank: "р/с 40802810507110011057, ПАО «Челиндбанк», г. Челябинск, к/с 30101810400000000711, БИК 047501711",
   },
   socials: [
-    { label: "Telegram", href: links.telegramChannel },
-    { label: "ВКонтакте", href: links.vkCommunity },
-    { label: "YouTube", href: links.youtube },
+    { label: "Telegram", href: links.telegramChannel, track: "footer-telegram" },
+    { label: "ВКонтакте", href: links.vkCommunity, track: "footer-vk" },
+    { label: "YouTube", href: links.youtube, track: "footer-youtube" },
   ],
   legalPages: [
     { label: "Политика конфиденциальности", to: "/privacy" },
