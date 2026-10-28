@@ -145,7 +145,7 @@ export function Reviews() {
         })}
       </div>
 
-      <div className="mt-4 flex justify-center gap-1 md:hidden" role="group" aria-label={reviews.dotsLabel}>
+      <div className="mt-2 flex justify-center md:hidden" role="group" aria-label={reviews.dotsLabel}>
         {reviews.videos.map((r, i) => (
           <button
             key={r.id}
@@ -153,7 +153,7 @@ export function Reviews() {
             onClick={() => goTo(i)}
             aria-label={reviews.dotLabel(i + 1)}
             aria-current={dot === i ? "true" : undefined}
-            className="flex size-6 items-center justify-center"
+            className="flex size-11 items-center justify-center"
           >
             <span aria-hidden="true" className={cn("h-2 w-2 rounded-full transition-all", dot === i ? "w-5 bg-primary" : "bg-primary/75")} />
           </button>

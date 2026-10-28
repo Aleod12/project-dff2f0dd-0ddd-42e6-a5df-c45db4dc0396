@@ -46,7 +46,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
   }, [error]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <div className="flex min-h-app items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-3xl">Страница не загрузилась</h1>
         <p className="mt-2 text-sm text-muted-foreground">Что-то пошло не так. Попробуйте обновить страницу.</p>
@@ -73,7 +73,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
+      { name: "color-scheme", content: "light" },
       { title: "Клуб «Трансформация» — Сергей Табачников" },
       { name: "description", content: "Месяц системной работы с Сергеем Табачниковым: здоровье, финансы, отношения, предназначение." },
       { name: "author", content: "Сергей Табачников" },
@@ -117,7 +118,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex min-h-screen flex-col">
+      <div className="flex min-h-app flex-col">
         <SiteHeader />
         <main className="flex-1 pt-3">
           <Outlet />
