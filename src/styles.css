@@ -15,6 +15,7 @@
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-island: var(--island-radius);
+  --radius-card: var(--card-radius);
 
   --font-display: "Cormorant Garamond", "Times New Roman", serif;
   --font-sans: "Manrope", system-ui, sans-serif;
@@ -51,6 +52,7 @@
 :root {
   --radius: 0.75rem;
   --island-radius: 1.5rem;
+  --card-radius: 1.5rem; /* pain cards: 24px on every screen */
 
   --background: oklch(0.976 0.009 75); /* #FBF7F1 */
   --surface: oklch(0.943 0.015 75); /* #F3ECE2 */
