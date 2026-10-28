@@ -105,7 +105,10 @@ function RoundVideo({ className }: { className?: string }) {
 
 function Portrait() {
   return (
-    <img
+    <picture>
+      {/* Phones get an empty source, so the portrait is never downloaded there. */}
+      <source media="(max-width: 767px)" srcSet="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
+      <img
       src={portrait864.url}
       srcSet={`${portrait480.url} 480w, ${portrait864.url} 864w`}
       sizes="(min-width: 1024px) 440px, 100vw"
@@ -116,6 +119,7 @@ function Portrait() {
       decoding="async"
       className="aspect-[4/5] w-full rounded-card object-cover shadow-island"
     />
+    </picture>
   );
 }
 
@@ -128,7 +132,7 @@ export function Host() {
 
       <div className="mt-8 grid gap-10 md:mt-12 lg:grid-cols-[minmax(0,440px)_1fr] lg:gap-16">
         {/* Desktop: portrait with the round video over its lower-right corner. */}
-        <div className="relative hidden self-start pb-20 lg:block">
+        <div className="relative hidden self-start pb-20 lg:sticky lg:top-24 lg:block">
           <Portrait />
           <RoundVideo className="absolute -right-12 bottom-0" />
         </div>
@@ -139,13 +143,13 @@ export function Host() {
           {/* Phones/tablets: video, then portrait. */}
           <div className="flex flex-col items-center gap-8 lg:hidden">
             <RoundVideo />
-            <div className="w-full max-w-[440px]">
+            <div className="hidden w-full max-w-[440px] md:block">
               <Portrait />
             </div>
           </div>
 
-          <ol className="relative flex flex-col gap-7 rounded-card bg-surface p-5 sm:p-8">
-            <span aria-hidden="true" className="absolute bottom-10 left-[29px] top-10 w-px bg-gold sm:left-[37px]" />
+          <ol className="relative flex flex-col gap-7 md:rounded-card md:bg-surface md:p-8">
+            <span aria-hidden="true" className="absolute bottom-10 left-[4px] top-10 w-px bg-gold md:left-[37px]" />
             {host.timeline.map((step) => (
               <li key={step.title} className="relative pl-8">
                 <span aria-hidden="true" className="absolute left-0 top-2 size-2.5 rotate-45 bg-gold" />

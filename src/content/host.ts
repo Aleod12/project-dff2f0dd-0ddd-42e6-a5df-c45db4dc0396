@@ -13,7 +13,7 @@ export const host = {
 
   video: {
     caption: "Знакомство — 55 секунд",
-    playLabel: "Смотреть видео-знакомство с Сергеем",
+    playLabel: "Смотреть приветствие Сергея",
     pauseLabel: "Пауза",
     resumeLabel: "Продолжить",
     closeLabel: "Остановить и закрыть видео",
