@@ -29,7 +29,7 @@ describe("LegalBackLink", () => {
 
   it("without in-site history navigates to /#<from>", async () => {
     const { router } = await renderAt("/offer?from=price", () => <LegalPage doc={offer} from="price" />);
-    const [top] = await screen.findAllByRole("link", { name: "Вернуться к разделу «Стоимость»" });
+    const top = (await screen.findAllByRole("link", { name: "Вернуться к разделу «Стоимость»" }))[0]!;
     expect(top.getAttribute("href")).toBe("/#price");
     fireEvent.click(top);
     await waitFor(() => expect(router.state.location.pathname).toBe("/"));
