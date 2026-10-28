@@ -9,8 +9,8 @@ import photo380 from "@/assets/hero/sergey-hero-circle-380.webp.asset.json";
 
 export function Hero() {
   return (
-    <section id="hero" aria-labelledby="hero-title" className="relative overflow-hidden pb-6 pt-2 md:pb-12 md:pt-6">
-      <Container className="grid items-center gap-5 md:grid-cols-[1.05fr_0.95fr] md:gap-12">
+    <section id="hero" aria-labelledby="hero-title" className="relative overflow-hidden pb-6 pt-0 md:pb-12 md:pt-6">
+      <Container className="grid items-center gap-3 md:grid-cols-[1.05fr_0.95fr] md:gap-12">
         {/* Ready-made composition (circle + ring + photo on the page background colour): shown as is, never cropped. */}
         <div className="flex justify-center md:order-2 md:justify-end">
           <img
@@ -27,7 +27,7 @@ export function Hero() {
         </div>
 
         {/* Text */}
-        <div className="relative flex flex-col items-center gap-3 text-center md:order-1 md:items-start md:gap-5 md:text-left">
+        <div className="relative flex flex-col items-center gap-2 text-center md:order-1 md:items-start md:gap-5 md:text-left">
           <p className="text-eyebrow">{hero.eyebrow}</p>
           <h1 id="hero-title" className="flex flex-col gap-2 md:gap-3">
             <span className="text-[1.95rem] leading-[1.05] sm:text-h1">
@@ -46,7 +46,7 @@ export function Hero() {
               </li>
             ))}
           </ul>
-          <div className="mt-1 flex w-full flex-col gap-3 md:w-auto md:flex-row md:items-stretch">
+          <div className="mt-1 flex w-full flex-col gap-2 md:gap-3 md:w-auto md:flex-row md:items-stretch">
             <CtaButton href={hero.primary.href} track={hero.primary.track} className="w-full md:w-auto">{hero.primary.label}</CtaButton>
             <CtaButton href={hero.secondary.href} track={hero.secondary.track} variant="outline" className="w-full md:w-auto">{hero.secondary.label}</CtaButton>
           </div>
