@@ -68,7 +68,7 @@ export function RootCause() {
                 </marker>
               </defs>
               <path d="M 272 34 C 430 60, 440 180, 402 266" markerEnd="url(#rc-arrow)" />
-              <path d="M 386 282 L 138 282" markerEnd="url(#rc-arrow)" />
+              <path d="M 386 282 C 330 296, 190 296, 138 282" markerEnd="url(#rc-arrow)" />
               <path d="M 116 266 C 40 190, 60 80, 244 36" markerEnd="url(#rc-arrow)" />
             </svg>
 
@@ -103,15 +103,15 @@ export function RootCause() {
 
           <div className="mt-8 flex w-full flex-col items-center gap-4">
             {/* Phones only: a small arrow back to the first link of the loop. */}
-            <div className="flex items-center gap-3 lg:hidden">
+            <div className="flex w-full items-center gap-3 lg:hidden">
               <svg
                 aria-hidden="true"
-                viewBox="0 0 132 36"
-                className="size-9 shrink-0"
+                viewBox="0 0 30 48"
+                className="h-12 w-[30px] shrink-0"
                 fill="none"
                 stroke="var(--color-primary)"
-                strokeOpacity="0.5"
-                strokeWidth="1.5"
+                strokeOpacity="0.65"
+                strokeWidth="1.75"
                 strokeLinecap="round"
               >
                 <defs>
@@ -127,7 +127,7 @@ export function RootCause() {
                     <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--color-primary)" fillOpacity="0.65" stroke="none" />
                   </marker>
                 </defs>
-                <path d="M 122 30 C 74 32, 30 26, 16 8" markerEnd="url(#rc-arrow-loop)" />
+                <path d="M 22 44 C 6 36, 6 14, 20 6" markerEnd="url(#rc-arrow-loop)" />
               </svg>
               <p className="text-sm text-muted-foreground">{rootCause.loopLabel}</p>
             </div>
