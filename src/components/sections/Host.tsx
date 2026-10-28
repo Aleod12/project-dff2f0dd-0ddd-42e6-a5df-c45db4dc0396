@@ -6,6 +6,8 @@ import { SectionTitle } from "@/components/brand/SectionTitle";
 import { Island } from "@/components/layout/Island";
 import { isPresent } from "@/lib/present";
 import { cn } from "@/lib/utils";
+import { pauseOtherVideos } from "@/lib/exclusivePlay";
+import { Transcript } from "@/components/brand/TranscriptToggle";
 import portrait480 from "@/assets/host/sergey-host-480.webp.asset.json";
 import portrait864 from "@/assets/host/sergey-host-864.webp.asset.json";
 import poster from "@/assets/host/welcome-poster.webp.asset.json";
@@ -70,7 +72,10 @@ function RoundVideo({ className }: { className?: string }) {
               preload="none"
               playsInline
               onClick={toggle}
-              onPlay={() => setState("playing")}
+              onPlay={() => {
+                pauseOtherVideos(ref.current);
+                setState("playing");
+              }}
               onPause={() => setState((s) => (s === "idle" ? s : "paused"))}
               onEnded={close}
               className="size-full cursor-pointer rounded-full object-cover"
@@ -98,7 +103,8 @@ function RoundVideo({ className }: { className?: string }) {
           </>
         )}
       </div>
-      <figcaption className="text-sm font-semibold text-muted-foreground">{v.caption}</figcaption>
+      <figcaption className="text-center text-sm font-semibold text-muted-foreground">{v.caption}</figcaption>
+      <Transcript text={v.transcript} className="max-w-[440px]" />
     </figure>
   );
 }
