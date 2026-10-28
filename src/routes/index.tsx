@@ -3,6 +3,7 @@ import { Hero } from "@/components/sections/Hero";
 import { ForYou } from "@/components/sections/ForYou";
 import { RootCause } from "@/components/sections/RootCause";
 import { Host } from "@/components/sections/Host";
+import { Areas } from "@/components/sections/Areas";
 
 const title = "Клуб «Трансформация» Сергея Табачникова — месяц системной работы";
 const description =
@@ -27,6 +28,7 @@ function Index() {
       <ForYou />
       <RootCause />
       <Host />
+      <Areas />
     </>
   );
 }
