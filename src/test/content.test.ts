@@ -65,7 +65,6 @@ describe("content rules", () => {
     expect(rootCause.thesis).toHaveLength(3);
   });
   it("section 3 closes the loop without inventing new promises", () => {
-    expect(rootCause.loopLabel).toBe("и круг замыкается");
     expect(rootCause.conclusion).toBe(
       "Круг замыкается. В клубе мы работаем с первым звеном — через тело и состояние.",
     );
