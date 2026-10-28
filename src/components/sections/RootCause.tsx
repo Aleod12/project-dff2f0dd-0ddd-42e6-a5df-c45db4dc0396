@@ -48,7 +48,7 @@ export function RootCause() {
             {/* Phones only: the return path from the last diamond back to the first one. */}
             <span
               aria-hidden="true"
-              className="absolute bottom-[77px] left-[4px] top-[11px] w-[30px] rounded-bl-[20px] border-b border-l border-primary/30 lg:hidden"
+              className="absolute bottom-[87px] left-[4px] top-[11px] w-[30px] rounded-bl-[20px] border-b border-l border-primary/30 lg:hidden"
             />
             {/* Short stroke with an arrow that points into the first node. */}
             <span aria-hidden="true" className="absolute left-[4px] top-[11px] h-px w-[22px] bg-primary/30 lg:hidden" />
