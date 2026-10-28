@@ -162,11 +162,11 @@ import { freeLadder } from "@/content/freeLadder";
 describe("section 9 free ladder", () => {
   it("has four steps with their own bot/channel links and tags", () => {
     expect(freeLadder.steps.map((s) => s.button.track)).toEqual(["free-test", "free-practice", "free-scan", "free-channel"]);
-    expect(freeLadder.steps[0].button.href).toBe(links.diagnostic);
-    expect(freeLadder.steps[3].button.href).toBe(links.telegramChannel);
+    expect(freeLadder.steps[0]!.button.href).toBe(links.diagnostic);
+    expect(freeLadder.steps[3]!.button.href).toBe(links.telegramChannel);
   });
   it("practice badge stays hidden while the duration is empty", () => {
     expect(freeLadder.practiceDuration).toBe("");
-    expect(isPresent(freeLadder.steps[1].badge)).toBe(false);
+    expect(isPresent(freeLadder.steps[1]!.badge)).toBe(false);
   });
 });
