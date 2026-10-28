@@ -31,9 +31,6 @@ export const rootCause = {
     },
   ],
 
-  /** Small label by the return arrow on phones. */
-  loopLabel: "и круг замыкается",
-
   /** One line under the diagram. */
   conclusion: "Круг замыкается. В клубе мы работаем с первым звеном — через тело и состояние.",
 } as const;
