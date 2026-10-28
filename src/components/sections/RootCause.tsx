@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
  * the arrows run 1 → 2 → 3 → 1. All labels sit outside the loop.
  */
 const nodePos = [
-  "lg:left-[50%] lg:top-[15%] lg:w-[30%]",
+  "lg:left-[50%] lg:top-[26%] lg:w-[30%]",
   "lg:left-[77%] lg:top-[66%] lg:w-[36%]",
   "lg:left-[23%] lg:top-[66%] lg:w-[36%]",
 ];
@@ -78,9 +78,9 @@ export function RootCause() {
                   <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--color-primary)" fillOpacity="0.6" stroke="none" />
                 </marker>
               </defs>
-              <path d="M 274 66 C 435 80, 445 190, 402 266" markerEnd="url(#rc-arrow)" />
+              <path d="M 274 112 C 435 125, 448 205, 402 266" markerEnd="url(#rc-arrow)" />
               <path d="M 388 286 C 320 324, 200 324, 132 286" markerEnd="url(#rc-arrow)" />
-              <path d="M 116 266 C 40 190, 60 90, 242 70" markerEnd="url(#rc-arrow)" />
+              <path d="M 116 266 C 40 190, 60 130, 242 116" markerEnd="url(#rc-arrow)" />
             </svg>
 
             <ol className="relative flex flex-col gap-6 pb-6 lg:h-full lg:gap-0 lg:pb-0">
@@ -107,7 +107,7 @@ export function RootCause() {
                     className={cn(
                       "flex flex-col gap-1.5",
                       // Node 1: the label sits fully above the diamond, outside the loop.
-                      i === 0 && "lg:absolute lg:bottom-full lg:left-1/2 lg:mb-6 lg:max-w-[260px] lg:-translate-x-1/2",
+                      i === 0 && "lg:absolute lg:bottom-full lg:left-1/2 lg:mb-6 lg:w-[240px] lg:-translate-x-1/2",
                     )}
                   >
                     <h3 className="text-lg font-semibold lg:text-xl">{node.title}</h3>
