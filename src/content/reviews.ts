@@ -2,9 +2,11 @@ import { links } from "./links";
 import poster1 from "@/assets/reviews/review-1-poster.webp.asset.json";
 import poster2 from "@/assets/reviews/review-2-poster.webp.asset.json";
 import poster3 from "@/assets/reviews/review-3-poster.webp.asset.json";
+import poster4 from "@/assets/reviews/review-4-poster.webp.asset.json";
 import video1 from "@/assets/reviews/review-1.mp4.asset.json";
 import video2 from "@/assets/reviews/review-2.mp4.asset.json";
 import video3 from "@/assets/reviews/review-3.mp4.asset.json";
+import video4 from "@/assets/reviews/review-4.mp4.asset.json";
 
 export type VideoReview = {
   id: string;
@@ -13,11 +15,11 @@ export type VideoReview = {
   summary?: string;
   fallbackLabel: string;
   duration: string;
-  video?: string;
-  /** Empty poster shows a neutral circle with the play button. */
+  video: string;
   poster: string;
-  posterSize?: number;
-  embedUrl?: string;
+  /** Poster/video side in px (square), for explicit width/height. */
+  size: number;
+  transcript?: string;
 };
 
 export type QuoteReview = { name: string; text: string };
@@ -30,22 +32,56 @@ export const reviews = {
   pauseLabel: "Пауза",
   resumeLabel: "Продолжить",
   closeLabel: "Закрыть видео",
-  modalCloseLabel: "Закрыть",
   dotsLabel: "Видеоотзывы",
   dotLabel: (n: number) => `Видеоотзыв ${n}`,
   videos: [
-    { id: "v1", name: "", summary: "", fallbackLabel: "Видеоотзыв участницы", duration: "29 сек", video: video1.url, poster: poster1.url, posterSize: 400 },
-    { id: "v2", name: "", summary: "", fallbackLabel: "Видеоотзыв участника", duration: "51 сек", video: video2.url, poster: poster2.url, posterSize: 344 },
-    { id: "v3", name: "", summary: "", fallbackLabel: "Видеоотзыв участницы", duration: "39 сек", video: video3.url, poster: poster3.url, posterSize: 400 },
+    {
+      id: "v3",
+      name: "",
+      fallbackLabel: "Видеоотзыв участницы",
+      duration: "39 сек",
+      summary: "Поток очень бережный — нет ощущения, что ты под лупой",
+      video: video3.url,
+      poster: poster3.url,
+      size: 400,
+      transcript:
+        "Хочу поделиться историей моего сканирования. Меня порадовало, что поток очень бережный — нет ощущения, что ты находишься под лупой и тебя разглядывают. Ключевые моменты, которые всплывали, сразу же отображались на теле и чувствовались, поэтому подтверждение или опровержение информации давал ещё и телесный отклик. Даже когда ты много знаешь и понимаешь, есть слепые зоны, которых ты сам просто не можешь увидеть. Я очень благодарна, для меня это было очень ценно.",
+    },
     {
       id: "v4",
       name: "",
-      summary: "",
       fallbackLabel: "Видеоотзыв участницы",
-      duration: "1 мин 24 сек",
-      // review_vk_poster.jpg not received yet — empty until uploaded.
-      poster: "",
-      embedUrl: "https://vk.ru/video_ext.php?oid=-236528362&id=456239041&hash=videos-236528362&autoplay=1",
+      duration: "1 мин 25 сек",
+      summary: "Получила очень экологичный ответ — без „правильно“ и „неправильно“",
+      video: video4.url,
+      poster: poster4.url,
+      size: 480,
+      transcript:
+        "Добрый день. Хочу поделиться обратной связью: сейчас прошла диагностику у Сергея. Мне очень понравилось, что Сергей очень верит в себя, и от него я почувствовала уверенность. Это очень важно для тех, кто первый раз сталкивается с подобными диагностиками, — чувствовать уверенность в мастере. Именно в Сергее я её почувствовала, поэтому смогла раскрыться и довериться потоку. На мой вопрос я получила ответ, и самое важное — это был очень экологичный ответ: Сергей не показывал мне, как правильно и как неправильно, а что может помочь мне решить мой вопрос самостоятельно. Полное доверие к себе и к потоку — именно это Сергей и передавал на наших диагностиках. Большая благодарность за практику и за знания, которыми Вы поделились. Мне очень понравилось, что в конце было такое послание от моей собственной души — оно помогло ещё больше убедиться в том, кто я есть и что мне необходимо для решения моего вопроса. Большое спасибо Вам, Сергей.",
+    },
+    {
+      id: "v1",
+      name: "",
+      fallbackLabel: "Видеоотзыв участницы",
+      duration: "29 сек",
+      summary: "Получила мощную обратную связь и много инсайтов",
+      video: video1.url,
+      poster: poster1.url,
+      size: 400,
+      transcript:
+        "Всем добрый вечер, делюсь своим отзывом. Сегодня прошла первичную диагностику. Отнеслась к процессу с большим доверием и получила мощную обратную связь. Сергей, ты прямо увидел меня, мою душу, я получила много инсайтов. Когда я слушала обратную связь, где-то хотелось смеяться, где-то плакать, потому что ты говорил истину. Мне очень понравилось, и хочется ещё поработать с тобой. Благодарю.",
+    },
+    {
+      id: "v2",
+      name: "",
+      fallbackLabel: "Видеоотзыв участника",
+      duration: "51 сек",
+      summary: "Очень много нового узнал о себе",
+      video: video2.url,
+      poster: poster2.url,
+      size: 344,
+      transcript:
+        "Сергей, привет. Хотел бы оставить отзыв о сканировании и трансформации. Это фантастический опыт — замечательный, превосходный, даже не хватает слов, чтобы его описать. Очень много нового узнал о себе, о своей душе. После трансформации прямо физически чувствую, как начали происходить изменения. Моя жизнь начала меняться. Спасибо тебе, обязательно продолжим взаимодействие. Всем рекомендую.",
     },
   ] as VideoReview[],
   quotes: [
