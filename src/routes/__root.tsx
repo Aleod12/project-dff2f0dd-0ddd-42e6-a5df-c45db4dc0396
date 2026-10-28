@@ -19,8 +19,12 @@ import { Island } from "@/components/layout/Island";
 import { DiamondDivider } from "@/components/brand/DiamondDivider";
 
 function NotFoundComponent() {
+  useEffect(() => {
+    document.title = "Страница не найдена — Клуб «Трансформация»";
+  }, []);
   return (
     <Island tone="surface" className="flex flex-col items-center gap-6 text-center">
+      <meta name="robots" content="noindex, nofollow" />
       <p className="font-display text-7xl text-secondary">404</p>
       <h1 className="text-h2">
         Страница <em className="italic">не найдена</em>
@@ -79,14 +83,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "theme-color", content: "#FBF7F1" },
     ],
     links: [
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600&display=swap&subset=cyrillic",
-      },
+      // Self-hosted fonts: preload the two Cyrillic files used on the first screen.
+      { rel: "preload", href: "/fonts/cormorant-garamond-normal-cyrillic.woff2", as: "font", type: "font/woff2", crossOrigin: "anonymous" },
+      { rel: "preload", href: "/fonts/manrope-normal-cyrillic.woff2", as: "font", type: "font/woff2", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "icon", href: "/favicon-32.png", type: "image/png", sizes: "32x32" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png", sizes: "180x180" },
     ],
   }),
   shellComponent: RootShell,

@@ -41,7 +41,7 @@ export function FinalCta() {
               <CtaButton
                 href={c.join.href}
                 track={c.join.track}
-                className={`w-full bg-primary-foreground text-primary shadow-none hover:bg-sage sm:w-auto ${focusLight}`}
+                className={`w-full bg-primary-foreground text-base font-semibold text-primary shadow-none hover:bg-sage sm:w-auto ${focusLight}`}
               >
                 {c.join.label}
               </CtaButton>
@@ -49,7 +49,7 @@ export function FinalCta() {
                 href={c.test.href}
                 track={c.test.track}
                 variant="outline"
-                className={`w-full border-primary-foreground text-primary-foreground hover:bg-primary-hover sm:w-auto ${focusLight}`}
+                className={`w-full text-base font-semibold border-primary-foreground text-primary-foreground hover:bg-primary-hover sm:w-auto ${focusLight}`}
               >
                 {c.test.label}
               </CtaButton>
