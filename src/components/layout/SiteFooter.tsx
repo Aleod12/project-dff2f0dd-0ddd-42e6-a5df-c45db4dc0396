@@ -29,7 +29,7 @@ export function SiteFooter() {
               <ul className="flex flex-col gap-2">
                 {site.legalPages.map((p) => (
                   <li key={p.to}>
-                    <Link to={p.to} className="inline-flex min-h-11 items-center text-foreground underline-offset-4 hover:text-primary hover:underline">{p.label}</Link>
+                    <Link to={p.to} search={{ from: "site-footer" }} className="inline-flex min-h-11 items-center text-foreground underline-offset-4 hover:text-primary hover:underline">{p.label}</Link>
                   </li>
                 ))}
               </ul>

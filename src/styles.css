@@ -155,8 +155,17 @@
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
-    /* Sticky header height (4rem) + iPhone notch, so anchored titles are never under the header. */
-    scroll-padding-top: calc(4rem + env(safe-area-inset-top, 0px));
+  }
+  /* Every anchor target clears the sticky header (4rem) + 16px + iPhone notch. */
+  [id] {
+    scroll-margin-top: calc(4rem + 16px + env(safe-area-inset-top, 0px));
+  }
+  /* Placeholders in legal drafts: gold at 35% under dark text. */
+  mark.legal-placeholder {
+    background-color: color-mix(in oklab, var(--color-gold) 35%, transparent);
+    color: var(--color-foreground);
+    border-radius: 0.2em;
+    padding: 0 0.15em;
   }
   @media (prefers-reduced-motion: no-preference) {
     html {
@@ -219,3 +228,32 @@
   font-size: clamp(2rem, 3.6vw + 0.75rem, 3.25rem);
 }
 
+
+@media print {
+  header,
+  footer,
+  button {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .legal-doc,
+  .legal-doc h1,
+  .legal-doc h2,
+  .legal-doc p,
+  .legal-doc li,
+  .legal-doc th,
+  .legal-doc td,
+  .legal-doc dt,
+  .legal-doc a {
+    color: #000 !important;
+  }
+  .legal-doc {
+    max-width: none;
+  }
+  .legal-row {
+    break-inside: avoid;
+  }
+}

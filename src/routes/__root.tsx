@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
+  useRouterState,
   Outlet,
   Link,
   createRootRouteWithContext,
@@ -8,7 +9,9 @@ import {
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
+import { setCameFromSite } from "@/lib/legalFrom";
+import { showStickyCta } from "@/lib/stickyCta";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -115,6 +118,13 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const location = useRouterState({ select: (s) => s.location });
+  const firstLoad = useRef(true);
+  // Flag for «back» on document pages: false after a fresh load, true after any in-site navigation in this tab.
+  useEffect(() => {
+    setCameFromSite(!firstLoad.current);
+    firstLoad.current = false;
+  }, [location.href]);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -125,7 +135,7 @@ function RootComponent() {
         </main>
         <SiteFooter />
       </div>
-      <MobileStickyCta />
+      {showStickyCta(location.pathname) && <MobileStickyCta />}
     </QueryClientProvider>
   );
 }

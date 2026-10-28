@@ -20,7 +20,7 @@ export const pricing = {
   ],
   payRub: { label: `Оплатить ${formatPrice("rub")}`, href: "/payment/checkout?currency=rub", track: "pay-rub" },
   payEur: { label: `Оплатить ${formatPrice("eur")}`, href: "/payment/checkout?currency=eur", track: "pay-eur" },
-  offerNote: { before: "Нажимая «Оплатить», Вы принимаете условия ", linkLabel: "публичной оферты", href: "/offer" },
+  offerNote: { before: "Нажимая «Оплатить», Вы принимаете условия ", linkLabel: "публичной оферты", to: "/offer", from: "price" },
   questions: { before: "Остались вопросы?", linkLabel: "Напишите мне", href: links.club, track: "price-write" },
 
   checkout: {
@@ -33,6 +33,7 @@ export const pricing = {
     errorText: "Не удалось открыть страницу оплаты. Напишите мне — помогу с оплатой.",
     write: { label: "Написать в Telegram", href: links.club, track: "checkout-write" },
     back: { label: "Вернуться к стоимости", href: "/#price" },
+    offer: { before: "Условия участия — в ", linkLabel: "публичной оферте", to: "/offer", from: "checkout" },
   },
   success: {
     title: "Спасибо!",

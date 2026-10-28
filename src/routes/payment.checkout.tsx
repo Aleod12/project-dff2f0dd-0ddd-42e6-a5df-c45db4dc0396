@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
 import { pricing } from "@/content/pricing";
@@ -48,6 +48,12 @@ function Checkout() {
         <dd className="mt-3 font-display text-4xl font-semibold text-primary [font-variant-numeric:lining-nums]">{formatPrice(currency)}</dd>
         <dd className="mt-1 text-sm">{c.noRenewal}</dd>
       </dl>
+      <p className="text-[15px] text-muted-foreground">
+        {c.offer.before}
+        <Link to={c.offer.to} search={{ from: c.offer.from }} className="text-primary underline underline-offset-4 hover:no-underline">
+          {c.offer.linkLabel}
+        </Link>
+      </p>
 
       {state === null || state.kind === "redirect" ? (
         <p className="text-muted-foreground" role="status">{c.redirecting}</p>
