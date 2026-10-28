@@ -1,3 +1,4 @@
+import { site } from "./site";
 import { links } from "./links";
 
 export const hero = {
@@ -9,7 +10,7 @@ export const hero = {
   lead: "Месяц системной работы: снимаем зажимы — меняем сценарии.",
   sub: "Для тех, кто устал ходить по кругу старых решений.",
   facts: ["4 живые встречи с Сергеем", "4 сферы жизни", "Разовая оплата, без автосписаний"],
-  primary: { label: "Вступить в Клуб", href: links.join, track: "hero-join" },
+  primary: { label: "Вступить в Клуб", href: site.joinHref, track: "hero-join" },
   secondary: { label: "Бесплатная диагностика · 2 мин", href: links.diagnostic, track: "hero-diagnostic" },
   photoAlt: "Сергей Табачников — ведущий клуба «Трансформация»",
 };

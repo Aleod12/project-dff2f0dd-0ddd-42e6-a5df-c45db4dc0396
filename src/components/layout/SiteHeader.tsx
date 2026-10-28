@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import { site } from "@/content/site";
-import { links } from "@/content/links";
 import { CtaButton } from "@/components/brand/CtaButton";
 import { Container } from "./Container";
 
@@ -22,7 +21,7 @@ export function SiteHeader() {
             ))}
           </ul>
         </nav>
-        <CtaButton href={links.join} track="header-join" size="sm">
+        <CtaButton href={site.joinHref} track="header-join" size="sm">
           {site.joinLabel}
         </CtaButton>
       </Container>

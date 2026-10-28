@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { site } from "@/content/site";
-import { links } from "@/content/links";
 import { CtaButton } from "@/components/brand/CtaButton";
 import { cn } from "@/lib/utils";
 
@@ -16,11 +15,17 @@ export function MobileStickyCta() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     const footer = document.getElementById("site-footer");
-    const io = footer ? new IntersectionObserver(([e]) => setFooterVisible(!!e?.isIntersecting)) : null;
-    if (footer && io) io.observe(footer);
+    // Hide while the footer or the price block (where the button leads) is on screen.
+    const targets = [footer, document.getElementById("price")].filter((el): el is HTMLElement => !!el);
+    const visible = new Set<Element>();
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) (e.isIntersecting ? visible.add(e.target) : visible.delete(e.target));
+      setFooterVisible(visible.size > 0);
+    });
+    targets.forEach((el) => io.observe(el));
     return () => {
       window.removeEventListener("scroll", onScroll);
-      io?.disconnect();
+      io.disconnect();
     };
   }, []);
 
@@ -33,7 +38,7 @@ export function MobileStickyCta() {
         show ? "translate-y-0" : "pointer-events-none translate-y-full",
       )}
     >
-      <CtaButton href={links.join} track="sticky-join" className="w-full">
+      <CtaButton href={site.joinHref} track="sticky-join" className="w-full">
         {site.joinLabel}
       </CtaButton>
     </div>

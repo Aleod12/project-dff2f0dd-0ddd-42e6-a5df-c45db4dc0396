@@ -1,4 +1,8 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+import { payments, formatPrice, parseCurrency } from "@/content/payments";
+import { site } from "@/content/site";
+import { hero } from "@/content/hero";
+import { startCheckout } from "@/lib/checkout";
 import { pricing } from "@/content/pricing";
 import { links } from "@/content/links";
 import { pains } from "@/content/pains";
@@ -9,18 +13,37 @@ import { monthFormat } from "@/content/format";
 import { isPresent } from "@/lib/present";
 
 describe("content rules", () => {
-  it("price is 9 990 ₽ and 100 €", () => {
-    expect(pricing.rub.amount).toBe("9 990 ₽");
-    expect(pricing.eur.amount).toBe("100 €");
+  it("prices come only from payments.ts: 9990 ₽ and 100 €", () => {
+    expect(payments.prices).toEqual({ rub: 9990, eur: 100 });
+    expect(pricing.priceRub).toBe(formatPrice("rub"));
+    expect(pricing.payRub.label).toBe(`Оплатить ${formatPrice("rub")}`);
+    expect(pricing.payEur.label).toBe(`Оплатить ${formatPrice("eur")}`);
+    expect(formatPrice("rub", { rub: 12000, eur: 1 })).toBe("12\u00A0000\u00A0₽");
   });
-  it("payment note says no auto-renewal", () => {
-    expect(pricing.paymentNote).toContain("без автосписаний");
+  it("price list says no auto-renewal", () => {
+    expect(pricing.included).toContain("Разовый платёж, без автосписаний");
+  });
+  it("unknown checkout currency falls back to rubles", () => {
+    expect(parseCurrency("usd")).toBe("rub");
+    expect(parseCurrency("eur")).toBe("eur");
+  });
+  it("every «Вступить в Клуб» points to #price", () => {
+    expect(site.joinHref).toBe("/#price");
+    expect(hero.primary.href).toBe("/#price");
+    expect(areas.cta.href).toBe("/#price");
+    expect(monthFormat.cta.href).toBe("/#price");
+  });
+  it("checkout with payments disabled never calls createPayment", async () => {
+    const create = vi.fn();
+    const r = await startCheckout({ enabled: false }, "rub", create);
+    expect(r.kind).toBe("disabled");
+    expect(create).not.toHaveBeenCalled();
   });
   it("every link is an https URL", () => {
     for (const v of Object.values(links)) expect(v).toMatch(/^https:\/\//);
   });
-  it("join goes to Sergey's Telegram for now", () => {
-    expect(links.join).toBe("https://t.me/STabachnikov");
+  it("«Написать Сергею» goes to Sergey's Telegram", () => {
+    expect(links.club).toBe("https://t.me/STabachnikov");
   });
   it("empty values are hidden", () => {
     expect(isPresent("")).toBe(false);
@@ -30,7 +53,7 @@ describe("content rules", () => {
     expect(isPresent("27")).toBe(true);
   });
   it("stream start is empty so the date block stays hidden", () => {
-    expect(isPresent(pricing.streamStart)).toBe(false);
+    expect(isPresent(payments.streamStartDate)).toBe(false);
   });
   it("section 2 has exactly five pains, in the agreed order", () => {
     expect(pains.items.map((i) => i.title)).toEqual([
@@ -101,7 +124,7 @@ describe("content rules", () => {
     ]);
   });
   it("section 5 button is the club link with its own tracking tag", () => {
-    expect(areas.cta.href).toBe(links.join);
+    expect(areas.cta.href).toBe(site.joinHref);
     expect(areas.cta.track).toBe("club-areas");
     expect(areas.cta.label).toBe("Вступить в Клуб");
   });
@@ -127,10 +150,10 @@ describe("content rules", () => {
       "Оплатите участие",
       "Получите доступ",
     ]);
-    expect(monthFormat.join.steps[1].text).toContain("без автосписаний");
+    expect(monthFormat.join.steps[1].text).toContain("Чек придёт на e-mail");
   });
   it("section 6 button is the club link with its own tracking tag", () => {
-    expect(monthFormat.cta.href).toBe(links.join);
+    expect(monthFormat.cta.href).toBe(site.joinHref);
     expect(monthFormat.cta.track).toBe("format-join");
   });
 });

@@ -14,4 +14,4 @@
 - Empty content values hide their element (use `isPresent` from `src/lib/present.ts`); never invent placeholder facts.
 - All colors/fonts/shadows are tokens in `src/styles.css`; components use semantic classes only. No dark theme.
 - Header, footer and mobile sticky CTA are mounted once in `src/routes/__root.tsx`; home sections go in `src/components/sections/`, one file each.
-- v1 has no forms, payments or data collection: CTAs are external links via `CtaButton`. Payment routes (/payment/success, /payment/fail) are planned, not built.
+- No forms or personal data on the site. «Вступить в Клуб» CTAs scroll to #price; prices and the on/off switch live only in `src/content/payments.ts`; online payment goes through `createPayment` (server, stub until a provider is connected) and is confirmed only by a signed provider notification — so turning payment on never touches the design.

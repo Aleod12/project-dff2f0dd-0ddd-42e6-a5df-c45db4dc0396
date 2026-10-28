@@ -13,6 +13,9 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ConsentRouteImport } from './routes/consent'
 import { Route as OfferRouteImport } from './routes/offer'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PaymentCheckoutRouteImport } from './routes/payment.checkout'
+import { Route as PaymentFailRouteImport } from './routes/payment.fail'
+import { Route as PaymentSuccessRouteImport } from './routes/payment.success'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +37,39 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PaymentCheckoutRoute = PaymentCheckoutRouteImport.update({
+  id: '/payment/checkout',
+  path: '/payment/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaymentFailRoute = PaymentFailRouteImport.update({
+  id: '/payment/fail',
+  path: '/payment/fail',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaymentSuccessRoute = PaymentSuccessRouteImport.update({
+  id: '/payment/success',
+  path: '/payment/success',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/consent': typeof ConsentRoute
   '/offer': typeof OfferRoute
   '/privacy': typeof PrivacyRoute
+  '/payment/checkout': typeof PaymentCheckoutRoute
+  '/payment/fail': typeof PaymentFailRoute
+  '/payment/success': typeof PaymentSuccessRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/consent': typeof ConsentRoute
   '/offer': typeof OfferRoute
   '/privacy': typeof PrivacyRoute
+  '/payment/checkout': typeof PaymentCheckoutRoute
+  '/payment/fail': typeof PaymentFailRoute
+  '/payment/success': typeof PaymentSuccessRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +77,38 @@ export interface FileRoutesById {
   '/consent': typeof ConsentRoute
   '/offer': typeof OfferRoute
   '/privacy': typeof PrivacyRoute
+  '/payment/checkout': typeof PaymentCheckoutRoute
+  '/payment/fail': typeof PaymentFailRoute
+  '/payment/success': typeof PaymentSuccessRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/consent' | '/offer' | '/privacy'
+  fullPaths:
+    | '/'
+    | '/consent'
+    | '/offer'
+    | '/privacy'
+    | '/payment/checkout'
+    | '/payment/fail'
+    | '/payment/success'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/consent' | '/offer' | '/privacy'
-  id: '__root__' | '/' | '/consent' | '/offer' | '/privacy'
+  to:
+    | '/'
+    | '/consent'
+    | '/offer'
+    | '/privacy'
+    | '/payment/checkout'
+    | '/payment/fail'
+    | '/payment/success'
+  id:
+    | '__root__'
+    | '/'
+    | '/consent'
+    | '/offer'
+    | '/privacy'
+    | '/payment/checkout'
+    | '/payment/fail'
+    | '/payment/success'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +116,9 @@ export interface RootRouteChildren {
   ConsentRoute: typeof ConsentRoute
   OfferRoute: typeof OfferRoute
   PrivacyRoute: typeof PrivacyRoute
+  PaymentCheckoutRoute: typeof PaymentCheckoutRoute
+  PaymentFailRoute: typeof PaymentFailRoute
+  PaymentSuccessRoute: typeof PaymentSuccessRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +151,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/payment/checkout': {
+      id: '/payment/checkout'
+      path: '/payment/checkout'
+      fullPath: '/payment/checkout'
+      preLoaderRoute: typeof PaymentCheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/payment/fail': {
+      id: '/payment/fail'
+      path: '/payment/fail'
+      fullPath: '/payment/fail'
+      preLoaderRoute: typeof PaymentFailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/payment/success': {
+      id: '/payment/success'
+      path: '/payment/success'
+      fullPath: '/payment/success'
+      preLoaderRoute: typeof PaymentSuccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +180,9 @@ const rootRouteChildren: RootRouteChildren = {
   ConsentRoute: ConsentRoute,
   OfferRoute: OfferRoute,
   PrivacyRoute: PrivacyRoute,
+  PaymentCheckoutRoute: PaymentCheckoutRoute,
+  PaymentFailRoute: PaymentFailRoute,
+  PaymentSuccessRoute: PaymentSuccessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

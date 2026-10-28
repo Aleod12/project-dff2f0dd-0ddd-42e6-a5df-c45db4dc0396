@@ -1,4 +1,4 @@
-import { links } from "./links";
+import { site } from "./site";
 
 /** Section 6 «Как устроен месяц в клубе» — the concrete format and the three steps to join. */
 export const monthFormat = {
@@ -39,11 +39,11 @@ export const monthFormat = {
     steps: [
       {
         title: "Нажмите «Вступить в Клуб»",
-        text: "Откроется чат с Сергеем в Telegram.",
+        text: "Выберите оплату в рублях или в евро.",
       },
       {
         title: "Оплатите участие",
-        text: "В рублях или в евро — разовый платёж, без автосписаний.",
+        text: "На защищённой странице платёжного сервиса. Чек придёт на e-mail.",
       },
       {
         title: "Получите доступ",
@@ -54,7 +54,7 @@ export const monthFormat = {
 
   cta: {
     label: "Вступить в Клуб",
-    href: links.join,
+    href: site.joinHref,
     track: "format-join",
   },
 } as const;
