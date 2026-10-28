@@ -3,9 +3,9 @@ import { isPresent } from "@/lib/present";
 import { CtaButton } from "@/components/brand/CtaButton";
 import { TelegramFallback } from "@/components/brand/TelegramFallback";
 import { Container } from "@/components/layout/Container";
-import photo860 from "@/assets/hero/sergey-hero-860.webp.asset.json";
-import photo640 from "@/assets/hero/sergey-hero-640.webp.asset.json";
-import photo430 from "@/assets/hero/sergey-hero-430.webp.asset.json";
+import photo860 from "@/assets/hero/sergey-hero-v3-860.webp.asset.json";
+import photo640 from "@/assets/hero/sergey-hero-v3-640.webp.asset.json";
+import photo430 from "@/assets/hero/sergey-hero-v3-430.webp.asset.json";
 
 export function Hero() {
   return (
@@ -19,11 +19,11 @@ export function Hero() {
               srcSet={`${photo430.url} 430w, ${photo640.url} 640w, ${photo860.url} 860w`}
               sizes="(min-width: 768px) 460px, 300px"
               width={860}
-              height={957}
+              height={724}
               alt={hero.photoAlt}
               fetchPriority="high"
               decoding="async"
-              className="absolute bottom-0 left-1/2 h-[86%] w-auto max-w-[94%] -translate-x-1/2 object-contain object-bottom"
+              className="absolute bottom-0 left-1/2 h-[80%] w-auto max-w-[84%] -translate-x-1/2 object-contain object-bottom"
             />
           </div>
         </div>
