@@ -45,7 +45,7 @@ describe("content rules", () => {
   it("pain CTA is the free diagnostic in the bot", () => {
     expect(pains.cta.href).toBe(links.diagnostic);
     expect(pains.cta.track).toBe("pains-diagnostic");
-    expect(pains.cta.label).toBe("Узнать, где именно блок — бесплатная диагностика, 2 минуты →");
+    expect(pains.cta.label).toBe("Узнать, где именно блок — бесплатная диагностика, 2 минуты\u00A0→");
   });
   it("Sergey's note under the cards is signed and keeps the 27 years", () => {
     expect(pains.hostNote.sign).toBe("— Сергей Табачников");

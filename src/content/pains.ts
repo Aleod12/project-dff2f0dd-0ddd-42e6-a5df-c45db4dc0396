@@ -38,7 +38,8 @@ export const pains = {
     photoAlt: "Сергей Табачников",
   },
   cta: {
-    label: "Узнать, где именно блок — бесплатная диагностика, 2 минуты →",
+    /** Non-breaking space before the arrow so it never wraps onto a line of its own. */
+    label: "Узнать, где именно блок — бесплатная диагностика, 2 минуты\u00A0→",
     href: links.diagnostic,
     track: "pains-diagnostic",
   },
