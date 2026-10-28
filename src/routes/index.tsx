@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { pageSeo } from "@/lib/siteUrl";
-import heroPhoto from "@/assets/hero/sergey-hero-860.webp.asset.json";
-import heroPhoto640 from "@/assets/hero/sergey-hero-640.webp.asset.json";
-import heroPhoto430 from "@/assets/hero/sergey-hero-430.webp.asset.json";
+import heroPhoto from "@/assets/hero/sergey-hero-v3-860.webp.asset.json";
+import heroPhoto640 from "@/assets/hero/sergey-hero-v3-640.webp.asset.json";
+import heroPhoto430 from "@/assets/hero/sergey-hero-v3-430.webp.asset.json";
 import { Hero } from "@/components/sections/Hero";
 import { ForYou } from "@/components/sections/ForYou";
 import { RootCause } from "@/components/sections/RootCause";

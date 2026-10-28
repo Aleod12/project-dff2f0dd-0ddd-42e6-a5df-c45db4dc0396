@@ -16,7 +16,7 @@ import videoFile from "@/assets/host/welcome-video.mp4.asset.json";
 type VideoState = "idle" | "playing" | "paused";
 
 /** Round welcome video: poster only until click, then loads and plays with sound. Never autoplays. */
-function RoundVideo({ className }: { className?: string }) {
+function RoundVideo({ className, circleClassName, captionClassName }: { className?: string; circleClassName?: string; captionClassName?: string }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [state, setState] = useState<VideoState>("idle");
   const v = host.video;
@@ -42,7 +42,7 @@ function RoundVideo({ className }: { className?: string }) {
 
   return (
     <figure className={cn("flex flex-col items-center gap-3", className)}>
-      <div className="relative size-60 rounded-full bg-sage shadow-island ring-4 ring-background lg:size-60">
+      <div className={cn("relative size-60 rounded-full bg-sage shadow-island ring-4 ring-background", circleClassName)}>
         {state === "idle" ? (
           <button
             type="button"
@@ -103,7 +103,7 @@ function RoundVideo({ className }: { className?: string }) {
           </>
         )}
       </div>
-      <figcaption className="text-center text-sm font-semibold text-muted-foreground">{v.caption}</figcaption>
+      <figcaption className={cn("text-center text-sm font-semibold text-muted-foreground", captionClassName)}>{v.caption}</figcaption>
     </figure>
   );
 }
@@ -116,7 +116,7 @@ function Portrait() {
       <img
       src={portrait864.url}
       srcSet={`${portrait480.url} 480w, ${portrait864.url} 864w`}
-      sizes="(min-width: 1024px) 440px, 100vw"
+      sizes="(min-width: 1024px) 340px, 100vw"
       width={864}
       height={1080}
       alt={host.portraitAlt}
@@ -138,18 +138,14 @@ export function Host() {
 
       <div className="mt-8 grid gap-10 md:mt-12 lg:grid-cols-[minmax(0,400px)_1fr] lg:gap-x-[136px]">
         {/* Desktop: portrait with the round video over its lower-right corner. */}
-        <div className="hidden self-start lg:sticky lg:top-24 lg:block">
-          {/* The circle's center sits on the portrait's bottom-right corner: only a quarter covers the photo. */}
-          <div className="relative pb-[190px]">
-            <div className="relative">
-              <Portrait />
-              <div className="absolute -right-[120px] top-[calc(100%-120px)] flex w-60 flex-col items-center gap-2">
-                <RoundVideo />
-                <TranscriptButton open={textOpen} onToggle={() => setTextOpen((o) => !o)} controls="host-video-text" />
-              </div>
-            </div>
+        {/* Desktop: portrait, then the round video below it (no overlap). Sticky only on viewports tall enough to fit it. */}
+        <div className="hidden self-start lg:top-24 lg:flex lg:flex-col lg:items-center [@media(min-height:820px)]:lg:sticky">
+          <div className="w-[340px]">
+            <Portrait />
           </div>
-          <TranscriptPanel id="host-video-text" open={textOpen} text={host.video.transcript} />
+          <RoundVideo className="mt-6" circleClassName="size-[200px]" captionClassName="max-w-[260px]" />
+          <TranscriptButton open={textOpen} onToggle={() => setTextOpen((o) => !o)} controls="host-video-text" className="mt-1" />
+          <TranscriptPanel id="host-video-text" open={textOpen} text={host.video.transcript} className="mt-3 w-full" />
         </div>
 
         <div className="flex min-w-0 flex-col gap-10">
