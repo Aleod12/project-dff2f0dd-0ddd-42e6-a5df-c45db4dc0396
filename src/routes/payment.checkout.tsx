@@ -12,7 +12,7 @@ const title = "Оформление участия — Клуб «Трансфо
 const description = "Оплата участия в Клубе «Трансформация» Сергея Табачникова.";
 
 export const Route = createFileRoute("/payment/checkout")({
-  validateSearch: (search: Record<string, unknown>) => ({ currency: parseCurrency(search.currency) }),
+  validateSearch: (search: Record<string, unknown>) => ({ currency: parseCurrency(search["currency"]) }),
   head: () => ({
     meta: [
       { title },
