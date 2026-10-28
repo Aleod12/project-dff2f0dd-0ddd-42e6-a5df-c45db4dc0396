@@ -7,8 +7,8 @@ import { Island } from "@/components/layout/Island";
 import { isPresent } from "@/lib/present";
 
 /**
- * Format cards: four columns only when the text still reads comfortably;
- * on phones everything is one column with compact padding.
+ * Format cards: two per row on desktop — four columns left single orphan words
+ * in almost every card. On phones one column with compact padding.
  *
  * The steps sit on a thin gold line: horizontal across the row on desktop,
  * a vertical rail on the left on phones. Diamonds mask the line, so they read
@@ -40,7 +40,7 @@ export function MonthFormat() {
                 {card.title}
               </h3>
               {isPresent(card.text) && (
-                <p className="text-muted-foreground">{card.text}</p>
+                <p className="text-balance text-muted-foreground">{card.text}</p>
               )}
             </li>
           ))}
@@ -82,7 +82,7 @@ export function MonthFormat() {
                       <span className="lining-nums text-muted-foreground">{i + 1}.</span> {step.title}
                     </h4>
                     {isPresent(step.text) && (
-                      <p className="text-muted-foreground md:max-w-[26ch]">{step.text}</p>
+                      <p className="text-balance text-muted-foreground md:max-w-[26ch]">{step.text}</p>
                     )}
                   </div>
                 </li>
