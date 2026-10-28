@@ -5,7 +5,7 @@ export function parseFrom(value: unknown): LegalFrom | undefined {
   return typeof value === "string" && (legalFromValues as readonly string[]).includes(value) ? (value as LegalFrom) : undefined;
 }
 
-export function backLabel(from?: LegalFrom): string {
+export function backLabel(from?: LegalFrom | undefined): string {
   if (!from) return legalUi.backHome;
   if (from === "site-footer") return legalUi.backToSite;
   if (from === "checkout") return legalUi.backToCheckout;
@@ -13,13 +13,13 @@ export function backLabel(from?: LegalFrom): string {
 }
 
 /** Where «back» goes when there is no in-site history. */
-export function backTarget(from?: LegalFrom): { to: "/" | "/payment/checkout"; hash?: string } {
+export function backTarget(from?: LegalFrom | undefined): { to: "/" | "/payment/checkout"; hash?: string } {
   if (!from) return { to: "/" };
   if (from === "checkout") return { to: "/payment/checkout" };
   return { to: "/", hash: from };
 }
 
-export function backHref(from?: LegalFrom): string {
+export function backHref(from?: LegalFrom | undefined): string {
   const t = backTarget(from);
   return t.hash ? `${t.to}#${t.hash}` : t.to;
 }

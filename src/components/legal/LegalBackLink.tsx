@@ -5,7 +5,7 @@ import { backHref, backLabel, backTarget, cameFromSite } from "@/lib/legalFrom";
 import { cn } from "@/lib/utils";
 
 /** Quiet inline «back» link: history back when the visitor came from our site in this tab, otherwise to the origin section. */
-export function LegalBackLink({ from, className }: { from?: LegalFrom; className?: string }) {
+export function LegalBackLink({ from, className }: { from?: LegalFrom | undefined; className?: string }) {
   const router = useRouter();
   const navigate = useNavigate();
   const onClick = (e: React.MouseEvent<HTMLAnchorElement>) => {

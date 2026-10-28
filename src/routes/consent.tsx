@@ -8,7 +8,7 @@ const title = "Согласие на обработку персональных
 const description = "Текст согласия на обработку персональных данных для сайта Клуба «Трансформация» Сергея Табачникова.";
 
 export const Route = createFileRoute("/consent")({
-  validateSearch: (search: Record<string, unknown>): { from?: ReturnType<typeof parseFrom> } => ({ from: parseFrom(search.from) }),
+  validateSearch: (search: Record<string, unknown>): { from?: ReturnType<typeof parseFrom> | undefined } => ({ from: parseFrom(search["from"]) }),
   head: () => {
     const seo = pageSeo("/consent");
     return {
