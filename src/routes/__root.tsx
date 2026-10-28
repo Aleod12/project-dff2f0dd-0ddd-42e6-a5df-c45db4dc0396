@@ -114,11 +114,13 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SiteHeader />
-      <main className="pt-3">
-        <Outlet />
-      </main>
-      <SiteFooter />
+      <div className="flex min-h-screen flex-col">
+        <SiteHeader />
+        <main className="flex-1 pt-3">
+          <Outlet />
+        </main>
+        <SiteFooter />
+      </div>
       <MobileStickyCta />
     </QueryClientProvider>
   );
