@@ -88,8 +88,7 @@ export function RootCause() {
                 <li
                   key={node.title}
                   className={cn(
-                    "relative flex gap-4 lg:absolute lg:-translate-x-1/2 lg:items-center lg:gap-0 lg:text-center",
-                    i === 0 ? "lg:flex-col" : "lg:flex-col",
+                    "relative flex gap-4 lg:absolute lg:flex-col lg:-translate-x-1/2 lg:items-center lg:gap-0 lg:text-center",
                     nodePos[i],
                   )}
                 >
