@@ -11,6 +11,7 @@ import { FreeLadder } from "@/components/sections/FreeLadder";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Faq } from "@/components/sections/Faq";
 import { faqJsonLd } from "@/content/faq";
+import { personJsonLd, serviceJsonLd } from "@/lib/homeJsonLd";
 
 const title = "Клуб «Трансформация» Сергея Табачникова — месяц системной работы";
 const description =
@@ -24,7 +25,11 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: title },
       { property: "og:description", content: description },
     ],
-    scripts: [{ type: "application/ld+json", children: JSON.stringify(faqJsonLd()) }],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(personJsonLd()) },
+      { type: "application/ld+json", children: JSON.stringify(serviceJsonLd()) },
+      { type: "application/ld+json", children: JSON.stringify(faqJsonLd()) },
+    ],
   }),
   component: Index,
 });
