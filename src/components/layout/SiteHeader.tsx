@@ -2,8 +2,12 @@ import { Link } from "@tanstack/react-router";
 import { site } from "@/content/site";
 import { CtaButton } from "@/components/brand/CtaButton";
 import { Container } from "./Container";
+import { useUiFlag } from "@/lib/uiFlags";
+import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
+  // Phones: never two identical «Вступить» buttons — the header one steps aside while the sticky bar is shown.
+  const stickyVisible = useUiFlag("sticky-visible");
   return (
     <header className="sticky top-0 z-40 pt-[env(safe-area-inset-top)] border-b border-border/60 bg-background/90 backdrop-blur">
       <Container className="flex h-16 items-center justify-between gap-3 sm:gap-4">
@@ -21,7 +25,7 @@ export function SiteHeader() {
             ))}
           </ul>
         </nav>
-        <CtaButton href={site.joinHref} track="header-join" size="sm">
+        <CtaButton href={site.joinHref} track="header-join" size="sm" className={cn(stickyVisible && "max-md:invisible")}>
           {site.joinLabel}
         </CtaButton>
       </Container>
