@@ -44,7 +44,12 @@ export function MobileStickyCta() {
     };
   }, []);
 
-  const show = pastHero && !footerVisible;
+  const sheetOpen = useUiFlag("sheet-open");
+  const show = pastHero && !footerVisible && !sheetOpen;
+  useEffect(() => {
+    setUiFlag("sticky-visible", show);
+  }, [show]);
+  useEffect(() => () => setUiFlag("sticky-visible", false), []);
   return (
     <div
       aria-hidden={!show}
