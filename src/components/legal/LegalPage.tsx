@@ -43,8 +43,8 @@ function Block({ block, from }: { block: LegalBlock; from?: LegalFrom | undefine
   return (
     <>
       {/* ≥768px and print: a real table. */}
-      <div className="hidden md:block print:block">
-        <table className="w-full border-collapse text-[15px] leading-normal">
+      <div className="hidden w-full min-w-0 md:block print:block" data-legal-table>
+        <table className="w-full min-w-full table-auto border-collapse text-[15px] leading-normal">
           <thead>
             <tr>
               {block.columns.map((c) => (
