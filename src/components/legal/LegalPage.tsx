@@ -22,7 +22,7 @@ export function LegalText({ text, from }: { text: string; from?: LegalFrom | und
         const link = token ? legalInlineLinks[token] : undefined;
         if (link)
           return (
-            <Link key={i} to={legalDocs[link.doc].to} search={{ from }} className="text-primary underline underline-offset-4 hover:no-underline">
+            <Link key={i} to={legalDocs[link.doc].to} search={{ from }} className="text-primary tap-link underline underline-offset-4 hover:no-underline">
               {link.label}
             </Link>
           );

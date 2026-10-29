@@ -50,7 +50,7 @@ function Checkout() {
       </dl>
       <p className="text-[15px] text-muted-foreground">
         {c.offer.before}
-        <Link to={c.offer.to} search={{ from: c.offer.from }} className="text-primary underline underline-offset-4 hover:no-underline">
+        <Link to={c.offer.to} search={{ from: c.offer.from }} className="text-primary tap-link underline underline-offset-4 hover:no-underline">
           {c.offer.linkLabel}
         </Link>
       </p>
@@ -62,7 +62,7 @@ function Checkout() {
           <p className="text-balance">{state.kind === "disabled" ? c.disabledText : c.errorText}</p>
           <div className="flex w-full flex-col items-center gap-4">
             <CtaButton href={c.write.href} track={c.write.track} className="w-full sm:w-auto">{c.write.label}</CtaButton>
-            <a href={c.back.href} className="text-sm font-medium text-primary underline underline-offset-4 hover:no-underline">{c.back.label}</a>
+            <a href={c.back.href} className="text-sm font-medium text-primary tap-link underline underline-offset-4 hover:no-underline">{c.back.label}</a>
           </div>
         </>
       )}
