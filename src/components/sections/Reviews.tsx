@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { Pause, Play, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pause, Play, X } from "lucide-react";
+import { Drawer, DrawerClose, DrawerContent, DrawerTitle, DrawerDescription } from "@/components/ui/drawer";
+import { setUiFlag } from "@/lib/uiFlags";
 import { reviews, reviewTitle, transcriptHeading, type VideoReview } from "@/content/reviews";
 import { CtaButton } from "@/components/brand/CtaButton";
 import { SectionTitle } from "@/components/brand/SectionTitle";
@@ -9,7 +11,7 @@ import { pauseOtherVideos } from "@/lib/exclusivePlay";
 import { isPresent } from "@/lib/present";
 import { cn } from "@/lib/utils";
 
-const circle = "relative size-[180px] shrink-0 rounded-full bg-sage shadow-island ring-4 ring-background md:size-[200px]";
+const circle = "relative size-[200px] shrink-0 rounded-full bg-sage shadow-island ring-4 ring-background md:size-[200px]";
 
 function PlayBadge() {
   return (
@@ -90,11 +92,30 @@ function LocalVideo({ r, active, onActivate, onStop }: { r: VideoReview; active:
   );
 }
 
+/** True below 768px — there the transcript opens in a bottom sheet instead of inline. */
+function useIsPhone() {
+  const [phone, setPhone] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767.98px)");
+    const sync = () => setPhone(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+  return phone;
+}
+
 export function Reviews() {
   const [active, setActive] = useState<string | null>(null);
   const [dot, setDot] = useState(0);
   const [openText, setOpenText] = useState<string | null>(null);
   const track = useRef<HTMLDivElement>(null);
+  const isPhone = useIsPhone();
+  const sheetReview = isPhone ? reviews.videos.find((r) => r.id === openText) : undefined;
+  useEffect(() => {
+    setUiFlag("sheet-open", Boolean(sheetReview));
+  }, [sheetReview]);
+  useEffect(() => () => setUiFlag("sheet-open", false), []);
 
   const onScroll = () => {
     const el = track.current;
@@ -113,17 +134,18 @@ export function Reviews() {
     <Island id="reviews" tone="surface" aria-labelledby={reviews.titleId}>
       <SectionTitle id={reviews.titleId} title={reviews.title} accent={reviews.accent} />
 
+      <div className="relative">
       <div
         ref={track}
         role="list"
         onScroll={onScroll}
-        className="-mx-5 mt-8 flex snap-x snap-mandatory items-start gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none] md:mx-0 md:mt-12 md:grid md:grid-cols-4 md:gap-x-6 md:gap-y-8 md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden"
+        className="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] md:mx-0 md:mt-12 md:grid md:grid-cols-4 md:gap-x-6 md:gap-y-8 md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden"
       >
         {reviews.videos.map((r) => {
           const panelId = `review-text-${r.id}`;
           const open = openText === r.id;
           return (
-            <div key={r.id} role="listitem" data-review-video className="flex w-[260px] shrink-0 snap-center flex-col items-center gap-3 md:contents">
+            <div key={r.id} role="listitem" data-review-video className="flex w-full shrink-0 snap-center snap-always flex-col items-center gap-3 md:contents">
               <div className="flex flex-col items-center gap-3 text-center md:h-full">
                 <div className={cn(circle, open && "ring-[3px] ring-gold")}>
                   <LocalVideo r={r} active={active === r.id} onActivate={() => setActive(r.id)} onStop={() => setActive(null)} />
@@ -138,11 +160,33 @@ export function Reviews() {
                 </div>
               </div>
               {isPresent(r.transcript ?? "") && (
-                <TranscriptPanel id={panelId} open={open} text={r.transcript!} label={transcriptHeading(reviewTitle(r), r.duration)} className="w-full md:order-1 md:col-span-4 md:mx-auto md:max-w-[760px]" />
+                <TranscriptPanel id={panelId} open={open} text={r.transcript!} label={transcriptHeading(reviewTitle(r), r.duration)} className="hidden w-full md:order-1 md:col-span-4 md:mx-auto md:max-w-[760px]" />
               )}
             </div>
           );
         })}
+      </div>
+      {/* Phones: prev/next arrows on both sides of the circle (circle is 200px, its centre is 100px from the top). */}
+      {[-1, 1].map((d) => {
+        const target = dot + d;
+        const disabled = target < 0 || target >= reviews.videos.length;
+        const Icon = d < 0 ? ChevronLeft : ChevronRight;
+        return (
+          <button
+            key={d}
+            type="button"
+            onClick={() => goTo(target)}
+            disabled={disabled}
+            aria-label={d < 0 ? reviews.prevLabel : reviews.nextLabel}
+            className={cn(
+              "absolute top-[78px] flex size-11 items-center justify-center rounded-full border border-primary bg-background text-primary transition-opacity disabled:opacity-30 focus-visible:outline-2 md:hidden",
+              d < 0 ? "left-0" : "right-0",
+            )}
+          >
+            <Icon className="size-5" aria-hidden="true" />
+          </button>
+        );
+      })}
       </div>
 
       <div className="mt-2 flex justify-center md:hidden" role="group" aria-label={reviews.dotsLabel}>
@@ -159,6 +203,27 @@ export function Reviews() {
           </button>
         ))}
       </div>
+
+      <Drawer open={Boolean(sheetReview)} onOpenChange={(o) => !o && setOpenText(null)} shouldScaleBackground={false}>
+        <DrawerContent className="max-h-[80dvh] border-border bg-background pb-[env(safe-area-inset-bottom)]">
+          {sheetReview && (
+            <>
+              <div className="flex items-start justify-between gap-3 px-5 pt-3">
+                <DrawerTitle className="font-display text-xl font-semibold leading-snug text-primary">
+                  {transcriptHeading(reviewTitle(sheetReview), sheetReview.duration)}
+                </DrawerTitle>
+                <DrawerClose aria-label={reviews.sheetCloseLabel} className="flex size-11 shrink-0 items-center justify-center rounded-full border border-primary text-primary focus-visible:outline-2">
+                  <X className="size-5" aria-hidden="true" />
+                </DrawerClose>
+              </div>
+              <DrawerDescription className="sr-only">{reviewTitle(sheetReview)}</DrawerDescription>
+              <div className="overflow-y-auto overscroll-contain px-5 pb-6 pt-3 text-[17px] leading-relaxed">
+                <p>{sheetReview.transcript}</p>
+              </div>
+            </>
+          )}
+        </DrawerContent>
+      </Drawer>
 
       <ul className="mx-auto mt-10 grid max-w-[900px] gap-4 md:mt-14 md:grid-cols-2 md:gap-6">
         {reviews.quotes.map((q) => (
