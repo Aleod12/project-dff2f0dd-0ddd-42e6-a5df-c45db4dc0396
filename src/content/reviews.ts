@@ -34,6 +34,9 @@ export const reviews = {
   closeLabel: "Закрыть видео",
   dotsLabel: "Видеоотзывы",
   dotLabel: (n: number) => `Видеоотзыв ${n}`,
+  prevLabel: "Предыдущий видеоотзыв",
+  nextLabel: "Следующий видеоотзыв",
+  sheetCloseLabel: "Закрыть текст",
   videos: [
     {
       id: "v3",
