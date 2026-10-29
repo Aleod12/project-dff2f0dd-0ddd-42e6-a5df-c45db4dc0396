@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { site } from "@/content/site";
 import { CtaButton } from "@/components/brand/CtaButton";
 import { cn } from "@/lib/utils";
+import { setUiFlag, useUiFlag } from "@/lib/uiFlags";
 
 /** Phone-only fixed CTA: appears after the first screen, hides while the footer is visible. */
 export function MobileStickyCta() {
@@ -20,7 +21,7 @@ export function MobileStickyCta() {
       for (const e of entries) (e.isIntersecting ? visible.add(e.target) : visible.delete(e.target));
       setFooterVisible(visible.size > 0);
     });
-    // Hide while the footer, the price block (where the button leads) or the final section is on screen.
+    // Hide while the footer, the reviews, the price block (where the button leads) or the final section is on screen.
     // The home sections may render a few frames after this bar (client navigation back to "/"), so wait for them.
     let frame = 0;
     let tries = 0;
@@ -30,7 +31,7 @@ export function MobileStickyCta() {
         frame = requestAnimationFrame(observe);
         return;
       }
-      ["site-footer", "price", "start"].forEach((id) => {
+      ["site-footer", "reviews", "price", "start"].forEach((id) => {
         const el = document.getElementById(id);
         if (el) io.observe(el);
       });
@@ -44,7 +45,12 @@ export function MobileStickyCta() {
     };
   }, []);
 
-  const show = pastHero && !footerVisible;
+  const sheetOpen = useUiFlag("sheet-open");
+  const show = pastHero && !footerVisible && !sheetOpen;
+  useEffect(() => {
+    setUiFlag("sticky-visible", show);
+  }, [show]);
+  useEffect(() => () => setUiFlag("sticky-visible", false), []);
   return (
     <div
       aria-hidden={!show}

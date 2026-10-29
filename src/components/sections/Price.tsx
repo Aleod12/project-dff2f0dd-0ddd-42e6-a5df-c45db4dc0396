@@ -51,7 +51,7 @@ export function Price() {
 
         <p className="text-sm text-muted-foreground">
           {pricing.offerNote.before}
-          <Link to={pricing.offerNote.to} search={{ from: pricing.offerNote.from }} className="text-primary underline underline-offset-4 hover:no-underline">
+          <Link to={pricing.offerNote.to} search={{ from: pricing.offerNote.from }} className="text-primary tap-link underline underline-offset-4 hover:no-underline">
             {pricing.offerNote.linkLabel}
           </Link>
         </p>
@@ -61,7 +61,7 @@ export function Price() {
       <div className="mt-8 flex flex-col items-center gap-2 text-center">
         <p>
           {pricing.questions.before}{" "}
-          <a href={pricing.questions.href} target="_blank" rel="noopener noreferrer" data-cta={pricing.questions.track} className="font-medium text-primary underline underline-offset-4 hover:no-underline">
+          <a href={pricing.questions.href} target="_blank" rel="noopener noreferrer" data-cta={pricing.questions.track} className="font-medium text-primary tap-link underline underline-offset-4 hover:no-underline">
             {pricing.questions.linkLabel}
           </a>
         </p>

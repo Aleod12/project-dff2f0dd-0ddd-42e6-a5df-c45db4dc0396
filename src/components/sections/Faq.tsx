@@ -18,7 +18,7 @@ export function Faq() {
             <AccordionContent className="pb-5 text-base leading-relaxed">
               {item.a.map((p, j) =>
                 p.href ? (
-                  <a key={j} href={p.href} {...(p.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="text-primary underline underline-offset-4 hover:no-underline">{p.text}</a>
+                  <a key={j} href={p.href} {...(p.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="text-primary tap-link underline underline-offset-4 hover:no-underline">{p.text}</a>
                 ) : (
                   <span key={j}>{p.text}</span>
                 ),
@@ -30,7 +30,7 @@ export function Faq() {
       <div className="mt-10 flex flex-col items-center gap-2 text-center">
         <p>
           {faq.more.before}{" "}
-          <a href={faq.more.href} target="_blank" rel="noopener noreferrer" data-cta={faq.more.track} className="font-medium text-primary underline underline-offset-4 hover:no-underline">
+          <a href={faq.more.href} target="_blank" rel="noopener noreferrer" data-cta={faq.more.track} className="font-medium text-primary tap-link underline underline-offset-4 hover:no-underline">
             {faq.more.linkLabel}
           </a>
         </p>

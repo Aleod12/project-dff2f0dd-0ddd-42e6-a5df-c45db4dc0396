@@ -167,8 +167,24 @@
     border-radius: 0.2em;
     padding: 0 0.15em;
   }
+  /* Phones: inline text links get a 44px-tall invisible hit area; the text itself does not change size. */
+  @media (max-width: 767.98px) {
+    .tap-link {
+      position: relative;
+    }
+    .tap-link::before {
+      content: "";
+      position: absolute;
+      left: -4px;
+      right: -4px;
+      top: 50%;
+      height: 44px;
+      transform: translateY(-50%);
+    }
+  }
+  /* Smooth scrolling only after the first load (added by the page shell), so /#anchor lands without an animated jump. */
   @media (prefers-reduced-motion: no-preference) {
-    html {
+    html.smooth-scroll {
       scroll-behavior: smooth;
     }
   }
