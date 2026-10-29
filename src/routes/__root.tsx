@@ -125,6 +125,14 @@ function RootComponent() {
     setCameFromSite(!firstLoad.current);
     firstLoad.current = false;
   }, [location.href]);
+  // First load with /#anchor: put the section in place instantly after hydration, then enable smooth scrolling for clicks.
+  useEffect(() => {
+    const id = decodeURIComponent(window.location.hash.slice(1));
+    const target = id ? document.getElementById(id) : null;
+    if (target) target.scrollIntoView({ behavior: "instant", block: "start" });
+    const raf = requestAnimationFrame(() => document.documentElement.classList.add("smooth-scroll"));
+    return () => cancelAnimationFrame(raf);
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

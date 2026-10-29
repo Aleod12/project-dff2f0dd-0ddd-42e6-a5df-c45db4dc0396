@@ -61,7 +61,7 @@ export function FinalCta() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cta={c.fallback.track}
-                className={`font-medium underline underline-offset-4 hover:no-underline ${focusLight}`}
+                className={`tap-link font-medium underline underline-offset-4 hover:no-underline ${focusLight}`}
               >
                 {c.fallback.label}
               </a>
