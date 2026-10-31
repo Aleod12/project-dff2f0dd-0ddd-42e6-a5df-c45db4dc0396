@@ -27,9 +27,9 @@ export function RootCause() {
         suffix={rootCause.titleSuffix}
       />
 
-      <div className="mt-10 flex flex-col gap-10 md:mt-14 md:gap-14 lg:flex-row lg:items-start lg:gap-12">
+      <div className="mt-10 grid gap-10 md:mt-14 md:gap-14 lg:grid-cols-[480px_1fr] lg:gap-x-12 lg:gap-y-0">
         {/* Thesis */}
-        <div className="flex flex-col gap-5 lg:max-w-[480px]">
+        <div className="flex flex-col gap-5">
           {rootCause.thesis.map((line, i) => (
             <p
               key={line}
