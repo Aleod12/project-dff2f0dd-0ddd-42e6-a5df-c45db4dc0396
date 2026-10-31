@@ -2,7 +2,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { Container } from "./Container";
 
-const islandVariants = cva("rounded-island px-5 py-12 sm:px-10 md:py-20", {
+const islandVariants = cva("section-island rounded-island px-5 py-14 sm:px-10 md:py-20", {
   variants: {
     tone: {
       surface: "bg-surface",

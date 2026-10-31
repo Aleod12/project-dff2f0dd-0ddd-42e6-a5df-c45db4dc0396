@@ -20,6 +20,12 @@ export const areas = {
   titleId: "areas-title",
   title: "С чем",
   accent: "работаем",
+  navigation: {
+    previous: "Предыдущая сфера",
+    next: "Следующая сфера",
+    label: "Сферы жизни",
+    item: (number: number) => `Сфера ${number}`,
+  },
 
   /** One muted line under the title. Empty value hides it. */
   intro: "Четыре сферы жизни — в каждой ищем первопричину повторяющихся ситуаций.",

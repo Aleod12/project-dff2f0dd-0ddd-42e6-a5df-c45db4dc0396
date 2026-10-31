@@ -27,7 +27,7 @@ export function Hero() {
             decoding="async"
             className="block aspect-[760/750] h-auto w-[min(64vw,240px)] object-contain md:w-full md:max-w-[520px]"
           />
-          <p className="hero-motto font-signature text-[26px] leading-tight text-primary md:absolute md:-bottom-6 md:right-0 md:-rotate-6 md:text-[34px]">{hero.signature}</p>
+          <p className="hero-motto font-signature text-[26px] leading-tight tracking-normal text-primary md:absolute md:-bottom-16 md:right-3 md:-rotate-6 md:text-[32px]">{hero.signature}</p>
         </div>
 
         {/* Text */}
@@ -40,7 +40,8 @@ export function Hero() {
             <span className="text-name text-base text-foreground sm:text-xl">{hero.titleName}</span>
           </h1>
           <p className="max-w-xl text-base font-medium md:text-xl">{hero.lead}</p>
-          {isPresent(hero.sub) && <p className="max-w-xl text-muted-foreground">{hero.sub}</p>}
+          {isPresent(hero.subShort) && <p className="max-w-xl text-muted-foreground md:hidden">{hero.subShort}</p>}
+          {isPresent(hero.sub) && <p className="hidden max-w-xl text-muted-foreground md:block">{hero.sub}</p>}
           <div className="flex w-full md:mt-1 flex-col gap-2 md:gap-3 md:w-auto md:flex-row md:items-stretch">
             <CtaButton href={hero.primary.href} track={hero.primary.track} className="w-full md:w-auto">{hero.primary.label}</CtaButton>
             <CtaButton href={hero.secondary.href} track={hero.secondary.track} variant="outline" className="w-full md:w-auto">{hero.secondary.label}</CtaButton>

@@ -6,6 +6,7 @@ import { SectionTitle } from "@/components/brand/SectionTitle";
 import { Island } from "@/components/layout/Island";
 import { isPresent } from "@/lib/present";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import { pauseOtherVideos } from "@/lib/exclusivePlay";
 import { Transcript, TranscriptButton, TranscriptPanel } from "@/components/brand/TranscriptToggle";
 import portrait480 from "@/assets/host/sergey-host-480.webp.asset.json";
@@ -130,6 +131,7 @@ function Portrait() {
 
 export function Host() {
   const [textOpen, setTextOpen] = useState(false);
+  const [storyOpen, setStoryOpen] = useState(false);
   const numbers = host.numbers.filter((n) => isPresent(n.value));
 
   return (
@@ -160,16 +162,20 @@ export function Host() {
             </div>
           </div>
 
-          <ol className="relative flex flex-col gap-7 md:rounded-card md:bg-surface md:p-8">
+          <ol id="host-story" className="relative flex flex-col gap-7 md:rounded-card md:bg-surface md:p-8">
             <span aria-hidden="true" className="absolute bottom-10 left-[4px] top-3 md:top-10 w-px bg-gold md:left-[37px]" />
-            {host.timeline.map((step) => (
-              <li key={step.title} className="relative pl-8">
+            {host.timeline.map((step, i) => (
+              <li key={step.title} className={cn("relative pl-8", i > 0 && !storyOpen && "hidden md:list-item")}>
                 <span aria-hidden="true" className="absolute left-0 top-2 size-2.5 rotate-45 bg-gold" />
                 <h3 className="lining-nums text-xl font-semibold text-primary md:text-2xl">{step.title}</h3>
                 <p className="mt-1 text-muted-foreground">{step.text}</p>
               </li>
             ))}
           </ol>
+
+          <Button variant="link" aria-expanded={storyOpen} aria-controls="host-story" onClick={() => setStoryOpen((open) => !open)} className="-mt-6 h-auto min-h-11 justify-start self-start whitespace-normal px-0 text-left text-[15px] md:hidden">
+            {host.storyToggle}
+          </Button>
 
           {numbers.length > 0 && (
             <div>

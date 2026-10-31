@@ -139,7 +139,7 @@ export function Reviews() {
         ref={track}
         role="list"
         onScroll={onScroll}
-        className="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] md:mx-0 md:mt-12 md:grid md:grid-cols-3 md:mx-auto md:max-w-[760px] md:gap-x-6 md:gap-y-8 md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden"
+        className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] md:mx-0 md:mt-12 md:grid md:grid-cols-3 md:mx-auto md:max-w-[760px] md:gap-x-6 md:gap-y-8 md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden"
       >
         {reviews.videos.map((r) => {
           const panelId = `review-text-${r.id}`;

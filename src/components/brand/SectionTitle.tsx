@@ -21,7 +21,7 @@ type Props = {
 export function SectionTitle({ title, accent, accentFirst, suffix, id, eyebrow, align = "center", as: Tag = "h2", className }: Props) {
   const acc = accent ? <em className="italic">{accent}</em> : null;
   return (
-    <div className={cn("flex flex-col gap-4", align === "center" ? "items-center text-center" : "items-start", className)}>
+    <div className={cn("section-title flex flex-col gap-4", align === "center" ? "items-center text-center" : "items-start", className)}>
       {eyebrow && <p className="text-eyebrow">{eyebrow}</p>}
       <Tag id={id} className="text-h2 text-balance">
         {accentFirst ? (

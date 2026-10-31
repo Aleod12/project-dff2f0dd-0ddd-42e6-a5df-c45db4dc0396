@@ -20,12 +20,12 @@ export function ForYou() {
     <Island id="for-you" tone="surface" aria-labelledby={pains.titleId}>
       <SectionTitle id={pains.titleId} title={pains.title} accent={pains.accent} suffix={pains.titleSuffix} />
 
-      <ul className="mt-8 flex flex-wrap justify-center gap-3 md:mt-12 md:gap-5">
+      <ul className="mt-7 flex flex-wrap justify-center gap-2.5 md:mt-12 md:gap-5">
         {pains.items.map((item, i) => (
           <li
             key={item.title}
             className={cn(
-              "flex flex-col gap-2 rounded-card bg-background p-5 shadow-island md:gap-3 md:p-6",
+              "flex flex-col gap-2 rounded-card bg-background p-[18px] shadow-island md:gap-3 md:p-6",
               cardWidth,
             )}
           >
@@ -38,7 +38,7 @@ export function ForYou() {
               </span>
               <h3 className="text-lg font-semibold leading-snug md:text-2xl">{item.title}</h3>
             </div>
-            <p className="text-muted-foreground">{item.text}</p>
+            <p className="text-base text-muted-foreground md:text-[17px]">{item.text}</p>
           </li>
         ))}
       </ul>

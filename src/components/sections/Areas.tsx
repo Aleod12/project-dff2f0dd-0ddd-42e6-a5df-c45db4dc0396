@@ -1,8 +1,11 @@
-import { Compass, Heart, Leaf, Wallet } from "lucide-react";
+import { useRef, useState } from "react";
+import { ChevronLeft, ChevronRight, Compass, Heart, Leaf, Wallet } from "lucide-react";
 import { areas, type AreaIcon } from "@/content/areas";
 import { SectionTitle } from "@/components/brand/SectionTitle";
 import { Island } from "@/components/layout/Island";
 import { isPresent } from "@/lib/present";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 /** Icon keys used in the content file, resolved to components here. */
 const icons: Record<AreaIcon, typeof Leaf> = {
@@ -21,6 +24,18 @@ const rowLabel = "text-sm font-semibold uppercase tracking-[0.12em] text-muted-f
  */
 export function Areas() {
   const items = areas.items.filter((item) => isPresent(item.title));
+  const track = useRef<HTMLUListElement>(null);
+  const [current, setCurrent] = useState(0);
+  const goTo = (index: number) => {
+    const el = track.current;
+    const item = el?.children[index] as HTMLElement | undefined;
+    if (el && item) el.scrollTo({ left: item.offsetLeft - el.offsetLeft, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+  };
+  const onScroll = () => {
+    const el = track.current;
+    if (!el) return;
+    setCurrent(Math.max(0, Math.min(items.length - 1, Math.round(el.scrollLeft / (el.clientWidth + 16)))));
+  };
 
   return (
     <Island id="areas" tone="sage" aria-labelledby={areas.titleId}>
@@ -31,13 +46,13 @@ export function Areas() {
       )}
 
       {items.length > 0 && (
-        <ul className="mt-8 grid gap-4 md:mt-12 md:grid-cols-2 md:gap-5">
+        <ul ref={track} onScroll={onScroll} className="relative mt-7 flex snap-x snap-mandatory items-stretch gap-4 overflow-x-auto [scrollbar-width:none] md:mt-12 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible [&::-webkit-scrollbar]:hidden">
           {items.map((item) => {
             const Icon = icons[item.icon];
             return (
               <li
                 key={item.title}
-                className="flex flex-col overflow-hidden rounded-card bg-background shadow-island"
+                className="flex w-full min-w-0 shrink-0 snap-start snap-always flex-col overflow-hidden rounded-card bg-background shadow-island"
               >
                 <img
                   src={item.image.src}
@@ -48,7 +63,7 @@ export function Areas() {
                   alt=""
                   loading="lazy"
                   decoding="async"
-                  className="block aspect-video w-full object-cover md:aspect-[4/3]"
+                  className="block aspect-video w-full object-cover md:aspect-[2/1]"
                 />
                 <div className="flex flex-1 flex-col gap-4 p-5 md:p-7">
                 <div className="flex items-center gap-3 md:flex-col md:items-start md:gap-4">
@@ -82,6 +97,22 @@ export function Areas() {
             );
           })}
         </ul>
+      )}
+
+      {items.length > 1 && (
+        <div className="mt-3 flex items-center justify-center gap-1 md:hidden" role="group" aria-label={areas.navigation.label}>
+          <Button variant="outline" size="icon" disabled={current === 0} onClick={() => goTo(current - 1)} aria-label={areas.navigation.previous} className="mr-auto size-11 rounded-full border-primary bg-background text-primary disabled:opacity-30">
+            <ChevronLeft aria-hidden="true" />
+          </Button>
+          {items.map((item, index) => (
+            <Button key={item.title} variant="ghost" size="icon" onClick={() => goTo(index)} aria-label={areas.navigation.item(index + 1)} aria-current={current === index ? "true" : undefined} className="size-11 rounded-full">
+              <span aria-hidden="true" className={cn("h-2 rounded-full", current === index ? "w-5 bg-primary" : "w-2 bg-primary/75")} />
+            </Button>
+          ))}
+          <Button variant="outline" size="icon" disabled={current === items.length - 1} onClick={() => goTo(current + 1)} aria-label={areas.navigation.next} className="ml-auto size-11 rounded-full border-primary bg-background text-primary disabled:opacity-30">
+            <ChevronRight aria-hidden="true" />
+          </Button>
+        </div>
       )}
 
     </Island>
