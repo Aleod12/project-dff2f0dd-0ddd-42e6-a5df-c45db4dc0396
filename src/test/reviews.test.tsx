@@ -69,7 +69,9 @@ describe("Reviews section", () => {
   it("quote cards show the author on top with an initial", () => {
     const { container } = render(<Reviews />);
     const first = container.querySelector("[data-review-quote]")!;
-    expect(first.textContent!.startsWith("“ТТатьяна")).toBe(true);
+    // Author row (initial + name) comes first, the quote text follows in the blockquote.
+    expect(first.textContent!.startsWith("ТТатьяна")).toBe(true);
+    expect(first.querySelector("blockquote")!.textContent).toContain("огромное спасибо");
   });
 });
 
