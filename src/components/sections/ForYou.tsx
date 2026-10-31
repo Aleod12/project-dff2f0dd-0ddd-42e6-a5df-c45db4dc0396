@@ -10,7 +10,7 @@ import portrait240 from "@/assets/portrait/sergey-portrait-240.webp.asset.json";
  * One card per row on phones, two on tablets, three on desktop.
  * Widths account for the row gap that applies at each breakpoint (12px below md, 20px from md).
  */
-const cardWidth = "w-full sm:w-[calc(50%-0.4rem)] md:w-[calc(50%-0.65rem)] lg:w-[calc(33.333%-0.9rem)]";
+const cardWidth = "w-full md:w-[calc(50%-0.65rem)] lg:w-[calc(33.333%-0.9rem)]";
 
 /** Sergey's note reads as one block, kept to a comfortable reading measure. */
 const noteWidth = "mx-auto max-w-[640px]";
@@ -20,12 +20,12 @@ export function ForYou() {
     <Island id="for-you" tone="surface" aria-labelledby={pains.titleId}>
       <SectionTitle id={pains.titleId} title={pains.title} accent={pains.accent} suffix={pains.titleSuffix} />
 
-      <ul className="mt-7 flex flex-wrap justify-center gap-2.5 md:mt-12 md:gap-5">
+      <ol className="mt-7 flex flex-col rounded-card bg-background p-[18px] shadow-island md:mt-12 md:flex-row md:flex-wrap md:justify-center md:gap-5 md:rounded-none md:bg-transparent md:p-0 md:shadow-none">
         {pains.items.map((item, i) => (
           <li
             key={item.title}
             className={cn(
-              "flex flex-col gap-2 rounded-card bg-background p-[18px] shadow-island md:gap-3 md:p-6",
+              "flex flex-col gap-2 border-b border-border py-3 first:pt-0 last:border-b-0 last:pb-0 md:rounded-card md:border-0 md:bg-background md:p-6 md:gap-3 md:shadow-island md:first:pt-6 md:last:pb-6",
               cardWidth,
             )}
           >
@@ -41,7 +41,7 @@ export function ForYou() {
             <p className="text-base text-muted-foreground md:text-[17px]">{item.text}</p>
           </li>
         ))}
-      </ul>
+      </ol>
 
       <div
         className={cn(

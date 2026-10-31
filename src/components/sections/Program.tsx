@@ -6,22 +6,25 @@ import { TelegramFallback } from "@/components/brand/TelegramFallback";
 import { Island } from "@/components/layout/Island";
 import { isPresent } from "@/lib/present";
 import { cn } from "@/lib/utils";
+import { useMobileSwipe } from "@/lib/useMobileSwipe";
+import { MobileSwipeNavigation } from "@/components/brand/MobileSwipeNavigation";
 
-/** «Как устроена программа» (#club): three stages in a row on desktop, stacked on phones; then how to join. */
+/** Three stage columns on desktop, full-width swipe cards on phones; then how to join. */
 export function Program() {
   const steps = program.join.steps;
+  const swipe = useMobileSwipe<HTMLOListElement>(program.stages.length);
   return (
     <Island id="club" tone="light" aria-labelledby={program.titleId}>
       <SectionTitle id={program.titleId} title={program.title} accent={program.accent} />
       {isPresent(program.intro) && <p className="mt-6 text-center text-muted-foreground md:mt-8">{program.intro}</p>}
 
-      <ol className="relative mt-7 grid gap-3 md:mt-14 md:grid-cols-3 md:gap-5">
+      <ol ref={swipe.track} onScroll={swipe.onScroll} className="relative mt-7 flex snap-x snap-mandatory gap-4 overflow-x-auto [scrollbar-width:none] md:mt-14 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible [&::-webkit-scrollbar]:hidden">
         {/* Thin line with diamonds connecting the cards (desktop). */}
         <span aria-hidden="true" className="absolute left-[16%] right-[16%] top-0 hidden h-px bg-gold md:block" />
         {program.stages.map((s, i) => {
           const hl = "highlight" in s && s.highlight;
           return (
-            <li key={s.title} className={cn("relative flex flex-col gap-3 rounded-card p-5 md:p-6", hl ? "bg-sage" : "bg-surface")}>
+            <li key={s.title} className={cn("relative flex w-full min-w-0 shrink-0 snap-start snap-always flex-col gap-3 rounded-card p-5 md:p-6", hl ? "bg-sage" : "bg-surface")}>
               <span aria-hidden="true" className="absolute left-1/2 top-0 hidden size-2.5 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-gold md:block" />
               <p className="flex items-center gap-2 text-[15px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
                 {hl && <span aria-hidden="true" className="size-2 rotate-45 bg-gold md:hidden" />}
@@ -41,6 +44,7 @@ export function Program() {
           );
         })}
       </ol>
+      <MobileSwipeNavigation count={program.stages.length} current={swipe.current} goTo={swipe.goTo} label={program.navigation.label} itemLabel={program.navigation.item} previous={program.navigation.previous} next={program.navigation.next} />
 
       {isPresent(program.recordings) && <p className="mx-auto mt-6 max-w-2xl text-balance text-center text-muted-foreground">{program.recordings}</p>}
 

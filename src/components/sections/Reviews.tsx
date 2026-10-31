@@ -10,6 +10,8 @@ import { TranscriptButton, TranscriptPanel } from "@/components/brand/Transcript
 import { pauseOtherVideos } from "@/lib/exclusivePlay";
 import { isPresent } from "@/lib/present";
 import { cn } from "@/lib/utils";
+import { useMobileSwipe } from "@/lib/useMobileSwipe";
+import { MobileSwipeNavigation } from "@/components/brand/MobileSwipeNavigation";
 
 const circle = "relative size-[200px] shrink-0 rounded-full bg-sage shadow-island ring-4 ring-background md:size-[200px]";
 
@@ -106,6 +108,7 @@ function useIsPhone() {
 }
 
 export function Reviews() {
+  const quotesSwipe = useMobileSwipe<HTMLUListElement>(reviews.quotes.length);
   const [active, setActive] = useState<string | null>(null);
   const [dot, setDot] = useState(0);
   const [openText, setOpenText] = useState<string | null>(null);
@@ -225,9 +228,9 @@ export function Reviews() {
         </DrawerContent>
       </Drawer>
 
-      <ul className="mx-auto mt-10 grid max-w-[900px] md:mt-14 gap-6 md:grid-cols-2">
+      <ul ref={quotesSwipe.track} onScroll={quotesSwipe.onScroll} className="mx-auto mt-10 flex max-w-[900px] snap-x snap-mandatory gap-4 overflow-x-auto [scrollbar-width:none] md:mt-14 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible [&::-webkit-scrollbar]:hidden">
         {reviews.quotes.map((q) => (
-          <li key={q.name} data-review-quote className="flex flex-col gap-4 rounded-card border border-border bg-background p-6 shadow-island md:p-7">
+          <li key={q.name} data-review-quote className="flex w-full min-w-0 shrink-0 snap-start snap-always flex-col gap-4 rounded-card border border-border bg-background p-6 shadow-island md:p-7">
             <div className="flex items-center gap-3 border-b border-gold/50 pb-4">
               <span aria-hidden="true" className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sage font-display text-xl font-semibold text-primary">{q.name.charAt(0)}</span>
               <p className="font-display text-xl font-semibold text-primary">{q.name}</p>
@@ -237,6 +240,7 @@ export function Reviews() {
           </li>
         ))}
       </ul>
+      <MobileSwipeNavigation count={reviews.quotes.length} current={quotesSwipe.current} goTo={quotesSwipe.goTo} label={reviews.quoteDotsLabel} itemLabel={reviews.quoteDotLabel} />
 
       <div className="mt-8 flex flex-col items-center gap-4 text-center">
         <p className="text-sm text-muted-foreground">{reviews.consent}</p>

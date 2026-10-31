@@ -18,6 +18,7 @@
 - Fonts are self-hosted woff2 in public/fonts (@font-face in src/styles.css); never load Google Fonts — no visitor IP transfer to Google.
 - Area photo sources and responsive variants are mapped in content items, not presentation components, so media can change independently of layout.
 - Area cards use a native scroll-snap track below md and the existing grid above it; host history disclosure hides only later timeline steps below md, preserving all content in SSR and desktop layouts.
+- Program stages and text reviews share native full-width mobile swipe logic and labelled navigation; desktop grids remain CSS-controlled, while For You shares one list surface only below md to avoid duplicate content.
 - robots.txt and sitemap.xml are generated server routes from site.siteUrl (src/lib/seoFiles.ts); while siteUrl is empty there is no Sitemap line and sitemap.xml returns 404.
 - Uploaded photos/videos are self-hosted in public/media and their .asset.json `url` points to /media/<file> — the production Node server cannot serve Lovable's asset CDN paths.
 - Production build for own Node hosting: `NITRO_PRESET=node-server npm run build`, run `node .output/server/index.mjs` (PORT env); the Lovable editor build keeps its own preset.
