@@ -31,6 +31,8 @@ export const reviews = {
   resumeLabel: "Продолжить",
   closeLabel: "Закрыть видео",
   dotsLabel: "Видеоотзывы",
+  quoteDotsLabel: "Текстовые отзывы",
+  quoteDotLabel: (n: number) => `Текстовый отзыв ${n}`,
   dotLabel: (n: number) => `Видеоотзыв ${n}`,
   prevLabel: "Предыдущий видеоотзыв",
   nextLabel: "Следующий видеоотзыв",

@@ -6,6 +6,12 @@ export const program = {
   title: "Как устроена",
   accent: "программа",
   intro: "Месяц работы в группе — от первой встречи до личного итога.",
+  navigation: {
+    label: "Этапы программы",
+    item: (number: number) => `Этап ${number}`,
+    previous: "Предыдущий этап",
+    next: "Следующий этап",
+  },
   /** Duration of the final scanning. Empty → stage 3 badge says «каждому участнику». */
   finalScanDuration: "",
   stages: [
