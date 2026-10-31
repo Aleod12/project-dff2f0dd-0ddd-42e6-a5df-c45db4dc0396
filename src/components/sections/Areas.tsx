@@ -37,8 +37,20 @@ export function Areas() {
             return (
               <li
                 key={item.title}
-                className="flex flex-col gap-4 rounded-card bg-background p-5 shadow-island md:p-7"
+                className="flex flex-col overflow-hidden rounded-card bg-background shadow-island"
               >
+                <img
+                  src={item.image.src}
+                  srcSet={item.image.srcSet}
+                  sizes="(min-width: 1280px) 560px, (min-width: 768px) calc((100vw - 116px) / 2), calc(100vw - 64px)"
+                  width={item.image.width}
+                  height={item.image.height}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  className="block aspect-video w-full object-cover md:aspect-[4/3]"
+                />
+                <div className="flex flex-1 flex-col gap-4 p-5 md:p-7">
                 <div className="flex items-center gap-3 md:flex-col md:items-start md:gap-4">
                   <span
                     aria-hidden="true"
@@ -65,6 +77,7 @@ export function Areas() {
                     </div>
                   )}
                 </dl>
+                </div>
               </li>
             );
           })}

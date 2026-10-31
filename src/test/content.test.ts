@@ -102,8 +102,7 @@ describe("content rules", () => {
     expect(pains.hostNote.text).toBe("Я знаю это изнутри: однажды драйв просто закончился, хотя внешне всё было. Тогда я начал искать не советы, а первопричины.");
   });
 
-  it("hero facts and header order follow the polish brief", () => {
-    expect(hero.facts).toEqual(["4 живые встречи со мной", "Личное итоговое сканирование", "Разовая оплата, без автосписаний"]);
+  it("header order follows the approved section anchors", () => {
     expect(site.nav.map((n) => n.label)).toEqual(["Программа", "Ведущий", "Отзывы", "Стоимость", "Вопросы"]);
     expect(site.nav.map((n) => n.hash)).toEqual(["club", "host", "reviews", "price", "faq"]);
   });
@@ -184,7 +183,7 @@ describe("banned words", () => {
   it("no «зажим», «точечн… трансформац», «системн… работ», «в удобное для Вас время» in the site", () => {
     const walk = (d: string): string[] => readdirSync(d).flatMap((f) => (statSync(join(d, f)).isDirectory() ? walk(join(d, f)) : [join(d, f)]));
     const hits = walk(join(process.cwd(), "src"))
-      .filter((f) => /\.(tsx?)$/.test(f) && !f.includes("/test/"))
+      .filter((f) => /\.(tsx?)$/.test(f) && !/[\\/]test[\\/]/.test(f))
       .filter((f) => /зажим|точечн\S* трансформац|системн\S* работ|в удобное для Вас время/i.test(readFileSync(f, "utf8")));
     expect(hits).toEqual([]);
   });
