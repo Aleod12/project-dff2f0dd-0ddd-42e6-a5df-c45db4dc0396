@@ -139,7 +139,7 @@ export function Reviews() {
         ref={track}
         role="list"
         onScroll={onScroll}
-        className="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] md:mx-0 md:mt-12 md:grid md:grid-cols-4 md:gap-x-6 md:gap-y-8 md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden"
+        className="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] md:mx-0 md:mt-12 md:grid md:grid-cols-3 md:mx-auto md:max-w-[760px] md:gap-x-6 md:gap-y-8 md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden"
       >
         {reviews.videos.map((r) => {
           const panelId = `review-text-${r.id}`;
@@ -160,7 +160,7 @@ export function Reviews() {
                 </div>
               </div>
               {isPresent(r.transcript ?? "") && (
-                <TranscriptPanel id={panelId} open={open} text={r.transcript!} label={transcriptHeading(reviewTitle(r), r.duration)} className="hidden w-full md:order-1 md:col-span-4 md:mx-auto md:max-w-[760px]" />
+                <TranscriptPanel id={panelId} open={open} text={r.transcript!} label={transcriptHeading(reviewTitle(r), r.duration)} className="max-md:!hidden w-full md:order-1 md:col-span-3" />
               )}
             </div>
           );
@@ -225,12 +225,15 @@ export function Reviews() {
         </DrawerContent>
       </Drawer>
 
-      <ul className="mx-auto mt-10 grid max-w-[900px] gap-4 md:mt-14 md:grid-cols-2 md:gap-6">
+      <ul className="mx-auto mt-10 grid max-w-[900px] md:mt-14 gap-6 md:grid-cols-2">
         {reviews.quotes.map((q) => (
-          <li key={q.name} data-review-quote className="flex flex-col gap-3 rounded-card bg-background p-6 shadow-island md:p-7">
-            <span aria-hidden="true" className="font-display text-6xl leading-[0.6] text-gold">“</span>
+          <li key={q.name} data-review-quote className="relative flex flex-col gap-4 rounded-card bg-background p-6 shadow-island md:p-7">
+            <span aria-hidden="true" className="absolute right-6 top-6 font-display text-6xl leading-[0.6] text-gold">“</span>
+            <div className="flex items-center gap-3 pr-10">
+              <span aria-hidden="true" className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sage font-display text-xl font-semibold text-primary">{q.name.charAt(0)}</span>
+              <p className="font-display text-xl font-semibold text-primary">{q.name}</p>
+            </div>
             <blockquote className="text-[17px] leading-relaxed md:text-lg">{q.text}</blockquote>
-            <p className="font-display text-xl font-semibold text-primary">{q.name}</p>
           </li>
         ))}
       </ul>

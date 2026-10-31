@@ -1,8 +1,6 @@
 import { Compass, Heart, Leaf, Wallet } from "lucide-react";
 import { areas, type AreaIcon } from "@/content/areas";
-import { CtaButton } from "@/components/brand/CtaButton";
 import { SectionTitle } from "@/components/brand/SectionTitle";
-import { TelegramFallback } from "@/components/brand/TelegramFallback";
 import { Island } from "@/components/layout/Island";
 import { isPresent } from "@/lib/present";
 
@@ -25,7 +23,7 @@ export function Areas() {
   const items = areas.items.filter((item) => isPresent(item.title));
 
   return (
-    <Island id="club" tone="sage" aria-labelledby={areas.titleId}>
+    <Island id="areas" tone="sage" aria-labelledby={areas.titleId}>
       <SectionTitle id={areas.titleId} title={areas.title} accent={areas.accent} />
 
       {isPresent(areas.intro) && (
@@ -73,12 +71,6 @@ export function Areas() {
         </ul>
       )}
 
-      <div className="mt-10 flex flex-col items-center gap-3 md:mt-12">
-        <CtaButton href={areas.cta.href} track={areas.cta.track} block>
-          {areas.cta.label}
-        </CtaButton>
-        <TelegramFallback cta="vk-fallback-areas" />
-      </div>
     </Island>
   );
 }
