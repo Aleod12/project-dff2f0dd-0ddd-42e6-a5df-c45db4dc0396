@@ -1,4 +1,3 @@
-import { ArrowRight } from "lucide-react";
 import { intro } from "@/content/intro";
 import { CtaButton } from "@/components/brand/CtaButton";
 import { FrequencyBadge } from "@/components/brand/FrequencyBadge";

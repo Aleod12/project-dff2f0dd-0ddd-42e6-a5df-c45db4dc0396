@@ -105,7 +105,7 @@ export function RootCause() {
                     className={cn(
                       "mt-[6px] size-[11px] shrink-0 rotate-45 bg-gold lg:mt-0",
                       // Bottom labels start below the lowest point of the circle.
-                      i === 0 ? "lg:mb-8" : "lg:mb-20",
+                      i === 0 ? "lg:mb-8" : "lg:mb-14",
                     )}
                   />
                   <div
