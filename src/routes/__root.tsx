@@ -79,7 +79,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
       { name: "color-scheme", content: "light" },
       { title: "Клуб «Трансформация» — Сергей Табачников" },
-      { name: "description", content: "Месяц системной работы с Сергеем Табачниковым: здоровье, финансы, отношения, предназначение." },
+      { name: "description", content: "Месяц глубокой работы с Сергеем Табачниковым: энергия и состояние, финансы, отношения, предназначение." },
       { name: "author", content: "Сергей Табачников" },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "ru_RU" },

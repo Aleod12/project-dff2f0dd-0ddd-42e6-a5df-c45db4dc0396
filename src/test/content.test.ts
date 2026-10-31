@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
+import { faq, faqJsonLd, answerText } from "@/content/faq";
 import { payments, formatPrice, parseCurrency } from "@/content/payments";
 import { site } from "@/content/site";
 import { hero } from "@/content/hero";
@@ -9,7 +10,11 @@ import { pains } from "@/content/pains";
 import { rootCause } from "@/content/rootCause";
 import { host } from "@/content/host";
 import { areas } from "@/content/areas";
-import { monthFormat } from "@/content/format";
+import { program, stageBadge } from "@/content/program";
+import { practices, showPractices } from "@/content/practices";
+import { intro } from "@/content/intro";
+import { readdirSync, readFileSync, statSync } from "node:fs";
+import { join } from "node:path";
 import { isPresent } from "@/lib/present";
 
 describe("content rules", () => {
@@ -23,9 +28,23 @@ describe("content rules", () => {
   it("price list says no auto-renewal", () => {
     expect(pricing.included).toContain("Разовый платёж, без автосписаний");
   });
-  it("price list promises recordings plus two weeks of archive", () => {
-    expect(pricing.included).toContain("Записи всех встреч + 2 недели доступа к архиву");
-    expect(pricing.included.some((s) => s.startsWith("Ещё 2 недели"))).toBe(false);
+  it("price list is the agreed seven items in order", () => {
+    expect(pricing.included).toEqual([
+      "4 живые встречи со мной — раз в неделю",
+      "Глубокие трансформации по четырём сферам жизни",
+      "4 бонусные практики — сразу после входа в канал",
+      "Закрытый канал и моё сопровождение",
+      "Записи всех встреч: месяц + 14 дней доступа",
+      "Личное итоговое сканирование",
+      "Разовый платёж, без автосписаний",
+    ]);
+    expect(pricing.period).toBe("Участие на 1 месяц + 14 дней доступа к записям");
+  });
+  it("euro payment is off until the provider is confirmed; € price kept", () => {
+    expect(payments.eurEnabled).toBe(false);
+    expect(payments.prices.eur).toBe(100);
+    expect(pricing.abroad.label).toBe("Оплата из-за рубежа — напишите мне, подскажу удобный способ");
+    expect(pricing.abroad.href).toBe(links.club);
   });
   it("unknown checkout currency falls back to rubles", () => {
     expect(parseCurrency("usd")).toBe("rub");
@@ -34,8 +53,8 @@ describe("content rules", () => {
   it("every «Вступить в Клуб» points to #price", () => {
     expect(site.joinHref).toBe("/#price");
     expect(hero.primary.href).toBe("/#price");
-    expect(areas.cta.href).toBe("/#price");
-    expect(monthFormat.cta.href).toBe("/#price");
+    expect(program.cta.href).toBe("/#price");
+    expect(intro.join.href).toBe("/#price");
   });
   it("checkout with payments disabled never calls createPayment", async () => {
     const create = vi.fn();
@@ -84,8 +103,9 @@ describe("content rules", () => {
   });
 
   it("hero facts and header order follow the polish brief", () => {
-    expect(hero.facts).toEqual(["4 живые онлайн-встречи со мной", "Записи всех встреч", "Разовая оплата, без автосписаний"]);
-    expect(site.nav.map((n) => n.label)).toEqual(["Клуб", "Ведущий", "Отзывы", "Стоимость", "Вопросы"]);
+    expect(hero.facts).toEqual(["4 живые встречи со мной", "Личное итоговое сканирование", "Разовая оплата, без автосписаний"]);
+    expect(site.nav.map((n) => n.label)).toEqual(["Программа", "Ведущий", "Отзывы", "Стоимость", "Вопросы"]);
+    expect(site.nav.map((n) => n.hash)).toEqual(["club", "host", "reviews", "price", "faq"]);
   });
   it("section 3 has three links of the loop, in the agreed order", () => {
     expect(rootCause.nodes.map((n) => n.title)).toEqual([
@@ -101,7 +121,7 @@ describe("content rules", () => {
   });
   it("section 3 closes the loop without inventing new promises", () => {
     expect(rootCause.conclusion).toBe(
-      "Круг замыкается. В клубе мы работаем с первым звеном — через тело и состояние.",
+      "Круг замыкается. В клубе мы работаем с первопричиной — через тело и состояние.",
     );
   });
   it("section 4 scan CTA goes to the bot scanning link", () => {
@@ -114,7 +134,7 @@ describe("content rules", () => {
   });
   it("section 5 has the four areas in the agreed order, both rows filled", () => {
     expect(areas.items.map((i) => i.title)).toEqual([
-      "Здоровье и энергия",
+      "Энергия и состояние",
       "Финансы",
       "Отношения",
       "Предназначение",
@@ -132,61 +152,48 @@ describe("content rules", () => {
       "внутренняя опора и свой вектор",
     ]);
   });
-  it("section 5 button is the club link with its own tracking tag", () => {
-    expect(areas.cta.href).toBe(site.joinHref);
-    expect(areas.cta.track).toBe("club-areas");
-    expect(areas.cta.label).toBe("Вступить в Клуб");
+  it("program: three stages with exact badges; final badge falls back while duration is empty", () => {
+    expect(program.stages.map((s) => s.title)).toEqual(["Основная работа", "Поддержка", "Личный итог"]);
+    expect(program.finalScanDuration).toBe("");
+    expect([0, 1, 2].map((i) => stageBadge(i))).toEqual(["4 встречи", "весь месяц", "каждому участнику"]);
+    expect(stageBadge(2, "60 минут")).toBe("60 минут");
+    expect(program.join.steps.map((s) => s.title)).toEqual(["Нажмите «Вступить в Клуб»", "Оплатите участие", "Сразу получите доступ"]);
+    expect(program.cta.track).toBe("program-join");
   });
-  it("section 6 has the four format cards in the agreed order, each with a frequency badge", () => {
-    expect(monthFormat.cards.map((c) => c.title)).toEqual([
-      "Живая встреча",
-      "Закрытый канал потока",
-      "Медитации и практики",
-      "Архив +2 недели",
-    ]);
-    expect(monthFormat.cards.map((c) => c.badge)).toEqual([
-      "Раз в неделю",
-      "Весь месяц",
-      "Бонус",
-      "После потока",
-    ]);
-    for (const card of monthFormat.cards) expect(isPresent(card.text)).toBe(true);
-  });
-  it("archive card says all recordings stay available two weeks longer", () => {
-    expect(monthFormat.cards[3]!.text).toBe("Записи всех встреч и материалы остаются доступны ещё две недели после окончания месяца.");
-  });
-  it("section 6 joining is three steps in the agreed order", () => {
-    expect(monthFormat.join.subtitle).toBe("Как присоединиться");
-    expect(monthFormat.join.steps.map((s) => s.title)).toEqual([
-      "Нажмите «Вступить в Клуб»",
-      "Оплатите участие",
-      "Получите доступ",
-    ]);
-    expect(monthFormat.join.steps[1].text).toContain("Чек придёт на e-mail");
-  });
-  it("section 6 button is the club link with its own tracking tag", () => {
-    expect(monthFormat.cta.href).toBe(site.joinHref);
-    expect(monthFormat.cta.track).toBe("format-join");
+  it("practices stay hidden until confirmed with four names", () => {
+    expect(practices.confirmed).toBe(false);
+    expect(showPractices()).toBe(false);
+    const items = [1, 2, 3, 4].map((n) => ({ title: `П${n}`, note: "" }));
+    expect(showPractices({ ...practices, confirmed: true, items })).toBe(true);
+    expect(showPractices({ ...practices, confirmed: true, items: [...items.slice(0, 3), { title: "", note: "" }] })).toBe(false);
   });
 });
 
-import { freeLadder } from "@/content/freeLadder";
-describe("section 9 free ladder", () => {
-  it("has four steps with their own bot/channel links and tags", () => {
-    expect(freeLadder.steps.map((s) => s.button.track)).toEqual(["free-test", "free-practice", "free-scan", "free-channel"]);
-    expect(freeLadder.steps[0]!.button.href).toBe(links.diagnostic);
-    expect(freeLadder.steps[3]!.button.href).toBe(links.telegramChannel);
+describe("intro section", () => {
+  it("diagnostic is the main path, two quiet links, join back to price", () => {
+    expect(intro.main).toEqual({ label: "Пройти диагностику", href: links.diagnostic, track: "intro-test" });
+    expect(intro.more.map((m) => [m.href, m.track])).toEqual([[links.audioPractice, "intro-practice"], [links.telegramChannel, "intro-channel"]]);
+    expect(intro.join.track).toBe("intro-join");
   });
-  it("practice badge shows «около часа»", () => {
-    expect(freeLadder.steps[1]!.badge).toBe("около часа");
+  it("«бесплатно» appears at most once", () => {
+    expect((JSON.stringify(intro).match(/бесплатн/gi) ?? []).length).toBeLessThanOrEqual(1);
   });
 });
 
-import { faq, faqJsonLd, answerText } from "@/content/faq";
+describe("banned words", () => {
+  it("no «зажим», «точечн… трансформац», «системн… работ», «в удобное для Вас время» in the site", () => {
+    const walk = (d: string): string[] => readdirSync(d).flatMap((f) => (statSync(join(d, f)).isDirectory() ? walk(join(d, f)) : [join(d, f)]));
+    const hits = walk(join(process.cwd(), "src"))
+      .filter((f) => /\.(tsx?)$/.test(f) && !f.includes("/test/"))
+      .filter((f) => /зажим|точечн\S* трансформац|системн\S* работ|в удобное для Вас время/i.test(readFileSync(f, "utf8")));
+    expect(hits).toEqual([]);
+  });
+});
+
 describe("section 10 faq", () => {
   it("has 10 questions and matching FAQPage data", () => {
-    expect(faq.items).toHaveLength(10);
-    expect(faqJsonLd().mainEntity).toHaveLength(10);
+    expect(faq.items).toHaveLength(11);
+    expect(faqJsonLd().mainEntity).toHaveLength(11);
   });
   it("no answer mentions the MAX platform", () => {
     const all = faq.items.map((i) => `${i.q} ${answerText(i.a)}`).join(" ");

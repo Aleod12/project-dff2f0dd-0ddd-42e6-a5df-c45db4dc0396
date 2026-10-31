@@ -28,7 +28,7 @@ export function Price() {
           <p className="font-display text-6xl font-semibold leading-none text-primary [font-variant-numeric:lining-nums] sm:text-7xl">
             {pricing.priceRub}
           </p>
-          <p className="text-muted-foreground">{pricing.priceEurNote}</p>
+          {payments.eurEnabled && <p className="text-muted-foreground">{pricing.priceEurNote}</p>}
         </div>
 
         <ul className="flex w-full flex-col gap-3 border-y border-border/70 py-6 text-left">
@@ -44,9 +44,15 @@ export function Price() {
           <CtaButton href={pricing.payRub.href} track={pricing.payRub.track} className="w-full">
             {pricing.payRub.label}
           </CtaButton>
-          <CtaButton href={pricing.payEur.href} track={pricing.payEur.track} variant="outline" className="w-full">
-            {pricing.payEur.label}
-          </CtaButton>
+          {payments.eurEnabled ? (
+            <CtaButton href={pricing.payEur.href} track={pricing.payEur.track} variant="outline" className="w-full">
+              {pricing.payEur.label}
+            </CtaButton>
+          ) : (
+            <a href={pricing.abroad.href} target="_blank" rel="noopener noreferrer" data-cta={pricing.abroad.track} className="tap-link text-[15px] text-muted-foreground underline underline-offset-4 hover:no-underline">
+              {pricing.abroad.label}
+            </a>
+          )}
         </div>
 
         <p className="text-sm text-muted-foreground">

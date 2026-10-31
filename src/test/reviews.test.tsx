@@ -14,10 +14,11 @@ function filesIn(dir: string): string[] {
 }
 
 describe("Reviews section", () => {
-  it("renders 4 videos in the order 3, 4, 1, 2", () => {
+  it("renders 3 videos in the order 3, 4, 1 (male review removed)", () => {
     const { container } = render(<Reviews />);
-    expect(container.querySelectorAll("[data-review-video]")).toHaveLength(4);
-    expect(reviews.videos.map((v) => v.id)).toEqual(["v3", "v4", "v1", "v2"]);
+    expect(container.querySelectorAll("[data-review-video]")).toHaveLength(3);
+    expect(reviews.videos.map((v) => v.id)).toEqual(["v3", "v4", "v1"]);
+    expect(container.textContent).not.toContain("Очень много нового узнал о себе");
   });
 
   it("renders 2 quotes", () => {
@@ -27,7 +28,7 @@ describe("Reviews section", () => {
 
   it("shows the fallback label when the name is empty", () => {
     render(<Reviews />);
-    expect(screen.getByText("Видеоотзыв участника")).toBeInTheDocument();
+    expect(screen.queryByText("Видеоотзыв участника")).toBeNull();
     expect(screen.getAllByText("Видеоотзыв участницы")).toHaveLength(3);
   });
 
@@ -51,7 +52,24 @@ describe("Reviews section", () => {
 
   it("transcripts are in the HTML even when collapsed", () => {
     const { container } = render(<Reviews />);
-    expect(container.textContent).toContain("Очень много нового узнал о себе, о своей душе.");
+    expect(container.textContent).toContain("Поток очень бережный");
+  });
+
+  it("desktop: the transcript panel becomes visible after «Читать текст»", () => {
+    render(<Reviews />);
+    const btn = screen.getAllByRole("button", { name: "Читать текст" })[0]!;
+    const panel = document.getElementById(btn.getAttribute("aria-controls")!)!;
+    expect(panel.classList.contains("hidden")).toBe(true);
+    fireEvent.click(btn);
+    expect(panel.classList.contains("hidden")).toBe(false);
+    expect(panel.classList.contains("block")).toBe(true);
+    expect(panel.textContent).toContain("Текст видеоотзыва — Видеоотзыв участницы, 39 сек");
+  });
+
+  it("quote cards show the author on top with an initial", () => {
+    const { container } = render(<Reviews />);
+    const first = container.querySelector("[data-review-quote]")!;
+    expect(first.textContent!.startsWith("“ТТатьяна")).toBe(true);
   });
 });
 

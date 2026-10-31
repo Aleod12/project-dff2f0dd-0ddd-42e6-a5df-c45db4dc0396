@@ -8,10 +8,11 @@ import { ForYou } from "@/components/sections/ForYou";
 import { RootCause } from "@/components/sections/RootCause";
 import { Host } from "@/components/sections/Host";
 import { Areas } from "@/components/sections/Areas";
-import { MonthFormat } from "@/components/sections/MonthFormat";
+import { Program } from "@/components/sections/Program";
+import { Practices } from "@/components/sections/Practices";
 import { Reviews } from "@/components/sections/Reviews";
 import { Price } from "@/components/sections/Price";
-import { FreeLadder } from "@/components/sections/FreeLadder";
+import { Intro } from "@/components/sections/Intro";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Faq } from "@/components/sections/Faq";
 import { faqJsonLd } from "@/content/faq";
@@ -19,7 +20,7 @@ import { personJsonLd, serviceJsonLd } from "@/lib/homeJsonLd";
 
 const title = "Клуб «Трансформация» Сергея Табачникова";
 const description =
-  "Онлайн-клуб с Сергеем Табачниковым: 4 живые встречи, 4 сферы жизни — здоровье, финансы, отношения, предназначение. Разовая оплата, без автосписаний.";
+  "Онлайн-клуб с Сергеем Табачниковым: 4 живые встречи, 4 сферы жизни — энергия и состояние, финансы, отношения, предназначение. Разовая оплата, без автосписаний.";
 
 export const Route = createFileRoute("/")({
   head: () => {
@@ -60,12 +61,13 @@ function Index() {
       <Hero />
       <ForYou />
       <RootCause />
-      <Host />
+      <Program />
       <Areas />
-      <MonthFormat />
+      <Practices />
+      <Host />
       <Reviews />
       <Price />
-      <FreeLadder />
+      <Intro />
       <Faq />
       <FinalCta />
     </>

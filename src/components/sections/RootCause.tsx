@@ -19,7 +19,7 @@ export function RootCause() {
   const last = rootCause.nodes.length - 1;
 
   return (
-    <Island tone="sage" aria-labelledby={rootCause.titleId}>
+    <Island id="why" tone="sage" aria-labelledby={rootCause.titleId}>
       <SectionTitle
         id={rootCause.titleId}
         title={rootCause.title}
