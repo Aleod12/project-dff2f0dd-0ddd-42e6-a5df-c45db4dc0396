@@ -44,7 +44,7 @@ export function RootCause() {
 
         {/* Closed loop — on desktop spans both rows of the right column. */}
         <div className="flex w-full flex-col items-center lg:row-span-2">
-          <div className="relative w-full max-w-[520px] pl-7 lg:aspect-[520/420] lg:pl-0">
+          <div className="relative w-full max-w-[520px] pl-7 lg:mb-14 lg:aspect-[520/420] lg:pl-0">
             {/* Phones only: the return path from the last diamond back to the first one. */}
             <span
               aria-hidden="true"
