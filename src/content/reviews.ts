@@ -1,10 +1,8 @@
 import { links } from "./links";
 import poster1 from "@/assets/reviews/review-1-poster.webp.asset.json";
-import poster2 from "@/assets/reviews/review-2-poster.webp.asset.json";
 import poster3 from "@/assets/reviews/review-3-poster.webp.asset.json";
 import poster4 from "@/assets/reviews/review-4-poster.webp.asset.json";
 import video1 from "@/assets/reviews/review-1.mp4.asset.json";
-import video2 from "@/assets/reviews/review-2.mp4.asset.json";
 import video3 from "@/assets/reviews/review-3.mp4.asset.json";
 import video4 from "@/assets/reviews/review-4.mp4.asset.json";
 
@@ -73,18 +71,6 @@ export const reviews = {
       size: 400,
       transcript:
         "Всем добрый вечер, делюсь своим отзывом. Сегодня прошла первичную диагностику. Отнеслась к процессу с большим доверием и получила мощную обратную связь. Сергей, ты прямо увидел меня, мою душу, я получила много инсайтов. Когда я слушала обратную связь, где-то хотелось смеяться, где-то плакать, потому что ты говорил истину. Мне очень понравилось, и хочется ещё поработать с тобой. Благодарю.",
-    },
-    {
-      id: "v2",
-      name: "",
-      fallbackLabel: "Видеоотзыв участника",
-      duration: "51 сек",
-      summary: "Очень много нового узнал о себе",
-      video: video2.url,
-      poster: poster2.url,
-      size: 344,
-      transcript:
-        "Сергей, привет. Хотел бы оставить отзыв о сканировании и трансформации. Это фантастический опыт — замечательный, превосходный, даже не хватает слов, чтобы его описать. Очень много нового узнал о себе, о своей душе. После трансформации прямо физически чувствую, как начали происходить изменения. Моя жизнь начала меняться. Спасибо тебе, обязательно продолжим взаимодействие. Всем рекомендую.",
     },
   ] as VideoReview[],
   quotes: [
