@@ -227,11 +227,11 @@ export function Reviews() {
 
       <ul className="mx-auto mt-10 grid max-w-[900px] md:mt-14 gap-6 md:grid-cols-2">
         {reviews.quotes.map((q) => (
-          <li key={q.name} data-review-quote className="relative flex flex-col gap-4 rounded-card bg-background p-6 shadow-island md:p-7">
-            <span aria-hidden="true" className="absolute right-6 top-6 font-display text-6xl leading-[0.6] text-gold">“</span>
-            <div className="flex items-center gap-3 pr-10">
+          <li key={q.name} data-review-quote className="flex flex-col gap-4 rounded-card border border-border bg-background p-6 shadow-island md:p-7">
+            <div className="flex items-center gap-3 border-b border-gold/50 pb-4">
               <span aria-hidden="true" className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sage font-display text-xl font-semibold text-primary">{q.name.charAt(0)}</span>
               <p className="font-display text-xl font-semibold text-primary">{q.name}</p>
+              <span aria-hidden="true" className="ml-auto font-display text-5xl leading-[0.6] text-gold">“</span>
             </div>
             <blockquote className="text-[17px] leading-relaxed md:text-lg">{q.text}</blockquote>
           </li>
