@@ -27,9 +27,9 @@ export function RootCause() {
         suffix={rootCause.titleSuffix}
       />
 
-      <div className="mt-10 flex flex-col gap-10 md:mt-14 md:gap-14 lg:flex-row lg:items-start lg:gap-12">
+      <div className="mt-10 grid gap-10 md:mt-14 md:gap-14 lg:grid-cols-[480px_1fr] lg:gap-x-12 lg:gap-y-0">
         {/* Thesis */}
-        <div className="flex flex-col gap-5 lg:max-w-[480px]">
+        <div className="flex flex-col gap-5">
           {rootCause.thesis.map((line, i) => (
             <p
               key={line}
@@ -42,8 +42,8 @@ export function RootCause() {
           ))}
         </div>
 
-        {/* Closed loop */}
-        <div className="flex w-full flex-col items-center lg:flex-1">
+        {/* Closed loop — on desktop spans both rows of the right column. */}
+        <div className="flex w-full flex-col items-center lg:row-span-2">
           <div className="relative w-full max-w-[520px] pl-7 lg:aspect-[520/420] lg:pl-0">
             {/* Phones only: the return path from the last diamond back to the first one. */}
             <span
@@ -123,9 +123,18 @@ export function RootCause() {
             </ol>
           </div>
 
-          <div className="mt-8 flex w-full justify-center lg:mt-[136px]">
-            <p className="max-w-[520px] text-balance text-center font-display text-xl italic">{rootCause.conclusion}</p>
-          </div>
+        </div>
+
+        {/* Conclusion — on desktop fills the lower-left cell under the thesis. */}
+        <div className="flex flex-col items-center gap-5 lg:items-start lg:justify-end lg:pb-2">
+          <span aria-hidden="true" className="flex items-center gap-3 text-gold">
+            <span className="h-px w-10 bg-gold/70" />
+            <span className="size-2 rotate-45 bg-gold" />
+            <span className="h-px w-10 bg-gold/70" />
+          </span>
+          <p className="max-w-[520px] text-balance text-center font-display text-xl italic text-primary md:text-2xl lg:text-left">
+            {rootCause.conclusion}
+          </p>
         </div>
       </div>
     </Island>
