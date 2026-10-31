@@ -13,7 +13,7 @@ export function FinalCta() {
   return (
     <section id="start" className="py-3 md:py-4" aria-labelledby={c.titleId}>
       <Container>
-        <div className="rounded-island bg-primary px-5 py-20 text-primary-foreground sm:px-10 md:py-28">
+        <div className="rounded-island bg-primary px-5 py-14 text-primary-foreground sm:px-10 md:py-28">
           <div className="mx-auto flex max-w-[720px] flex-col items-center gap-6 text-center">
             <img
               src={portrait240.url}
@@ -32,7 +32,7 @@ export function FinalCta() {
               </h2>
               <DiamondDivider />
             </div>
-            <p className="text-lg leading-relaxed">{c.text}</p>
+            <p className="mt-1 text-lg leading-relaxed md:mt-0">{c.text}</p>
             <div className="flex flex-col items-center gap-1">
               <p className="font-display text-xl italic">{c.sign}</p>
               <p className="font-display text-base italic">{c.motto}</p>
