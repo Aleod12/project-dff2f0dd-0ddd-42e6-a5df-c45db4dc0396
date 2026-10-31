@@ -1,14 +1,12 @@
-import { site } from "./site";
-
-/** Section 5 «Что даст Вам клуб» — four areas of work: what we take on and the direction, no promises. */
+/** Section «С чем работаем» (#areas) — four areas of work: what we take on and the direction, no promises. */
 export const areas = {
   /** Heading id, so the section can be labelled by it. */
-  titleId: "club-title",
-  title: "Что даст Вам",
-  accent: "клуб",
+  titleId: "areas-title",
+  title: "С чем",
+  accent: "работаем",
 
   /** One muted line under the title. Empty value hides it. */
-  intro: "Месяц работы охватывает четыре сферы жизни.",
+  intro: "Четыре сферы жизни — в каждой ищем первопричину повторяющихся ситуаций.",
 
   /** Row labels repeated in every card. */
   labels: {
@@ -20,8 +18,8 @@ export const areas = {
   items: [
     {
       icon: "leaf",
-      title: "Здоровье и энергия",
-      work: "хроническая усталость, зажимы в теле, фоновое напряжение",
+      title: "Энергия и состояние",
+      work: "хроническая усталость, напряжение в теле, фоновая тревога",
       goal: "больше сил и спокойный ресурс в теле",
     },
     {
@@ -44,11 +42,6 @@ export const areas = {
     },
   ],
 
-  cta: {
-    label: "Вступить в Клуб",
-    href: site.joinHref,
-    track: "club-areas",
-  },
 } as const;
 
 export type AreaIcon = (typeof areas.items)[number]["icon"];

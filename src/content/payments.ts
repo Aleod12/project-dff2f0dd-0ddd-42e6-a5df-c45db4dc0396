@@ -4,6 +4,8 @@ export type Currency = "rub" | "eur";
 
 export const payments: {
   enabled: boolean;
+  /** € button and «или 100 €» line; off until the provider is confirmed. */
+  eurEnabled: boolean;
   provider: PaymentProvider | null;
   prices: Record<Currency, number>;
   /** Shown only if not empty. */
@@ -12,6 +14,7 @@ export const payments: {
   streamStartDate: string;
 } = {
   enabled: false,
+  eurEnabled: false,
   provider: null,
   prices: { rub: 9990, eur: 100 },
   vatNote: "",

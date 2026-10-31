@@ -1,8 +1,10 @@
-import { legalFromValues, legalSectionNames, legalUi, type LegalFrom } from "@/content/legal/nav";
+import { legacyFrom, legalFromValues, legalSectionNames, legalUi, type LegalFrom } from "@/content/legal/nav";
 import type { LegalDoc } from "@/content/legal/types";
 
 export function parseFrom(value: unknown): LegalFrom | undefined {
-  return typeof value === "string" && (legalFromValues as readonly string[]).includes(value) ? (value as LegalFrom) : undefined;
+  if (typeof value !== "string") return undefined;
+  if ((legalFromValues as readonly string[]).includes(value)) return value as LegalFrom;
+  return Object.hasOwn(legacyFrom, value) ? legacyFrom[value] : undefined;
 }
 
 export function backLabel(from?: LegalFrom | undefined): string {
