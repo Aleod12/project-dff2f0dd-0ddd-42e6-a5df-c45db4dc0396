@@ -17,7 +17,10 @@ export function Intro() {
         <ol className="flex w-full flex-col items-center gap-3 md:flex-row md:justify-center md:gap-4">
           {intro.path.map((step, i) => (
             <li key={step} className="flex flex-col items-center gap-3 md:flex-row md:gap-4">
-              <span className="font-display text-xl font-semibold leading-snug text-primary md:text-[22px]">{step}</span>
+              <span className="flex items-center gap-3 rounded-full border border-gold/60 bg-sage px-4 py-2.5 text-left">
+                <span aria-hidden="true" className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary font-display text-lg font-semibold text-primary-foreground">{i + 1}</span>
+                <span className="font-display text-xl font-semibold leading-snug text-primary md:text-[21px]">{step}</span>
+              </span>
               {i < intro.path.length - 1 && <ArrowRight aria-hidden="true" className="size-5 rotate-90 text-gold md:rotate-0" />}
             </li>
           ))}
