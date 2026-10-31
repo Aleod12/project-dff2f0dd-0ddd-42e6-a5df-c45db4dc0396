@@ -36,6 +36,7 @@ export const site = {
   socials: [
     { label: "Telegram", href: links.telegramChannel, track: "footer-telegram" },
     { label: "ВКонтакте", href: links.vkCommunity, track: "footer-vk" },
+    { label: "MAX", href: links.maxProfile, track: "footer-max" },
     { label: "YouTube", href: links.youtube, track: "footer-youtube" },
   ],
   legalPages: [

@@ -8,6 +8,7 @@ export const links = {
   telegramChannel: "https://t.me/SergeySsoul",
   vkMessages: "https://vk.me/ts.soul",
   vkCommunity: "https://vk.ru/ts.soul",
+  maxProfile: "https://max.ru/u/f9LHodD0cOKxtbdXtw0XWZ3u5rYQBaeG2Ybf2mBzJGPPdCOvma__utTlA1g",
   youtube: "https://www.youtube.com/@st.soulpower",
 } as const;
 
