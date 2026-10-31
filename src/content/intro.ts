@@ -11,7 +11,7 @@ export const intro = {
   badge: "без оплаты",
   path: [
     { title: "Диагностика", note: "2 минуты" },
-    { title: "Результат по трём шкалам", note: "" },
+    { title: "Результат", note: "по трём шкалам" },
     { title: "Личное сканирование", note: "30 минут в Zoom, один раз" },
   ],
   main: { label: "Пройти диагностику", href: links.diagnostic, track: "intro-test" },

@@ -16,6 +16,7 @@
 - Header, footer and mobile sticky CTA are mounted once in `src/routes/__root.tsx`; home sections go in `src/components/sections/`, one file each.
 - No forms or personal data on the site. «Вступить в Клуб» CTAs scroll to #price; prices and the on/off switch live only in `src/content/payments.ts`; online payment goes through `createPayment` (server, stub until a provider is connected) and is confirmed only by a signed provider notification — so turning payment on never touches the design.
 - Fonts are self-hosted woff2 in public/fonts (@font-face in src/styles.css); never load Google Fonts — no visitor IP transfer to Google.
+- Area photo sources and responsive variants are mapped in content items, not presentation components, so media can change independently of layout.
 - robots.txt and sitemap.xml are generated server routes from site.siteUrl (src/lib/seoFiles.ts); while siteUrl is empty there is no Sitemap line and sitemap.xml returns 404.
 - Uploaded photos/videos are self-hosted in public/media and their .asset.json `url` points to /media/<file> — the production Node server cannot serve Lovable's asset CDN paths.
 - Production build for own Node hosting: `NITRO_PRESET=node-server npm run build`, run `node .output/server/index.mjs` (PORT env); the Lovable editor build keeps its own preset.
