@@ -15,9 +15,10 @@ export function Intro() {
         <FrequencyBadge className="self-center">{intro.badge}</FrequencyBadge>
         <ol className="grid w-full divide-y divide-border md:grid-cols-3 md:divide-x md:divide-y-0">
           {intro.path.map((step) => (
-            <li key={step} className="flex flex-col items-center gap-3 py-5 first:pt-0 last:pb-0 md:px-6 md:py-0 md:first:pl-0 md:last:pr-0">
-              <span aria-hidden="true" className="size-2 rotate-45 bg-gold" />
-              <span className="font-display text-xl font-semibold leading-snug text-primary md:text-[21px]">{step}</span>
+            <li key={step.title} className="flex flex-col items-center gap-2 py-5 first:pt-0 last:pb-0 md:px-6 md:py-0 md:first:pl-0 md:last:pr-0">
+              <span aria-hidden="true" className="mb-1 size-2 rotate-45 bg-gold" />
+              <span className="font-display text-2xl font-semibold leading-snug text-primary md:text-[26px]">{step.title}</span>
+              {step.note && <span className="text-[15px] text-muted-foreground">{step.note}</span>}
             </li>
           ))}
         </ol>
