@@ -103,8 +103,9 @@ describe("content rules", () => {
   });
 
   it("hero facts and header order follow the polish brief", () => {
-    expect(hero.facts).toEqual(["4 живые онлайн-встречи со мной", "Записи всех встреч", "Разовая оплата, без автосписаний"]);
-    expect(site.nav.map((n) => n.label)).toEqual(["Клуб", "Ведущий", "Отзывы", "Стоимость", "Вопросы"]);
+    expect(hero.facts).toEqual(["4 живые встречи со мной", "Личное итоговое сканирование", "Разовая оплата, без автосписаний"]);
+    expect(site.nav.map((n) => n.label)).toEqual(["Программа", "Ведущий", "Отзывы", "Стоимость", "Вопросы"]);
+    expect(site.nav.map((n) => n.hash)).toEqual(["club", "host", "reviews", "price", "faq"]);
   });
   it("section 3 has three links of the loop, in the agreed order", () => {
     expect(rootCause.nodes.map((n) => n.title)).toEqual([
