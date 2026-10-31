@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
+import { faq, faqJsonLd, answerText } from "@/content/faq";
 import { payments, formatPrice, parseCurrency } from "@/content/payments";
 import { site } from "@/content/site";
 import { hero } from "@/content/hero";
