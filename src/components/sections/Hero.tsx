@@ -27,7 +27,7 @@ export function Hero() {
             decoding="async"
             className="block aspect-[760/750] h-auto w-[min(64vw,240px)] object-contain md:w-full md:max-w-[520px]"
           />
-          <p className="hero-motto font-signature text-[26px] leading-tight text-primary md:absolute md:bottom-0 md:right-0 md:-rotate-6 md:text-[34px]">{hero.signature}</p>
+          <p className="hero-motto font-signature text-[26px] leading-tight text-primary md:absolute md:-bottom-6 md:right-0 md:-rotate-6 md:text-[34px]">{hero.signature}</p>
         </div>
 
         {/* Text */}
