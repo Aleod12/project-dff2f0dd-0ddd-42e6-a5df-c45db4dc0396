@@ -44,7 +44,7 @@ export function RootCause() {
 
         {/* Closed loop — on desktop spans both rows of the right column. */}
         <div className="flex w-full flex-col items-center lg:row-span-2">
-          <div className="relative w-full max-w-[520px] pl-7 lg:aspect-[520/420] lg:pl-0">
+          <div className="relative w-full max-w-[520px] pl-7 lg:mb-14 lg:aspect-[520/420] lg:pl-0">
             {/* Phones only: the return path from the last diamond back to the first one. */}
             <span
               aria-hidden="true"
@@ -105,7 +105,7 @@ export function RootCause() {
                     className={cn(
                       "mt-[6px] size-[11px] shrink-0 rotate-45 bg-gold lg:mt-0",
                       // Bottom labels start below the lowest point of the circle.
-                      i === 0 ? "lg:mb-8" : "lg:mb-20",
+                      i === 0 ? "lg:mb-8" : "lg:mb-14",
                     )}
                   />
                   <div
