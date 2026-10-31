@@ -123,9 +123,18 @@ export function RootCause() {
             </ol>
           </div>
 
-          <div className="mt-8 flex w-full justify-center lg:mt-[136px]">
-            <p className="max-w-[520px] text-balance text-center font-display text-xl italic">{rootCause.conclusion}</p>
-          </div>
+        </div>
+
+        {/* Conclusion — on desktop fills the lower-left cell under the thesis. */}
+        <div className="flex flex-col items-center gap-5 lg:items-start lg:justify-end lg:pb-2">
+          <span aria-hidden="true" className="flex items-center gap-3 text-gold">
+            <span className="h-px w-10 bg-gold/70" />
+            <span className="size-2 rotate-45 bg-gold" />
+            <span className="h-px w-10 bg-gold/70" />
+          </span>
+          <p className="max-w-[520px] text-balance text-center font-display text-xl italic text-primary md:text-2xl lg:text-left">
+            {rootCause.conclusion}
+          </p>
         </div>
       </div>
     </Island>
