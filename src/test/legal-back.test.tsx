@@ -37,6 +37,16 @@ describe("LegalBackLink", () => {
   });
 });
 
+describe("from whitelist", () => {
+  it("new section ids are accepted; old ones map to their new sections", async () => {
+    for (const id of ["why", "club", "areas", "practices", "intro"]) expect(parseFrom(id)).toBe(id);
+    expect(parseFrom("format")).toBe("club");
+    expect(parseFrom("free")).toBe("intro");
+    await renderAt("/offer?from=format", () => <LegalPage doc={offer} from={parseFrom("format")} />);
+    expect(await screen.findAllByRole("link", { name: "Вернуться к разделу «Как устроена программа»" })).toHaveLength(2);
+  });
+});
+
 describe("mobile sticky bar", () => {
   it("exists only on the home page", () => {
     expect(showStickyCta("/")).toBe(true);
