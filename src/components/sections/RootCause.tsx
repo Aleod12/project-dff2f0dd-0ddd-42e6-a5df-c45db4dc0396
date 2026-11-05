@@ -81,20 +81,20 @@ export function RootCause() {
         </div>
       </div>
 
-      <div data-session className="mt-7 md:mt-10">
+      <div data-session className="mt-6 md:mt-10">
         <GoldDivider />
         <h3 className="mt-4 text-center font-display text-[28px] leading-tight md:text-[32px]">
           {rootCause.session.title} <em>{rootCause.session.accent}</em>{rootCause.session.suffix}
         </h3>
         <p className="mt-2 text-center text-[15px] leading-snug text-muted-foreground">{rootCause.session.intro}</p>
-        <ol className="mt-6 grid gap-4 md:grid-cols-3 md:gap-x-5 md:gap-y-6 lg:grid-cols-6 lg:gap-x-4">
+        <ol className="mt-4 grid gap-3 md:mt-6 md:grid-cols-3 md:gap-x-5 md:gap-y-6 lg:grid-cols-6 lg:gap-x-4">
           {rootCause.session.steps.map((step, i) => (
             <li key={step.title} className="relative min-w-0 pl-7 md:pl-0 md:text-center">
-              {i < rootCause.session.steps.length - 1 && <span aria-hidden="true" className="absolute bottom-[-16px] left-[5px] top-5 w-px bg-primary/30 md:hidden" />}
-              <span className="text-[15px] leading-none text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
-              <span aria-hidden="true" className="absolute left-0 top-[5px] size-[11px] rotate-45 bg-gold md:relative md:mx-auto md:my-3 md:block md:top-0" />
-              {i < rootCause.session.steps.length - 1 && <span aria-hidden="true" className="absolute left-1/2 top-[34px] hidden w-[calc(100%+1rem)] border-t border-primary/30 lg:block" />}
-              <h4 className="mt-1 text-[15px] font-semibold leading-snug md:mt-0">{step.title}</h4>
+              {i < rootCause.session.steps.length - 1 && <span aria-hidden="true" className="absolute bottom-[-12px] left-[5px] top-10 w-px bg-primary/30 md:hidden" />}
+              <span className="absolute -left-1 top-0 text-[15px] leading-none text-muted-foreground md:static">{String(i + 1).padStart(2, "0")}</span>
+              <span aria-hidden="true" className="absolute left-0 top-7 size-[11px] rotate-45 bg-gold md:relative md:mx-auto md:my-3 md:block md:top-0" />
+              {i < rootCause.session.steps.length - 1 && <span aria-hidden="true" className="absolute left-1/2 top-[44px] hidden w-[calc(100%+1rem)] border-t border-primary/30 lg:block" />}
+              <h4 className="text-[15px] font-semibold leading-snug">{step.title}</h4>
               <p className="mt-1 text-[15px] leading-[1.25] text-muted-foreground">{step.text}</p>
             </li>
           ))}
