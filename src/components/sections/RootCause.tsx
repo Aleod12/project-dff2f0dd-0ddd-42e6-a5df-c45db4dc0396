@@ -33,7 +33,7 @@ export function RootCause() {
         </div>
         <div className="order-3 flex flex-col items-center gap-5 lg:order-2 lg:items-start">
           <GoldDivider />
-          <p className="max-w-[520px] text-balance text-center font-display text-lg italic text-primary md:text-xl lg:text-left lg:leading-[1.2]">{rootCause.conclusion}</p>
+          <p className="max-w-[520px] text-balance text-center font-display text-lg italic text-primary md:text-xl lg:text-left lg:text-lg lg:leading-[1.2] xl:text-xl">{rootCause.conclusion}</p>
         </div>
         </div>
 
