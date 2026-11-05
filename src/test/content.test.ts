@@ -170,7 +170,7 @@ describe("content rules", () => {
   });
   it("section 5 has the four areas in the agreed order, both rows filled", () => {
     expect(areas.items.map((i) => i.title)).toEqual([
-      "Энергия и состояние",
+      "Состояние и энергия",
       "Финансы",
       "Отношения",
       "Предназначение",
@@ -182,11 +182,17 @@ describe("content rules", () => {
   });
   it("section 5 names the direction without promising a result", () => {
     expect(areas.items.map((i) => i.goal)).toEqual([
-      "больше сил и спокойный ресурс в теле",
-      "внутреннее разрешение расти без отката",
-      "отношения без вины и роли спасателя",
-      "внутренняя опора и свой вектор",
+      "больше сил и внутреннего спокойствия",
+      "внутреннее разрешение расти",
+      "отношения без старых повторяющихся сценариев",
+      "внутренняя опора и движение по своему пути",
     ]);
+  });
+  it("area work and goals exclude the client-rejected wording", () => {
+    for (const item of areas.items) {
+      expect(item.work).not.toMatch(/стеклянный потолок|откат|страх масштаба|созависимость|спасатель|хроническ/i);
+      expect(item.goal).not.toMatch(/стеклянный потолок|откат|страх масштаба|созависимость|спасатель|хроническ/i);
+    }
   });
   it("program: three stages with exact badges; final badge falls back while duration is empty", () => {
     expect(program.stages.map((s) => s.title)).toEqual(["Основная работа", "Поддержка", "Индивидуальный итог"]);
