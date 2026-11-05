@@ -1,7 +1,7 @@
 import { QueryClient } from "@tanstack/react-query";
 import { createRouter, rootRouteId } from "@tanstack/react-router";
 import { describe, expect, it } from "vitest";
-import { readFileSync } from "node:fs";
+import homeSource from "../routes/index.tsx?raw";
 
 import { routeTree } from "@/routeTree.gen";
 
@@ -9,8 +9,7 @@ import { routeTree } from "@/routeTree.gen";
 // network the test run lacks, and jsdom never loads the stylesheets React waits on.
 describe("App routing", () => {
   it("places Meeting immediately after Program on the home page", () => {
-    const source = readFileSync(new URL("../routes/index.tsx", import.meta.url), "utf8");
-    const sections = [...source.matchAll(/<([A-Z]\w*)\s*\/>/g)].map((match) => match[1]);
+    const sections = [...homeSource.matchAll(/<([A-Z]\w*)\s*\/>/g)].map((match) => match[1]);
     const programIndex = sections.indexOf("Program");
     expect(programIndex).toBeGreaterThanOrEqual(0);
     expect(sections[programIndex + 1]).toBe("Meeting");
