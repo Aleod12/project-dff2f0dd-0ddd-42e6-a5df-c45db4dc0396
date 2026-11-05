@@ -9,7 +9,7 @@ export type LegalFrom = (typeof legalFromValues)[number];
 export const legalSectionNames: Record<Exclude<LegalFrom, "site-footer" | "checkout">, string> = {
   hero: "Начало",
   "for-you": "Этот клуб для Вас",
-  why: "Почему действия не меняют сценарий",
+  why: "Почему ситуации повторяются",
   club: "Как устроена программа",
   areas: "С чем работаем",
   practices: "Бонусные практики",

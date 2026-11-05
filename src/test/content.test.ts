@@ -123,11 +123,12 @@ describe("content rules", () => {
     expect(site.nav.map((n) => n.label)).toEqual(["Программа", "Ведущий", "Отзывы", "Стоимость", "Вопросы"]);
     expect(site.nav.map((n) => n.hash)).toEqual(["club", "host", "reviews", "price", "faq"]);
   });
-  it("section 3 has three links of the loop, in the agreed order", () => {
+  it("section 3 has four links of the loop, in the agreed order", () => {
     expect(rootCause.nodes.map((n) => n.title)).toEqual([
-      "Внутреннее напряжение",
-      "Скрытая программа",
-      "Повторяющийся результат",
+      "Знакомая ситуация",
+      "Привычная реакция",
+      "Повторяющееся поведение",
+      "Похожий результат",
     ]);
     for (const node of rootCause.nodes) expect(isPresent(node.text)).toBe(true);
   });
@@ -137,8 +138,19 @@ describe("content rules", () => {
   });
   it("section 3 closes the loop without inventing new promises", () => {
     expect(rootCause.conclusion).toBe(
-      "Круг замыкается. В клубе мы работаем с первопричиной — через тело и состояние.",
+      "Иногда внешние обстоятельства меняются, а привычные реакции и убеждения остаются прежними. На встречах клуба мы обращаем внимание на внутренние ограничения и жизненные запросы, которые человек хочет исследовать и изменить.",
     );
+  });
+  it("section 3 meeting follows the six agreed steps", () => {
+    expect(rootCause.session.steps.map((step) => step.title)).toEqual([
+      "Настройка", "Интуитивное считывание", "Поиск первопричины",
+      "Трансформация", "Ощущения и осознания", "Завершение",
+    ]);
+    for (const step of rootCause.session.steps) expect(isPresent(step.text)).toBe(true);
+  });
+  it("section 3 excludes the client-rejected terms", () => {
+    expect(JSON.stringify({ thesis: rootCause.thesis, nodes: rootCause.nodes, conclusion: rootCause.conclusion, session: rootCause.session }))
+      .not.toMatch(/через тело|сессий|подсознательн|зажат|симптом|живые/i);
   });
   it("section 4 scan CTA goes to the bot scanning link", () => {
     expect(host.cta.href).toBe(links.scanning);
