@@ -22,18 +22,18 @@ export function RootCause() {
     <Island id="why" tone="sage" aria-labelledby={rootCause.titleId}>
       <SectionTitle id={rootCause.titleId} title={rootCause.title} accent={rootCause.accent} suffix={rootCause.titleSuffix} />
 
-      <div className="mt-10 grid gap-10 md:mt-14 md:gap-14 lg:mt-8 lg:grid-cols-[minmax(0,1fr)_520px] lg:items-center lg:gap-x-14 lg:gap-y-0">
-        <div className="contents lg:order-1 lg:flex lg:min-w-0 lg:flex-col lg:gap-6">
-        <div className="order-1 flex flex-col gap-5 lg:gap-4 lg:leading-normal">
+      <div className="mt-10 grid gap-10 md:mt-14 md:gap-14 lg:mt-7 lg:grid-cols-[minmax(0,1fr)_520px] lg:items-center lg:gap-x-14 lg:gap-y-0">
+        <div className="contents lg:order-1 lg:flex lg:min-w-0 lg:flex-col lg:gap-5">
+        <div className="order-1 flex flex-col gap-5 lg:gap-3 lg:leading-[1.4]">
           {rootCause.thesis.map((line, i) => (
-            <p key={line} className={cn(i === rootCause.emphasizedIndex ? "text-lg font-medium text-primary md:text-xl lg:leading-normal" : "text-muted-foreground")}>
+            <p key={line} className={cn(i === rootCause.emphasizedIndex ? "text-lg font-medium text-primary md:text-xl lg:leading-[1.4]" : "text-muted-foreground")}>
               {line}
             </p>
           ))}
         </div>
         <div className="order-3 flex flex-col items-center gap-5 lg:order-2 lg:items-start">
           <GoldDivider />
-          <p className="max-w-[520px] text-balance text-center font-display text-lg italic text-primary md:text-xl lg:text-left lg:leading-normal">{rootCause.conclusion}</p>
+          <p className="max-w-[520px] text-balance text-center font-display text-lg italic text-primary md:text-xl lg:text-left lg:leading-[1.2]">{rootCause.conclusion}</p>
         </div>
         </div>
 
