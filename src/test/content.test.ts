@@ -20,7 +20,7 @@ import { isPresent } from "@/lib/present";
 describe("content rules", () => {
   it("hero facts use the client-approved labels and order", () => {
     expect(hero.facts.map((fact) => fact.label)).toEqual([
-      "4 живые встречи онлайн",
+      "4 онлайн-встречи",
       "4 бонусные трансформации",
       "2 бонусные практики",
       "Итоговое сканирование",
