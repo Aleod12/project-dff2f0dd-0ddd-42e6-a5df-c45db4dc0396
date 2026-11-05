@@ -10,9 +10,9 @@ const nodePos = [
   "lg:left-0 lg:top-1/2",
 ];
 const labelPos = [
-  "lg:bottom-full lg:left-1/2 lg:mb-5 lg:w-[260%] lg:max-w-[260px] lg:-translate-x-1/2 lg:text-center",
+  "lg:bottom-full lg:left-1/2 lg:mb-12 lg:w-[260%] lg:max-w-[260px] lg:-translate-x-1/2 lg:text-center",
   "lg:left-full lg:top-1/2 lg:ml-4 lg:w-[calc(106.25%-16px)] lg:-translate-y-1/2 lg:text-left",
-  "lg:top-full lg:left-1/2 lg:mt-5 lg:w-[280%] lg:max-w-[280px] lg:-translate-x-1/2 lg:text-center",
+  "lg:top-full lg:left-1/2 lg:mt-12 lg:w-[280%] lg:max-w-[280px] lg:-translate-x-1/2 lg:text-center",
   "lg:right-full lg:top-1/2 lg:mr-4 lg:w-[calc(106.25%-16px)] lg:-translate-y-1/2 lg:text-right",
 ];
 
