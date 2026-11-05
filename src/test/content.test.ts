@@ -18,6 +18,17 @@ import { join } from "node:path";
 import { isPresent } from "@/lib/present";
 
 describe("content rules", () => {
+  it("hero facts use the client-approved labels and order", () => {
+    expect(hero.facts.map((fact) => fact.label)).toEqual([
+      "4 живые встречи",
+      "4 бонусные трансформации",
+      "2 бонусные практики",
+      "Итоговое сканирование",
+    ]);
+  });
+  it("hero final scanning is not described as personal", () => {
+    expect(hero.sub).not.toMatch(/личн/i);
+  });
   it("prices come only from payments.ts: 9990 ₽ and 100 €", () => {
     expect(payments.prices).toEqual({ rub: 9990, eur: 100 });
     expect(pricing.priceRub).toBe(formatPrice("rub"));

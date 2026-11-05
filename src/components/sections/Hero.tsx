@@ -1,4 +1,4 @@
-import { CalendarDays, Headphones, UserRound, MessagesSquare } from "lucide-react";
+import { CalendarDays, Headphones, UserRound, PlayCircle } from "lucide-react";
 import { hero } from "@/content/hero";
 import { isPresent } from "@/lib/present";
 import { CtaButton } from "@/components/brand/CtaButton";
@@ -8,7 +8,7 @@ import photo760 from "@/assets/hero/sergey-hero-circle-760.webp.asset.json";
 import photo570 from "@/assets/hero/sergey-hero-circle-570.webp.asset.json";
 import photo380 from "@/assets/hero/sergey-hero-circle-380.webp.asset.json";
 
-const icons = { calendar: CalendarDays, headphones: Headphones, user: UserRound, messages: MessagesSquare };
+const icons = { calendar: CalendarDays, play: PlayCircle, headphones: Headphones, user: UserRound };
 
 export function Hero() {
   return (
@@ -46,11 +46,11 @@ export function Hero() {
             <CtaButton href={hero.primary.href} track={hero.primary.track} className="w-full md:w-auto">{hero.primary.label}</CtaButton>
             <CtaButton href={hero.secondary.href} track={hero.secondary.track} variant="outline" className="w-full md:w-auto">{hero.secondary.label}</CtaButton>
           </div>
-          <ul className="grid w-full grid-cols-2 gap-x-3 gap-y-3 md:grid-cols-4 md:gap-0">
+          <ul className="grid w-full auto-rows-fr grid-cols-2 gap-x-3 gap-y-3 md:auto-rows-auto md:grid-cols-4 md:gap-0">
             {hero.facts.map((fact) => {
               const Icon = icons[fact.icon];
               return (
-                <li key={fact.icon} className="flex min-w-0 items-center justify-center gap-2 md:flex-col md:items-start md:justify-start md:px-3 md:first:pl-0 md:last:pr-0 md:[&+li]:border-l md:[&+li]:border-border">
+                <li key={fact.icon} className="flex min-w-0 items-center justify-center gap-1.5 md:gap-2 md:flex-col md:items-start md:justify-start md:px-3 md:first:pl-0 md:last:pr-0 md:[&+li]:border-l md:[&+li]:border-border">
                   <span aria-hidden="true" className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sage text-primary">
                     <Icon size={20} strokeWidth={1.5} />
                   </span>
