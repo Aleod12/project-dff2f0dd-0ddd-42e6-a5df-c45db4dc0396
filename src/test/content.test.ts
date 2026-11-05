@@ -43,6 +43,11 @@ describe("content rules", () => {
   it("hero final scanning is not described as personal", () => {
     expect(hero.sub).not.toMatch(/личн/i);
   });
+  it("role line reads the same everywhere: «Энергопрактик · Проводник»", () => {
+    expect(hero.eyebrow).toBe("Энергопрактик · Проводник");
+    expect(site.roles).toBe("Энергопрактик · Проводник");
+    expect(host.eyebrow).toBe("Энергопрактик · Проводник");
+  });
   it("prices come only from payments.ts: 9990 ₽ and 100 €", () => {
     expect(payments.prices).toEqual({ rub: 9990, eur: 100 });
     expect(pricing.priceRub).toBe(formatPrice("rub"));

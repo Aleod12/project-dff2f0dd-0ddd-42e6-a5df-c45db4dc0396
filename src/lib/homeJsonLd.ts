@@ -13,7 +13,7 @@ export function personJsonLd() {
     "@type": "Person",
     "@id": url("/#person"),
     name: site.hostName,
-    jobTitle: "Проводник, энергопрактик",
+    jobTitle: site.roles,
     image: url(photo860.url),
     sameAs: [links.telegramChannel, links.vkCommunity, links.youtube],
   };

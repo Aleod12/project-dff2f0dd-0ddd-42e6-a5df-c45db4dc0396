@@ -2,7 +2,7 @@ import { site } from "./site";
 import { links } from "./links";
 
 export const hero = {
-  eyebrow: "Проводник • Энергопрактик",
+  eyebrow: "Энергопрактик · Проводник",
   titleLead: "Клуб",
   titleAccent: "«Трансформация»",
   titleName: "Сергея Табачникова",
