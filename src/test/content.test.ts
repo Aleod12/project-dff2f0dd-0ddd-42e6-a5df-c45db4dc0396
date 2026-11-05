@@ -43,10 +43,10 @@ describe("content rules", () => {
   it("hero final scanning is not described as personal", () => {
     expect(hero.sub).not.toMatch(/личн/i);
   });
-  it("role line reads the same everywhere: «Энергопрактик · Проводник»", () => {
-    expect(hero.eyebrow).toBe("Энергопрактик · Проводник");
-    expect(site.roles).toBe("Энергопрактик · Проводник");
-    expect(host.eyebrow).toBe("Энергопрактик · Проводник");
+  it("role line reads the same everywhere: «Энергопрактик»", () => {
+    expect(hero.eyebrow).toBe("Энергопрактик");
+    expect(site.roles).toBe("Энергопрактик");
+    expect(host.eyebrow).toBe("Энергопрактик");
   });
   it("prices come only from payments.ts: 9990 ₽ and 100 €", () => {
     expect(payments.prices).toEqual({ rub: 9990, eur: 100 });
@@ -174,11 +174,11 @@ describe("content rules", () => {
     expect(host.cta.track).toBe("host-scan");
   });
   it("section 4 practice numbers match the agreed draft", () => {
-    expect(host.numbers.map((n) => n.value)).toEqual(["27 лет", "150+", "120+", "10"]);
+    expect(host.numbers.map((n) => n.value)).toEqual(["150+", "120+", "10"]);
     expect(host.numbersCaption).toBe("по моей практике");
   });
   it("host story follows the five client-written milestones", () => {
-    expect(host.timeline.map((step) => step.title)).toEqual(["С детства", "С 1999 года", "2018", "2024", "Сегодня"]);
+    expect(host.timeline.map((step) => step.title)).toEqual(["С детства", "Своё направление", "Сегодня"]);
   });
   it("host intro, story, numbers and CTA exclude the rejected wording", () => {
     expect(JSON.stringify({ intro: host.intro, timeline: host.timeline, numbers: host.numbers, cta: host.cta }))
@@ -298,5 +298,33 @@ describe("section 10 faq", () => {
   });
   it("stream answer has no date line while the date is empty", () => {
     expect(faq.items[10]?.a[0]?.text).toBe("Дату старта я сообщаю в Telegram-канале и при вступлении в клуб.");
+  });
+});
+
+describe("client decisions: scanning wording and no business story", () => {
+  it("visible content has no business/guide words", async () => {
+    const fs = await import("node:fs");
+    const path = await import("node:path");
+    const dir = path.resolve(process.cwd(), "src", "content");
+    const files = fs.readdirSync(dir).filter((f: string) => f.endsWith(".ts"));
+    for (const f of files) {
+      const t = fs.readFileSync(path.join(dir, f), "utf8");
+      const low = t.toLowerCase();
+      for (const w of ["бизнес", "предпринимат", "проводник", "1999", "27 лет"]) {
+        expect(low.includes(w), `${f}: ${w}`).toBe(false);
+      }
+    }
+  });
+  it("scanning is never «со мной» / «лично»", () => {
+    const texts = [intro.lead, ...faq.items.flatMap((i) => i.a.map((p) => p.text))];
+    for (const t of texts) {
+      expect(t).not.toContain("сканирование со мной");
+      expect(t).not.toMatch(/лично[^.]{0,30}сканирован|сканирован[^.]{0,30}лично/i);
+    }
+    expect(intro.lead).toContain("по моему методу");
+  });
+  it("meetings keep «со мной»", () => {
+    expect(JSON.stringify(program)).toContain("4 онлайн-встречи со мной");
+    expect(JSON.stringify(pricing)).toContain("4 онлайн-встречи со мной");
   });
 });

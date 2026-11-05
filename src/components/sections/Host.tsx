@@ -180,7 +180,7 @@ export function Host() {
 
           {numbers.length > 0 && (
             <div>
-              <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              <dl className="grid grid-cols-3 gap-2 sm:gap-3">
                 {numbers.map((n) => (
                   <div key={n.label} className="flex flex-col justify-start rounded-card bg-surface p-4 text-center">
                     <dt className="order-2 mt-1 text-sm leading-snug text-muted-foreground">{n.label}</dt>
