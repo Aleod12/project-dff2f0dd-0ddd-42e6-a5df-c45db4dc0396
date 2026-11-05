@@ -43,10 +43,10 @@ describe("content rules", () => {
   it("hero final scanning is not described as personal", () => {
     expect(hero.sub).not.toMatch(/личн/i);
   });
-  it("role line reads the same everywhere: «Энергопрактик»", () => {
-    expect(hero.eyebrow).toBe("Энергопрактик");
-    expect(site.roles).toBe("Энергопрактик");
-    expect(host.eyebrow).toBe("Энергопрактик");
+  it("role line reads the same everywhere: «Энергопрактик · Проводник»", () => {
+    expect(hero.eyebrow).toBe("Энергопрактик · Проводник");
+    expect(site.roles).toBe("Энергопрактик · Проводник");
+    expect(host.eyebrow).toBe("Энергопрактик · Проводник");
   });
   it("prices come only from payments.ts: 9990 ₽ and 100 €", () => {
     expect(payments.prices).toEqual({ rub: 9990, eur: 100 });
@@ -302,7 +302,7 @@ describe("section 10 faq", () => {
 });
 
 describe("client decisions: scanning wording and no business story", () => {
-  it("visible content has no business/guide words", async () => {
+  it("visible content has no business words", async () => {
     const fs = await import("node:fs");
     const path = await import("node:path");
     const dir = path.resolve(process.cwd(), "src", "content");
@@ -310,7 +310,7 @@ describe("client decisions: scanning wording and no business story", () => {
     for (const f of files) {
       const t = fs.readFileSync(path.join(dir, f), "utf8");
       const low = t.toLowerCase();
-      for (const w of ["бизнес", "предпринимат", "проводник", "1999", "27 лет"]) {
+      for (const w of ["бизнес", "предпринимат", "1999", "27 лет"]) {
         expect(low.includes(w), `${f}: ${w}`).toBe(false);
       }
     }
