@@ -92,11 +92,17 @@ describe("content rules", () => {
   it("section 2 has exactly five pains, in the agreed order", () => {
     expect(pains.items.map((i) => i.title)).toEqual([
       "Устаёте, даже когда отдыхаете",
-      "Тревога стала фоном",
-      "В деньгах — стеклянный потолок",
-      "В отношениях один и тот же сценарий",
-      "Ощущение, что живёте не свою жизнь",
+      "Тревога стала постоянным фоном",
+      "В деньгах нет желаемого движения",
+      "В отношениях всё повторяется",
+      "Кажется, что живёте не свою жизнь",
     ]);
+  });
+  it("pain titles and texts exclude the client-rejected wording", () => {
+    for (const item of pains.items) {
+      expect(item.title).not.toMatch(/стеклянный потолок|откат|спасательство|разбитым/i);
+      expect(item.text).not.toMatch(/стеклянный потолок|откат|спасательство|разбитым/i);
+    }
   });
   it("every pain card has its own explanation line", () => {
     for (const item of pains.items) {
