@@ -189,12 +189,19 @@ describe("content rules", () => {
     ]);
   });
   it("program: three stages with exact badges; final badge falls back while duration is empty", () => {
-    expect(program.stages.map((s) => s.title)).toEqual(["Основная работа", "Поддержка", "Личный итог"]);
+    expect(program.stages.map((s) => s.title)).toEqual(["Основная работа", "Поддержка", "Индивидуальный итог"]);
     expect(program.finalScanDuration).toBe("");
     expect([0, 1, 2].map((i) => stageBadge(i))).toEqual(["4 встречи", "весь месяц", "каждому участнику"]);
     expect(stageBadge(2, "60 минут")).toBe("60 минут");
     expect(program.join.steps.map((s) => s.title)).toEqual(["Нажмите «Вступить в Клуб»", "Оплатите участие", "Сразу получите доступ"]);
     expect(program.cta.track).toBe("program-join");
+  });
+  it("program excludes the client-rejected wording", () => {
+    expect(JSON.stringify({ intro: program.intro, lines: program.stages.map((stage) => stage.lines), join: program.join }))
+      .not.toMatch(/живые|личн|согласовываем|4 бонусные практики/i);
+  });
+  it("program final scanning does not specify Sergey as the facilitator", () => {
+    expect(program.stages[2]?.lines.join(" ")).not.toContain("со мной");
   });
   it("practices stay hidden until confirmed with four names", () => {
     expect(practices.confirmed).toBe(false);
