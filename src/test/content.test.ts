@@ -223,12 +223,15 @@ describe("content rules", () => {
   it("program final scanning does not specify Sergey as the facilitator", () => {
     expect(program.stages[2]?.lines.join(" ")).not.toContain("со мной");
   });
-  it("practices stay hidden until confirmed with four names", () => {
+  it("practices stay hidden until confirmed with exactly two names", () => {
     expect(practices.confirmed).toBe(false);
+    expect(practices.items).toHaveLength(2);
     expect(showPractices()).toBe(false);
-    const items = [1, 2, 3, 4].map((n) => ({ title: `П${n}`, note: "" }));
+    const items = [1, 2].map((n) => ({ title: `П${n}`, note: "" }));
     expect(showPractices({ ...practices, confirmed: true, items })).toBe(true);
-    expect(showPractices({ ...practices, confirmed: true, items: [...items.slice(0, 3), { title: "", note: "" }] })).toBe(false);
+    expect(showPractices({ ...practices, confirmed: true, items: [...items.slice(0, 1), { title: "", note: "" }] })).toBe(false);
+    expect(showPractices({ ...practices, confirmed: true, items: items.slice(0, 1) })).toBe(false);
+    expect(showPractices({ ...practices, confirmed: true, items: [...items, ...items] })).toBe(false);
   });
 });
 

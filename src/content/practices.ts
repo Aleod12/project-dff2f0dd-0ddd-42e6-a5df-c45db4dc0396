@@ -4,15 +4,13 @@ export const practices: { confirmed: boolean; titleId: string; title: string; ac
   titleId: "practices-title",
   title: "Бонусные",
   accent: "практики",
-  intro: "Аудиопрактики для самостоятельной работы между встречами. Доступны сразу после входа в канал.",
+  intro: "Бонусные практики для самостоятельной работы между встречами — в закрытом канале.",
   items: [
-    { title: "", note: "" },
-    { title: "", note: "" },
     { title: "", note: "" },
     { title: "", note: "" },
   ],
 };
 
 export function showPractices(p = practices): boolean {
-  return p.confirmed && p.items.length === 4 && p.items.every((i) => i.title.trim() !== "");
+  return p.confirmed && p.items.length === 2 && p.items.every((i) => i.title.trim() !== "");
 }
