@@ -21,7 +21,7 @@ export function MobileStickyCta() {
       for (const e of entries) (e.isIntersecting ? visible.add(e.target) : visible.delete(e.target));
       setFooterVisible(visible.size > 0);
     });
-    // Hide while the footer, the reviews, the price block (where the button leads) or the final section is on screen.
+    // Hide while the footer, the reviews or the price block (where the button leads) is on screen.
     // The home sections may render a few frames after this bar (client navigation back to "/"), so wait for them.
     let frame = 0;
     let tries = 0;
@@ -31,7 +31,7 @@ export function MobileStickyCta() {
         frame = requestAnimationFrame(observe);
         return;
       }
-      ["site-footer", "reviews", "price", "start"].forEach((id) => {
+      ["site-footer", "reviews", "price"].forEach((id) => {
         const el = document.getElementById(id);
         if (el) io.observe(el);
       });
