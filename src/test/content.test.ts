@@ -18,6 +18,19 @@ import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { isPresent } from "@/lib/present";
 
+describe("meeting section", () => {
+  it("follows the six agreed steps with text", () => {
+    expect(meeting.steps.map((step) => step.title)).toEqual([
+      "Настройка", "Интуитивное считывание", "Поиск первопричины",
+      "Трансформация", "Ощущения и осознания", "Завершение",
+    ]);
+    for (const step of meeting.steps) expect(isPresent(step.text)).toBe(true);
+  });
+  it("excludes the client-rejected wording", () => {
+    expect(JSON.stringify(meeting)).not.toMatch(/через тело|сессий|живые/i);
+  });
+});
+
 describe("content rules", () => {
   it("hero facts use the client-approved labels and order", () => {
     expect(hero.facts.map((fact) => fact.label)).toEqual([
