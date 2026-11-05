@@ -4,7 +4,7 @@ describe("home JSON-LD", () => {
   it("Person has name, job and 3 socials", () => {
     const p = personJsonLd();
     expect(p.name).toBe("Сергей Табачников");
-    expect(p.jobTitle).toBe("Проводник, энергопрактик");
+    expect(p.jobTitle).toBe("Энергопрактик · Проводник");
     expect(p.sameAs).toHaveLength(3);
   });
   it("Service offers 9990 RUB and 100 EUR", () => {
