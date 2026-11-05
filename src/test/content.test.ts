@@ -168,6 +168,16 @@ describe("content rules", () => {
     expect(host.numbers.map((n) => n.value)).toEqual(["27 лет", "150+", "120+", "10"]);
     expect(host.numbersCaption).toBe("по моей практике");
   });
+  it("host story follows the five client-written milestones", () => {
+    expect(host.timeline.map((step) => step.title)).toEqual(["С детства", "С 1999 года", "2018", "2024", "Сегодня"]);
+  });
+  it("host intro, story, numbers and CTA exclude the rejected wording", () => {
+    expect(JSON.stringify({ intro: host.intro, timeline: host.timeline, numbers: host.numbers, cta: host.cta }))
+      .not.toMatch(/фабрик|кабел|магазин|сотни людей|точка невозврата|через тело|Урал|живую|личной работе|Познакомиться лично/i);
+  });
+  it("host story does not say he left business", () => {
+    expect(host.timeline.map((step) => step.text).join(" ")).not.toContain("ушёл из бизнеса");
+  });
   it("section 5 has the four areas in the agreed order, both rows filled", () => {
     expect(areas.items.map((i) => i.title)).toEqual([
       "Состояние и энергия",

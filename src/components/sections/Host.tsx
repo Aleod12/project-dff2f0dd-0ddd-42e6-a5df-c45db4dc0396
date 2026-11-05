@@ -137,6 +137,7 @@ export function Host() {
   return (
     <Island id="host" tone="card" aria-labelledby={host.titleId}>
       <SectionTitle id={host.titleId} title={host.title} accent={host.accent} />
+      {isPresent(host.eyebrow) && <p className="mt-5 text-center text-eyebrow">{host.eyebrow}</p>}
 
       <div className="mt-8 grid gap-10 md:mt-12 lg:grid-cols-[minmax(0,400px)_1fr] lg:gap-x-[136px]">
         {/* Desktop: portrait with the round video over its lower-right corner. */}
@@ -167,7 +168,7 @@ export function Host() {
             {host.timeline.map((step, i) => (
               <li key={step.title} className={cn("relative pl-8", i > 0 && !storyOpen && "hidden md:list-item")}>
                 <span aria-hidden="true" className="absolute left-0 top-2 size-2.5 rotate-45 bg-gold" />
-                <h3 className="lining-nums text-xl font-semibold text-primary md:text-2xl">{step.title}</h3>
+                <h3 className="text-xl font-semibold text-primary md:text-2xl [font-variant-numeric:lining-nums_tabular-nums]">{step.title}</h3>
                 <p className="mt-1 text-muted-foreground">{step.text}</p>
               </li>
             ))}
