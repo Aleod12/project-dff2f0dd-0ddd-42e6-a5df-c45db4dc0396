@@ -3,7 +3,7 @@
 Plan only — do not write code yet.
 
 PROJECT
-A website that sells «Трансформационный клуб» (Club «Трансформация») led by Sergey Tabachnikov — «Энергопрактик». The expert IS the brand: his real face, name and voice must be present from the first screen and throughout the page (unlike typical competitor sites that hide the expert at the bottom).
+A website that sells «Трансформационный клуб» (Club «Трансформация») led by Sergey Tabachnikov — «Энергопрактик · Проводник». The expert IS the brand: his real face, name and voice must be present from the first screen and throughout the page (unlike typical competitor sites that hide the expert at the bottom).
 Sergey's personal motto «Путь к Силе Души» is used as a small italic signature near his name, not as the main headline.
 All user-facing copy in Russian, addressing the reader as «Вы» (capitalized). Tone: calm, warm, respectful, honest, zero pressure.
 

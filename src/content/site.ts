@@ -6,7 +6,7 @@ export const site = {
   clubName: "Клуб «Трансформация»",
   hostName: "Сергей Табачников",
   hostNameGenitive: "Сергея Табачникова",
-  roles: "Энергопрактик",
+  roles: "Энергопрактик · Проводник",
   signature: "Путь к Силе Души",
   joinLabel: "Вступить в Клуб",
   /** Every «Вступить в Клуб» leads to the price block. */
