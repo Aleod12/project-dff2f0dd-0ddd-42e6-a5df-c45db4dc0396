@@ -133,6 +133,7 @@ describe("content rules", () => {
     for (const node of rootCause.nodes) expect(isPresent(node.text)).toBe(true);
   });
   it("section 3 emphasizes the paragraph about the hidden root", () => {
+    expect(rootCause.emphasizedIndex).toBe(1);
     expect(rootCause.thesis[rootCause.emphasizedIndex]).toContain("Дело не в силе воли");
     expect(rootCause.thesis).toHaveLength(3);
   });
