@@ -53,17 +53,21 @@ describe("content rules", () => {
   it("price list says no auto-renewal", () => {
     expect(pricing.included).toContain("Разовый платёж, без автосписаний");
   });
-  it("price list is the agreed seven items in order", () => {
+  it("price list is the agreed eight items in order", () => {
     expect(pricing.included).toEqual([
-      "4 живые встречи со мной — раз в неделю",
-      "Глубокие трансформации по четырём сферам жизни",
-      "4 бонусные практики — сразу после входа в канал",
+      "4 онлайн-встречи со мной — раз в неделю",
+      "На каждой встрече — трансформация по одной из четырёх сфер жизни",
+      "4 бонусные трансформации в записи — по тем же сферам",
+      "2 бонусные практики",
       "Закрытый канал и моё сопровождение",
       "Записи всех встреч: месяц + 14 дней доступа",
-      "Личное итоговое сканирование",
+      "Индивидуальное итоговое сканирование поля — после клуба",
       "Разовый платёж, без автосписаний",
     ]);
     expect(pricing.period).toBe("Участие на 1 месяц + 14 дней доступа к записям");
+  });
+  it("price inclusions exclude the client-rejected wording", () => {
+    expect(pricing.included.join(" ")).not.toMatch(/живые|личн|4 бонусные практики/i);
   });
   it("euro payment is off until the provider is confirmed; € price kept", () => {
     expect(payments.eurEnabled).toBe(false);
@@ -229,6 +233,9 @@ describe("content rules", () => {
 });
 
 describe("intro section", () => {
+  it("lead and path exclude the client-rejected wording", () => {
+    expect(JSON.stringify({ lead: intro.lead, path: intro.path })).not.toMatch(/живые|личн|4 бонусные практики/i);
+  });
   it("diagnostic is the main path, two quiet links, join back to price", () => {
     expect(intro.main).toEqual({ label: "Пройти диагностику", href: links.diagnostic, track: "intro-test" });
     expect(intro.more.map((m) => [m.href, m.track])).toEqual([[links.audioPractice, "intro-practice"], [links.telegramChannel, "intro-channel"]]);
