@@ -25,3 +25,4 @@
 - Canonical, og:url and og:image come only from `pageSeo()` in src/lib/siteUrl.ts (reads site.siteUrl; emits nothing while empty) — so one domain value drives every absolute URL.
 - Legal documents are block data in src/content/legal/*.ts rendered by LegalPage; every link to /privacy|/offer|/consent carries a whitelisted ?from= (src/content/legal/nav.ts) so the back link can return to the origin section; release is blocked by a test while [ЗАПОЛНИТЬ] remains and siteUrl is set.
 - RootCause uses one semantic clockwise loop list: a vertical return path below lg and a connected 2×2 tile grid beside the thesis/conclusion from lg; Meeting stays after Program with a semantic 3/2/1-column list and lining/tabular numbered markers, preserving SSR content.
+- FAQ is the final home content section before the shared footer; legacy legal origin `start` resolves to `faq` so removed section links remain usable.

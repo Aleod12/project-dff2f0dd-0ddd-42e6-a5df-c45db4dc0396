@@ -8,6 +8,11 @@ import { routeTree } from "@/routeTree.gen";
 // Match routes without running loaders or rendering: loaders may need a server or
 // network the test run lacks, and jsdom never loads the stylesheets React waits on.
 describe("App routing", () => {
+  it("ends home content with FAQ and omits the removed final section", () => {
+    const sections = [...homeSource.matchAll(/<([A-Z]\w*)\s*\/>/g)].map((match) => match[1]);
+    expect(sections.at(-1)).toBe("Faq");
+    expect(sections).not.toContain("FinalCta");
+  });
   it("places Meeting immediately after Program on the home page", () => {
     const sections = [...homeSource.matchAll(/<([A-Z]\w*)\s*\/>/g)].map((match) => match[1]);
     const programIndex = sections.indexOf("Program");

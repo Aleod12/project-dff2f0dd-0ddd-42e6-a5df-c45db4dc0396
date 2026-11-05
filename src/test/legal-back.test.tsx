@@ -42,6 +42,7 @@ describe("from whitelist", () => {
     for (const id of ["why", "club", "areas", "practices", "intro"]) expect(parseFrom(id)).toBe(id);
     expect(parseFrom("format")).toBe("club");
     expect(parseFrom("free")).toBe("intro");
+    expect(parseFrom("start")).toBe("faq");
     await renderAt("/offer?from=format", () => <LegalPage doc={offer} from={parseFrom("format")} />);
     expect(await screen.findAllByRole("link", { name: "Вернуться к разделу «Как устроена программа»" })).toHaveLength(2);
   });

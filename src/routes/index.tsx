@@ -14,7 +14,6 @@ import { Practices } from "@/components/sections/Practices";
 import { Reviews } from "@/components/sections/Reviews";
 import { Price } from "@/components/sections/Price";
 import { Intro } from "@/components/sections/Intro";
-import { FinalCta } from "@/components/sections/FinalCta";
 import { Faq } from "@/components/sections/Faq";
 import { faqJsonLd } from "@/content/faq";
 import { personJsonLd, serviceJsonLd } from "@/lib/homeJsonLd";
@@ -73,7 +72,6 @@ function Index() {
       <Price />
       <Intro />
       <Faq />
-      <FinalCta />
     </>
   );
 }

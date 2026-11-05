@@ -1,9 +1,9 @@
 import type { LegalDocKey } from "./types";
 
 /** Allowed values of ?from= on document pages. Anything else is ignored. */
-export const legalFromValues = ["hero", "for-you", "why", "club", "meeting", "areas", "practices", "host", "reviews", "price", "intro", "faq", "start", "site-footer", "checkout"] as const;
+export const legalFromValues = ["hero", "for-you", "why", "club", "meeting", "areas", "practices", "host", "reviews", "price", "intro", "faq", "site-footer", "checkout"] as const;
 /** Old section ids still arriving in links: mapped to their new sections. */
-export const legacyFrom: Record<string, LegalFrom> = { format: "club", free: "intro" };
+export const legacyFrom: Record<string, LegalFrom> = { format: "club", free: "intro", start: "faq" };
 export type LegalFrom = (typeof legalFromValues)[number];
 
 export const legalSectionNames: Record<Exclude<LegalFrom, "site-footer" | "checkout">, string> = {
@@ -19,7 +19,6 @@ export const legalSectionNames: Record<Exclude<LegalFrom, "site-footer" | "check
   price: "Стоимость",
   intro: "Знакомство с методом",
   faq: "Вопросы и ответы",
-  start: "В начало пути",
 };
 
 export const legalUi = {

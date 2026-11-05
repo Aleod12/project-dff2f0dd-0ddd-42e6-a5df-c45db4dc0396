@@ -263,25 +263,32 @@ describe("banned words", () => {
 });
 
 describe("section 10 faq", () => {
-  it("has 10 questions and matching FAQPage data", () => {
-    expect(faq.items).toHaveLength(11);
-    expect(faqJsonLd().mainEntity).toHaveLength(11);
+  it("has 13 questions and matching FAQPage data", () => {
+    expect(faq.items).toHaveLength(13);
+    expect(faqJsonLd().mainEntity).toHaveLength(13);
+    expect(faq.items[1]?.q).toBe("Это эзотерика? Я в это не верю.");
+    expect(faq.items[4]?.q).toBe("Что ждёт в закрытом канале?");
+  });
+  it("answers exclude the client-rejected wording", () => {
+    for (const item of faq.items) {
+      expect(answerText(item.a)).not.toMatch(/живые|живая|личн|согласовываем|4 бонусные практики|научно|доказано|по законам физики|квантовой психолог/i);
+    }
   });
   it("no answer mentions the MAX platform", () => {
     const all = faq.items.map((i) => `${i.q} ${answerText(i.a)}`).join(" ");
     expect(all).not.toMatch(/МАКС|MAX/i);
   });
   it("missed-meeting answer names recordings and the archive window", () => {
-    expect(answerText(faq.items[3]!.a)).toBe("Все встречи записываются — записи остаются в закрытом канале потока. Доступ: 1 месяц + 2 недели архива, чтобы спокойно пересмотреть материалы.");
+    expect(answerText(faq.items[5]?.a ?? [])).toBe("Все встречи записываются — записи остаются в закрытом канале потока. Доступ: 1 месяц + 2 недели архива, чтобы спокойно пересмотреть материалы.");
   });
   it("auto-renewal answer repeats one-time payment", () => {
-    expect(answerText(faq.items[4]!.a)).toBe("Нет. Вы оплачиваете ровно один месяц участия разовым платежом, без автосписаний. Продление — только по Вашему решению.");
+    expect(answerText(faq.items[6]?.a ?? [])).toBe("Нет. Вы оплачиваете ровно один месяц участия разовым платежом, без автосписаний. Продление — только по Вашему решению.");
   });
   it("«no Telegram» answer links «ВКонтакте» to VK messages", () => {
-    expect(answerText(faq.items[6]!.a)).toBe("Напишите мне во ВКонтакте — подскажу.");
-    expect(faq.items[6]!.a.find((p) => p.href)).toEqual({ text: "ВКонтакте", href: links.vkMessages });
+    expect(answerText(faq.items[8]?.a ?? [])).toBe("Напишите мне во ВКонтакте — подскажу.");
+    expect(faq.items[8]?.a.find((p) => p.href)).toEqual({ text: "ВКонтакте", href: links.vkMessages });
   });
   it("stream answer has no date line while the date is empty", () => {
-    expect(faq.items[8]!.a[0]!.text).toBe("Дату старта я сообщаю в Telegram-канале и при вступлении в клуб.");
+    expect(faq.items[10]?.a[0]?.text).toBe("Дату старта я сообщаю в Telegram-канале и при вступлении в клуб.");
   });
 });
