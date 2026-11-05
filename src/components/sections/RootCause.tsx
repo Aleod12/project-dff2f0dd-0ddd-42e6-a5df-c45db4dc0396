@@ -10,10 +10,10 @@ const nodePos = [
   "lg:left-0 lg:top-1/2",
 ];
 const labelPos = [
-  "lg:bottom-full lg:left-1/2 lg:mb-12 lg:w-[260%] lg:max-w-[260px] lg:-translate-x-1/2 lg:text-center",
-  "lg:left-full lg:top-1/2 lg:ml-4 lg:w-[calc(106.25%-16px)] lg:-translate-y-1/2 lg:text-left",
-  "lg:top-full lg:left-1/2 lg:mt-12 lg:w-[280%] lg:max-w-[280px] lg:-translate-x-1/2 lg:text-center",
-  "lg:right-full lg:top-1/2 lg:mr-4 lg:w-[calc(106.25%-16px)] lg:-translate-y-1/2 lg:text-right",
+  "lg:bottom-full lg:left-1/2 lg:mb-6 lg:w-[260px] lg:-translate-x-1/2 lg:text-center",
+  "lg:left-full lg:top-1/2 lg:ml-4 lg:w-[170px] lg:-translate-y-1/2 lg:text-left",
+  "lg:top-full lg:left-1/2 lg:mt-6 lg:w-[260px] lg:-translate-x-1/2 lg:text-center",
+  "lg:right-full lg:top-1/2 lg:mr-4 lg:w-[170px] lg:-translate-y-1/2 lg:text-right",
 ];
 
 function GoldDivider() {
@@ -28,11 +28,11 @@ function GoldDivider() {
 
 export function RootCause() {
   return (
-    <Island id="why" tone="sage" aria-labelledby={rootCause.titleId}>
+    <Island id="why" tone="sage" className="xl:px-4" aria-labelledby={rootCause.titleId}>
       <SectionTitle id={rootCause.titleId} title={rootCause.title} accent={rootCause.accent} suffix={rootCause.titleSuffix} />
 
-      <div className="mt-10 grid gap-10 md:mt-14 md:gap-14 lg:grid-cols-[480px_1fr] lg:gap-x-12 lg:gap-y-0">
-        <div className="flex flex-col gap-5">
+      <div className="mt-10 grid gap-10 md:mt-14 md:gap-14 xl:grid-cols-[440px_1fr] xl:gap-x-0 xl:gap-y-0">
+        <div className="flex flex-col gap-5 lg:mx-auto lg:max-w-[720px] xl:mx-0 xl:pr-6">
           {rootCause.thesis.map((line, i) => (
             <p key={line} className={cn(i === rootCause.emphasizedIndex ? "text-lg font-medium text-primary md:text-xl" : "text-muted-foreground")}>
               {line}
@@ -40,14 +40,14 @@ export function RootCause() {
           ))}
         </div>
 
-        <div className="flex min-w-0 flex-col items-center lg:row-span-2">
-          <div data-loop className="relative w-full max-w-[520px] pl-7 lg:h-[440px] lg:pl-0">
+        <div className="flex min-w-0 flex-col items-center xl:row-span-2">
+          <div data-loop className="relative w-full max-w-[720px] pl-7 lg:h-[480px] lg:pl-0">
             <span aria-hidden="true" className="absolute bottom-5 left-1 top-[11px] w-[30px] rounded-bl-[20px] border-b border-l border-primary/30 lg:hidden" />
             <span aria-hidden="true" className="absolute left-1 top-[11px] h-px w-[22px] bg-primary/30 lg:hidden" />
             <svg aria-hidden="true" viewBox="0 0 10 10" className="absolute left-6 top-[5px] size-3 lg:hidden">
               <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--color-primary)" fillOpacity="0.7" />
             </svg>
-            <div className="lg:absolute lg:left-1/2 lg:top-1/2 lg:aspect-square lg:w-[32%] lg:-translate-x-1/2 lg:-translate-y-1/2">
+            <div className="lg:absolute lg:left-1/2 lg:top-1/2 lg:aspect-square lg:w-[260px] xl:w-[300px] lg:-translate-x-1/2 lg:-translate-y-1/2">
               <svg data-loop-circle aria-hidden="true" viewBox="0 0 200 200" className="absolute inset-0 hidden size-full overflow-visible lg:block" fill="none" stroke="var(--color-primary)" strokeOpacity="0.45" strokeWidth="1.5" strokeLinecap="round">
                 <defs>
                   <marker id="rc-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
@@ -65,7 +65,7 @@ export function RootCause() {
                     {i < rootCause.nodes.length - 1 && <span aria-hidden="true" className="absolute left-[5px] top-6 h-[calc(100%+1.5rem)] w-px bg-primary/25 lg:hidden" />}
                     <span aria-hidden="true" className={cn("mt-[6px] size-[11px] shrink-0 rotate-45 bg-gold lg:absolute lg:mt-0 lg:-translate-x-1/2 lg:-translate-y-1/2", nodePos[i])} />
                     <div data-loop-label className={cn("flex flex-col gap-1.5 lg:absolute", labelPos[i])}>
-                      <h3 className="text-lg font-semibold">{node.title}</h3>
+                      <h3 className={cn("text-lg font-semibold", (i === 1 || i === 3) && "lg:whitespace-nowrap")}>{node.title}</h3>
                       <p className="text-[15px] leading-snug text-muted-foreground">{node.text}</p>
                     </div>
                   </li>
@@ -75,31 +75,12 @@ export function RootCause() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center gap-5 lg:items-start lg:justify-end lg:pb-2">
+        <div className="flex flex-col items-center gap-5 xl:items-start xl:justify-end xl:pb-2 xl:pr-6">
           <GoldDivider />
-          <p className="max-w-[520px] text-balance text-center font-display text-lg italic text-primary md:text-xl lg:text-left">{rootCause.conclusion}</p>
+          <p className="max-w-[520px] text-balance text-center font-display text-lg italic text-primary md:text-xl xl:text-left">{rootCause.conclusion}</p>
         </div>
       </div>
 
-      <div data-session className="mt-6 md:mt-10">
-        <GoldDivider />
-        <h3 className="mt-4 text-center font-display text-[28px] leading-tight md:text-[32px]">
-          {rootCause.session.title} <em>{rootCause.session.accent}</em>{rootCause.session.suffix}
-        </h3>
-        <p className="mt-2 text-center text-[15px] leading-snug text-muted-foreground">{rootCause.session.intro}</p>
-        <ol className="mt-4 grid gap-3 md:mt-6 md:grid-cols-3 md:gap-x-5 md:gap-y-6 lg:grid-cols-6 lg:gap-x-4">
-          {rootCause.session.steps.map((step, i) => (
-            <li key={step.title} className="relative min-w-0 pl-7 md:pl-0 md:text-center">
-              {i < rootCause.session.steps.length - 1 && <span aria-hidden="true" className="absolute bottom-[-12px] left-[5px] top-10 w-px bg-primary/30 md:hidden" />}
-              <span className="absolute -left-1 top-0 text-[15px] leading-none text-muted-foreground md:static">{String(i + 1).padStart(2, "0")}</span>
-              <span aria-hidden="true" className="absolute left-0 top-7 size-[11px] rotate-45 bg-gold md:relative md:mx-auto md:my-3 md:block md:top-0" />
-              {i < rootCause.session.steps.length - 1 && <span aria-hidden="true" className="absolute left-1/2 top-[44px] hidden w-[calc(100%+1rem)] border-t border-primary/30 lg:block" />}
-              <h4 className="text-[15px] font-semibold leading-snug">{step.title}</h4>
-              <p className="mt-1 text-[15px] leading-[1.25] text-muted-foreground">{step.text}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
     </Island>
   );
 }

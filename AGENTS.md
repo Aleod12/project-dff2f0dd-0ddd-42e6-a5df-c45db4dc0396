@@ -24,4 +24,4 @@
 - Production build for own Node hosting: `NITRO_PRESET=node-server npm run build`, run `node .output/server/index.mjs` (PORT env); the Lovable editor build keeps its own preset.
 - Canonical, og:url and og:image come only from `pageSeo()` in src/lib/siteUrl.ts (reads site.siteUrl; emits nothing while empty) — so one domain value drives every absolute URL.
 - Legal documents are block data in src/content/legal/*.ts rendered by LegalPage; every link to /privacy|/offer|/consent carries a whitelisted ?from= (src/content/legal/nav.ts) so the back link can return to the origin section; release is blocked by a test while [ЗАПОЛНИТЬ] remains and siteUrl is set.
-- RootCause keeps one semantic list per path: the loop positions labels outside its desktop circle, and the meeting path uses six desktop columns, three tablet columns and a vertical phone list, so all content remains in SSR.
+- RootCause uses one semantic loop list, stacked below 1280px and two columns above; Meeting is a separate section after Program with a semantic 3/2/1-column list and numbered markers, preserving SSR content.

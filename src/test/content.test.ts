@@ -8,6 +8,7 @@ import { pricing } from "@/content/pricing";
 import { links } from "@/content/links";
 import { pains } from "@/content/pains";
 import { rootCause } from "@/content/rootCause";
+import { meeting } from "@/content/meeting";
 import { host } from "@/content/host";
 import { areas } from "@/content/areas";
 import { program, stageBadge } from "@/content/program";
@@ -16,6 +17,19 @@ import { intro } from "@/content/intro";
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { isPresent } from "@/lib/present";
+
+describe("meeting section", () => {
+  it("follows the six agreed steps with text", () => {
+    expect(meeting.steps.map((step) => step.title)).toEqual([
+      "Настройка", "Интуитивное считывание", "Поиск первопричины",
+      "Трансформация", "Ощущения и осознания", "Завершение",
+    ]);
+    for (const step of meeting.steps) expect(isPresent(step.text)).toBe(true);
+  });
+  it("excludes the client-rejected wording", () => {
+    expect(JSON.stringify(meeting)).not.toMatch(/через тело|сессий|живые/i);
+  });
+});
 
 describe("content rules", () => {
   it("hero facts use the client-approved labels and order", () => {
@@ -142,15 +156,8 @@ describe("content rules", () => {
       "Иногда внешние обстоятельства меняются, а привычные реакции и убеждения остаются прежними. На встречах клуба мы обращаем внимание на внутренние ограничения и жизненные запросы, которые человек хочет исследовать и изменить.",
     );
   });
-  it("section 3 meeting follows the six agreed steps", () => {
-    expect(rootCause.session.steps.map((step) => step.title)).toEqual([
-      "Настройка", "Интуитивное считывание", "Поиск первопричины",
-      "Трансформация", "Ощущения и осознания", "Завершение",
-    ]);
-    for (const step of rootCause.session.steps) expect(isPresent(step.text)).toBe(true);
-  });
   it("section 3 excludes the client-rejected terms", () => {
-    expect(JSON.stringify({ thesis: rootCause.thesis, nodes: rootCause.nodes, conclusion: rootCause.conclusion, session: rootCause.session }))
+    expect(JSON.stringify({ thesis: rootCause.thesis, nodes: rootCause.nodes, conclusion: rootCause.conclusion }))
       .not.toMatch(/через тело|сессий|подсознательн|зажат|симптом|живые/i);
   });
   it("section 4 scan CTA goes to the bot scanning link", () => {

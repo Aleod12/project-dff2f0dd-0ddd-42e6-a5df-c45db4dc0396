@@ -9,6 +9,7 @@ import { RootCause } from "@/components/sections/RootCause";
 import { Host } from "@/components/sections/Host";
 import { Areas } from "@/components/sections/Areas";
 import { Program } from "@/components/sections/Program";
+import { Meeting } from "@/components/sections/Meeting";
 import { Practices } from "@/components/sections/Practices";
 import { Reviews } from "@/components/sections/Reviews";
 import { Price } from "@/components/sections/Price";
@@ -64,6 +65,7 @@ function Index() {
       <ForYou />
       <RootCause />
       <Program />
+      <Meeting />
       <Areas />
       <Practices />
       <Host />
