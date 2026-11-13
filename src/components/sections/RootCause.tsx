@@ -39,16 +39,22 @@ export function RootCause() {
 
         <div className="order-2 flex min-w-0 flex-col items-center">
           <div data-loop className="relative w-full max-w-[720px] pl-7 lg:pl-0">
-            <span aria-hidden="true" className="absolute bottom-5 left-1 top-[11px] w-[30px] rounded-bl-[20px] border-b border-l border-primary/30 lg:hidden" />
-            <span aria-hidden="true" className="absolute left-1 top-[11px] h-px w-[22px] bg-primary/30 lg:hidden" />
-            <svg aria-hidden="true" viewBox="0 0 10 10" className="absolute left-6 top-[5px] size-3 lg:hidden">
-              <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--color-primary)" fillOpacity="0.7" />
-            </svg>
             <div className="relative">
-              <ol className="relative flex flex-col gap-6 pb-6 lg:grid lg:grid-cols-2 lg:auto-rows-fr lg:gap-10 lg:pb-0">
+              <ol className="relative flex flex-col gap-6 lg:grid lg:grid-cols-2 lg:auto-rows-fr lg:gap-10">
                 {rootCause.nodes.map((node, i) => (
                   <li key={node.title} data-loop-tile={i + 1} className={cn("relative flex gap-4 lg:rounded-card lg:bg-background/70 lg:p-5 lg:gap-2.5", tilePos[i])}>
-                    {i < rootCause.nodes.length - 1 && <span aria-hidden="true" className="absolute left-[5px] top-6 h-[calc(100%+1.5rem)] w-px bg-primary/25 lg:hidden" />}
+                    {/* Mobile return path: drawn per item so its corners always meet the first and last diamonds (centre 11.5px from the item top). */}
+                    {i === 0 && (
+                      <>
+                        <span aria-hidden="true" className="absolute -left-6 top-[11px] h-[calc(100%-11px+1.5rem)] w-[10px] rounded-tl-[10px] border-l border-t border-primary/30 lg:hidden" />
+                        <svg aria-hidden="true" viewBox="0 0 10 10" className="absolute -left-[14px] top-[5.5px] size-3 lg:hidden">
+                          <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--color-primary)" fillOpacity="0.7" />
+                        </svg>
+                      </>
+                    )}
+                    {i > 0 && i < rootCause.nodes.length - 1 && <span aria-hidden="true" className="absolute -left-6 top-0 h-[calc(100%+1.5rem)] w-px bg-primary/30 lg:hidden" />}
+                    {i === rootCause.nodes.length - 1 && <span aria-hidden="true" className="absolute -left-6 top-0 h-3 w-[22px] rounded-bl-[10px] border-b border-l border-primary/30 lg:hidden" />}
+                    {i < rootCause.nodes.length - 1 && <span aria-hidden="true" className="absolute left-[5px] top-6 h-full w-px bg-primary/25 lg:hidden" />}
                     <span aria-hidden="true" className="mt-[6px] size-[11px] shrink-0 rotate-45 bg-gold lg:size-[9px]" />
                     <div data-loop-label className="min-w-0 flex flex-col gap-1.5">
                       <h3 className="text-lg font-semibold lg:font-sans lg:text-[17px] lg:leading-snug">{node.title}</h3>

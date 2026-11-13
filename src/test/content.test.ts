@@ -21,8 +21,8 @@ import { isPresent } from "@/lib/present";
 describe("meeting section", () => {
   it("follows the six agreed steps with text", () => {
     expect(meeting.steps.map((step) => step.title)).toEqual([
-      "Настройка на поле", "Поиск первопричины", "Трансформация",
-      "Ощущения в теле", "Новый взгляд", "Завершение",
+      "Подключение к полю", "Поиск негативных программ", "Трансформация программ",
+      "Ощущения в теле", "Новые возможности", "Завершение сессии",
     ]);
     for (const step of meeting.steps) expect(isPresent(step.text)).toBe(true);
   });
