@@ -55,7 +55,7 @@ function Block({ block, from }: { block: LegalBlock; from?: LegalFrom | undefine
           <tbody>
             {block.rows.map((r, i) => (
               <tr key={i} className="legal-row border-b border-border">
-                {r.map((cell, j) => <td key={j} className="px-2 py-3 align-top"><LegalText text={cell} from={from} /></td>)}
+                {r.map((cell, j) => <td key={j} className="px-2 py-3 align-top [overflow-wrap:anywhere]"><LegalText text={cell} from={from} /></td>)}
               </tr>
             ))}
           </tbody>
