@@ -85,4 +85,9 @@ describe("legal guardrails", () => {
   it("offer: a refusal by the Executor always refunds the unprovided part", () => {
     expect(section(offer, "s5")).toMatch(/возвращается стоимость неоказанных услуг/);
   });
+
+  it("privacy: every service that receives data is listed — including Planerka used by the bot for booking", () => {
+    const s5 = section(privacy, "s5");
+    for (const service of [/Робокасса/, /Telegram-бот/, /Планёрка/, /Zoom/, /хостинг-провайдер/]) expect(s5).toMatch(service);
+  });
 });
