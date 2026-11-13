@@ -300,7 +300,7 @@ describe("section 10 faq", () => {
     expect(answerText(faq.items[6]?.a ?? [])).toBe("Нет. Вы оплачиваете ровно один месяц участия разовым платежом, без автосписаний. Продление — только по Вашему решению.");
   });
   it("«no Telegram» answer links «ВКонтакте» to VK messages", () => {
-    expect(answerText(faq.items[8]?.a ?? [])).toBe("Напишите мне во ВКонтакте — подскажу.");
+    expect(answerText(faq.items[8]?.a ?? [])).toBe("Напишите в службу заботы во ВКонтакте — подскажем.");
     expect(faq.items[8]?.a.find((p) => p.href)).toEqual({ text: "ВКонтакте", href: links.vkMessages });
   });
   it("stream answer has no date line while the date is empty", () => {
