@@ -2,6 +2,8 @@
 export const links = {
   /** Sergey's Telegram DM — used for «Написать в Telegram». */
   club: "https://t.me/STabachnikov",
+  /** Служба заботы. ВРЕМЕННО — личка Сергея; заменить на ссылку бота службы заботы. */
+  care: "https://t.me/STabachnikov",
   diagnostic: "https://t.me/st_soulpower_bot?start=test_site",
   audioPractice: "https://t.me/st_soulpower_bot?start=trans_site",
   scanning: "https://t.me/st_soulpower_bot?start=scan_site",

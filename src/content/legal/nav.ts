@@ -11,7 +11,7 @@ export const legalSectionNames: Record<Exclude<LegalFrom, "site-footer" | "check
   "for-you": "Этот клуб для Вас",
   why: "Почему ситуации повторяются",
   club: "Как устроена программа",
-  meeting: "Как проходит встреча клуба",
+  meeting: "Процесс трансформационной сессии",
   areas: "С чем работаем",
   practices: "Бонусные практики",
   host: "Ведущий клуба",

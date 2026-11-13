@@ -21,8 +21,8 @@ import { isPresent } from "@/lib/present";
 describe("meeting section", () => {
   it("follows the six agreed steps with text", () => {
     expect(meeting.steps.map((step) => step.title)).toEqual([
-      "Настройка", "Интуитивное считывание", "Поиск первопричины",
-      "Трансформация", "Ощущения и осознания", "Завершение",
+      "Настройка на поле", "Поиск первопричины", "Трансформация",
+      "Ощущения в теле", "Новый взгляд", "Завершение",
     ]);
     for (const step of meeting.steps) expect(isPresent(step.text)).toBe(true);
   });
@@ -60,11 +60,11 @@ describe("content rules", () => {
   });
   it("price list is the agreed eight items in order", () => {
     expect(pricing.included).toEqual([
-      "4 онлайн-встречи со мной — раз в неделю",
+      "4 онлайн-встречи — раз в неделю",
       "На каждой встрече — трансформация по одной из четырёх сфер жизни",
       "4 бонусные трансформации в записи — по тем же сферам",
       "2 бонусные практики",
-      "Закрытый канал и моё сопровождение",
+      "Закрытый канал и сопровождение",
       "Записи всех встреч: месяц + 14 дней доступа",
       "Индивидуальное итоговое сканирование поля — после клуба",
       "Разовый платёж, без автосписаний",
@@ -77,8 +77,8 @@ describe("content rules", () => {
   it("euro payment is off until the provider is confirmed; € price kept", () => {
     expect(payments.eurEnabled).toBe(false);
     expect(payments.prices.eur).toBe(100);
-    expect(pricing.abroad.label).toBe("Оплата из-за рубежа — напишите мне, подскажу удобный способ");
-    expect(pricing.abroad.href).toBe(links.club);
+    expect(pricing.abroad.label).toBe("Оплата из-за рубежа — напишите в службу заботы, подскажем удобный способ");
+    expect(pricing.abroad.href).toBe(links.care);
   });
   it("unknown checkout currency falls back to rubles", () => {
     expect(parseCurrency("usd")).toBe("rub");
@@ -189,10 +189,10 @@ describe("content rules", () => {
   });
   it("section 5 has the four areas in the agreed order, both rows filled", () => {
     expect(areas.items.map((i) => i.title)).toEqual([
-      "Состояние и энергия",
-      "Финансы",
+      "Здоровье",
       "Отношения",
-      "Предназначение",
+      "Финансы",
+      "Предназначение и самореализация",
     ]);
     for (const item of areas.items) {
       expect(isPresent(item.work)).toBe(true);
@@ -202,8 +202,8 @@ describe("content rules", () => {
   it("section 5 names the direction without promising a result", () => {
     expect(areas.items.map((i) => i.goal)).toEqual([
       "больше сил и внутреннего спокойствия",
-      "внутреннее разрешение расти",
       "отношения без старых повторяющихся сценариев",
+      "внутреннее разрешение расти",
       "внутренняя опора и движение по своему пути",
     ]);
   });
@@ -297,7 +297,7 @@ describe("section 10 faq", () => {
     expect(faq.items[8]?.a.find((p) => p.href)).toEqual({ text: "ВКонтакте", href: links.vkMessages });
   });
   it("stream answer has no date line while the date is empty", () => {
-    expect(faq.items[10]?.a[0]?.text).toBe("Дату старта я сообщаю в Telegram-канале и при вступлении в клуб.");
+    expect(faq.items[10]?.a[0]?.text).toBe("Дату старта я сообщаю в Telegram-канале, а участники находят её в закрепе закрытого канала.");
   });
 });
 
@@ -321,10 +321,9 @@ describe("client decisions: scanning wording and no business story", () => {
       expect(t).not.toContain("сканирование со мной");
       expect(t).not.toMatch(/лично[^.]{0,30}сканирован|сканирован[^.]{0,30}лично/i);
     }
-    expect(intro.lead).toContain("по моему методу");
   });
-  it("meetings keep «со мной»", () => {
-    expect(JSON.stringify(program)).toContain("4 онлайн-встречи со мной");
-    expect(JSON.stringify(pricing)).toContain("4 онлайн-встречи со мной");
+  it("meetings no longer say «со мной»", () => {
+    expect(JSON.stringify(program)).not.toContain("4 онлайн-встречи со мной");
+    expect(JSON.stringify(pricing)).not.toContain("4 онлайн-встречи со мной");
   });
 });

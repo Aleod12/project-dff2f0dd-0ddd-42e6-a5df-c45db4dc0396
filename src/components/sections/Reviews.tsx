@@ -243,7 +243,7 @@ export function Reviews() {
       <MobileSwipeNavigation count={reviews.quotes.length} current={quotesSwipe.current} goTo={quotesSwipe.goTo} label={reviews.quoteDotsLabel} itemLabel={reviews.quoteDotLabel} />
 
       <div className="mt-8 flex flex-col items-center gap-4 text-center">
-        <p className="text-sm text-muted-foreground">{reviews.consent}</p>
+        <p className="text-[13px] text-muted-foreground">{reviews.consent}</p>
         <CtaButton href={reviews.cta.href} track={reviews.cta.track} variant="ghost" className="text-base sm:text-lg">
           {reviews.cta.label}
         </CtaButton>

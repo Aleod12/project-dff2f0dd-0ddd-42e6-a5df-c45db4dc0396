@@ -15,7 +15,7 @@ export function personJsonLd() {
     name: site.hostName,
     jobTitle: site.roles,
     image: url(photo860.url),
-    sameAs: [links.telegramChannel, links.vkCommunity, links.youtube],
+    sameAs: [links.telegramChannel, links.vkCommunity, links.youtube, links.maxProfile],
   };
 }
 
@@ -26,9 +26,10 @@ export function serviceJsonLd() {
     name: site.clubName,
     description: hero.lead,
     provider: { "@type": "Person", "@id": url("/#person"), name: site.hostName },
+    // EUR appears only while euro payment is switched on in payments.ts.
     offers: [
       { "@type": "Offer", price: String(payments.prices.rub), priceCurrency: "RUB", url: url("/#price") },
-      { "@type": "Offer", price: String(payments.prices.eur), priceCurrency: "EUR", url: url("/#price") },
+      ...(payments.eurEnabled ? [{ "@type": "Offer", price: String(payments.prices.eur), priceCurrency: "EUR", url: url("/#price") }] : []),
     ],
   };
 }
