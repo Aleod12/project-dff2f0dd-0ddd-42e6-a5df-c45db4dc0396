@@ -80,6 +80,12 @@ describe("content rules", () => {
     expect(pricing.abroad.label).toBe("Оплата из-за рубежа — напишите в службу заботы, подскажем удобный способ");
     expect(pricing.abroad.href).toBe(links.care);
   });
+  it("«служба заботы» everywhere leads to the care dialog of the bot, not to a personal account", () => {
+    expect(links.care).toBe("https://t.me/st_soulpower_bot?start=care_site");
+    for (const href of [faq.more.href, pricing.abroad.href, pricing.questions.href, pricing.checkout.write.href, pricing.success.write.href, pricing.fail.write.href]) {
+      expect(href).toBe(links.care);
+    }
+  });
   it("unknown checkout currency falls back to rubles", () => {
     expect(parseCurrency("usd")).toBe("rub");
     expect(parseCurrency("eur")).toBe("eur");
