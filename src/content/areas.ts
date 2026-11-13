@@ -71,3 +71,6 @@ export const areas = {
 } as const;
 
 export type AreaIcon = (typeof areas.items)[number]["icon"];
+
+/** The four areas as one lowercase list for running text («здоровье, отношения, …»). Follows areas.items, so names and order change in one place. */
+export const areaList = areas.items.map((item) => item.title.toLowerCase()).join(", ");

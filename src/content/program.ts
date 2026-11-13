@@ -1,4 +1,5 @@
 import { site } from "./site";
+import { areaList } from "./areas";
 
 /** Section «Как устроена программа» (#club): three stages + how to join. */
 export const program = {
@@ -18,7 +19,7 @@ export const program = {
     {
       label: "ЭТАП 1",
       title: "Основная работа",
-      lines: ["4 онлайн-встречи, раз в неделю", "Каждая встреча — трансформация по одной из четырёх сфер жизни"],
+      lines: ["4 онлайн-встречи, раз в неделю", `Каждая встреча — трансформация по одной сфере: ${areaList}`],
       badge: "4 встречи",
     },
     {

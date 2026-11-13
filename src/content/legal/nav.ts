@@ -21,6 +21,14 @@ export const legalSectionNames: Record<Exclude<LegalFrom, "site-footer" | "check
   faq: "Вопросы и ответы",
 };
 
+/** 1 место, 2–4 места, 5+ мест (11–14 — «мест»). */
+const placesWord = (n: number) => {
+  const d = n % 10, dd = n % 100;
+  if (d === 1 && dd !== 11) return "место";
+  if (d >= 2 && d <= 4 && (dd < 12 || dd > 14)) return "места";
+  return "мест";
+};
+
 export const legalUi = {
   backToSection: (name: string) => `Вернуться к разделу «${name}»`,
   backToSite: "Вернуться на сайт",
@@ -30,7 +38,7 @@ export const legalUi = {
   print: "Распечатать / сохранить в PDF",
   contents: "Содержание",
   otherDocs: "Другие документы",
-  draftNotice: (n: number) => `Черновик: в документе ${n} мест для заполнения`,
+  draftNotice: (n: number) => `Черновик: в документе ${n} ${placesWord(n)} для заполнения`,
 };
 
 export const legalDocs: Record<LegalDocKey, { to: "/privacy" | "/consent" | "/offer"; label: string }> = {

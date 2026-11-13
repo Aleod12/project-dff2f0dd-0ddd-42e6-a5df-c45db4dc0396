@@ -10,7 +10,7 @@ import { pains } from "@/content/pains";
 import { rootCause } from "@/content/rootCause";
 import { meeting } from "@/content/meeting";
 import { host } from "@/content/host";
-import { areas } from "@/content/areas";
+import { areas, areaList } from "@/content/areas";
 import { program, stageBadge } from "@/content/program";
 import { practices, showPractices } from "@/content/practices";
 import { intro } from "@/content/intro";
@@ -61,7 +61,7 @@ describe("content rules", () => {
   it("price list is the agreed eight items in order", () => {
     expect(pricing.included).toEqual([
       "4 онлайн-встречи — раз в неделю",
-      "На каждой встрече — трансформация по одной из четырёх сфер жизни",
+      "На каждой встрече — трансформация по одной сфере: здоровье, отношения, финансы, предназначение и самореализация",
       "4 бонусные трансформации в записи — по тем же сферам",
       "2 бонусные практики",
       "Закрытый канал и сопровождение",
@@ -198,6 +198,13 @@ describe("content rules", () => {
       expect(isPresent(item.work)).toBe(true);
       expect(isPresent(item.goal)).toBe(true);
     }
+  });
+  it("the four areas are listed by name wherever a meeting is described", () => {
+    expect(areaList).toBe("здоровье, отношения, финансы, предназначение и самореализация");
+    expect(program.stages[0]?.lines.join(" ")).toContain(areaList);
+    expect(pricing.included.join(" ")).toContain(areaList);
+    expect(hero.sub).toContain(areaList);
+    expect(hero.subShort).toContain(areaList);
   });
   it("section 5 names the direction without promising a result", () => {
     expect(areas.items.map((i) => i.goal)).toEqual([

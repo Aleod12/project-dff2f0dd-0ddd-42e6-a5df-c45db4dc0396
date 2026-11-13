@@ -17,7 +17,7 @@ export const payments: {
   eurEnabled: false,
   provider: null,
   prices: { rub: 9990, eur: 100 },
-  vatNote: "",
+  vatNote: "Цена включает НДС 5%.",
   streamStartDate: "",
 };
 

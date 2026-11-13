@@ -1,5 +1,6 @@
 import { links } from "./links";
 import { formatPrice } from "./payments";
+import { areaList } from "./areas";
 
 /** Section 8 «Стоимость» and the /payment/* pages. Prices come from payments.ts only. */
 export const pricing = {
@@ -13,7 +14,7 @@ export const pricing = {
   priceEurNote: `или ${formatPrice("eur")} — для зарубежных карт`,
   included: [
     "4 онлайн-встречи — раз в неделю",
-    "На каждой встрече — трансформация по одной из четырёх сфер жизни",
+    `На каждой встрече — трансформация по одной сфере: ${areaList}`,
     "4 бонусные трансформации в записи — по тем же сферам",
     "2 бонусные практики",
     "Закрытый канал и сопровождение",
